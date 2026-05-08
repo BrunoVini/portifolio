@@ -12,6 +12,7 @@ First public release. Bilingual EN/PT personal portfolio styled as the
 to GitHub Pages.
 
 ### Sections
+
 - Hero with handwritten title, sticky note, polaroid, comic strip
 - About with bio + ProfilePost (Instagram-style card) + AboutFunFacts sticky
 - Experience timeline with company logos + StatBadges + current-role pulse
@@ -22,6 +23,7 @@ to GitHub Pages.
 - Closing "FIM" page with bruno waving
 
 ### Design system
+
 - Theme tokens centralized in `src/styles/theme.css`
   (no hex literals outside this file — stylelint enforced)
 - Fonts: Caveat (display), Architects Daughter (body), Kalam (utility),
@@ -30,6 +32,7 @@ to GitHub Pages.
 - Comic-book drop shadows: `box-shadow: 4px 4px 0 var(--color-ink)`
 
 ### Animations & micro-interactions
+
 - Hero `pageSettle` master timeline (rotate −2deg → 0, 900ms)
 - Sibling-stagger reveal via IntersectionObserver (80ms × index, capped at 6)
 - FLIP-style skill modal — animates from clicked badge bbox using WAAPI
@@ -45,6 +48,7 @@ to GitHub Pages.
 - Rocket cursor with trail (replaces native cursor on fine pointers)
 
 ### Easter eggs
+
 - Konami code → diary sticker spins 720° + "VOL." becomes "VOL. ∞"
 - Hold "R" 1.8s → rocket cursor barrel-roll + triple confetti burst
 - Type "bruno" → ProfilePost likes spike to 1.21k briefly
@@ -52,6 +56,7 @@ to GitHub Pages.
 - Double-click PG.label → toggles `body[data-margin-secrets="on"]`
 
 ### Mobile experience
+
 - **Bookmark Ribbon nav** — fixed red ribbon top-right with vertical
   "INDEX" text. Tap → unfurls a chapter-index card with numbered tabs
   (01 about / 02 work / 03 skills / 04 contact) + EN/PT passport stamp.
@@ -65,6 +70,7 @@ to GitHub Pages.
 - NOW! badge repositioned above Arancia logo on mobile (no overlap)
 
 ### Accessibility
+
 - All animations respect `prefers-reduced-motion: reduce`
 - Skill modal uses `inert` on `<main>` while open + returns focus to
   source badge on close
@@ -73,6 +79,7 @@ to GitHub Pages.
 - Bilingual via `lang` attribute and locale-aware content
 
 ### Tooling & quality
+
 - 28 unit tests (Vitest) covering page-flip, tilt, reveal stagger, i18n,
   highlight, profile resolver, asset URLs
 - 12 Playwright smoke tests across mobile-360 / tablet-768 / desktop-1440
@@ -83,6 +90,7 @@ to GitHub Pages.
   `.css` siblings when over)
 
 ### Bug fixes during v1
+
 - Fixed `.logo` global CSS collision between Navigation and TimelineNode
   (TimelineNode CSS was imported globally and shadowed Navigation logo
   with a 56×56 circle, cutting off the "B")
