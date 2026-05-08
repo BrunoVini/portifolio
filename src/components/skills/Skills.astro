@@ -1,0 +1,102 @@
+---
+import { getProfile } from '../../lib/profile';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import SkillGroup from './SkillGroup.astro';
+import SkillsDecorations from './SkillsDecorations.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+const table = { en, pt };
+
+const isAi = (cat: string) => /ai|ia|intelig|tooling|ferramenta/i.test(cat);
+const grouped = {
+  paired: p.skills.filter((g) => !isAi(g.category)),
+  bottom: p.skills.filter((g) => isAi(g.category)),
+};
+const aside = locale === 'pt' ? '* ferramentas do ofício' : '* tools of the trade';
+---
+
+<div class="wrap" id="skills">
+  <SkillsDecorations />
+  <SectionTitle
+    title={t('skills.headline', locale, table)}
+    chapter="PG. 52"
+    icon="skills"
+    aside={aside}
+  />
+  <div class="cols">
+    {grouped.paired.map((g) => <SkillGroup category={g.category} items={g.items} />)}
+  </div>
+  {
+    grouped.bottom.length > 0 && (
+      <div class="ai-row">
+        {grouped.bottom.map((g) => (
+          <SkillGroup category={g.category} items={g.items} />
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .wrap {
+    padding: 80px 130px;
+    max-width: 1180px;
+    position: relative;
+    display: block;
+  }
+  /* SectionTitle component handles section heading styling */
+  .cols {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 64px;
+    max-width: 880px;
+    align-items: start;
+    align-content: start;
+  }
+  .ai-row {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    padding-top: 20px;
+    border-top: 2px dashed var(--color-margin-red);
+    max-width: 880px;
+    display: flex;
+    justify-content: center;
+  }
+  .ai-row :global(.grp) {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+  }
+  .ai-row :global(.grp-head) {
+    justify-content: center;
+  }
+  .ai-row :global(ul) {
+    justify-content: center;
+  }
+  @media (max-width: 760px) {
+    .cols {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  @media (max-width: 600px) {
+    .wrap {
+      padding: 36px 18px 36px 32px;
+    }
+    .ai-row {
+      margin-top: 0;
+      padding-top: 20px;
+    }
+  }
+</style>

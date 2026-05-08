@@ -1,0 +1,204 @@
+---
+interface Props {
+  pageNumber?: number;
+  /** Disable idle "breathing" — useful for sections after the hero. */
+  static?: boolean;
+  /** Whether this section is the page-flip target for desktop transitions. */
+  flipTarget?: boolean;
+}
+const { pageNumber, static: isStatic = false, flipTarget = true } = Astro.props;
+---
+
+<section class={`notebook-wrap ${isStatic ? 'is-static' : ''}`} data-reveal>
+  <div class="notebook-peek-2"></div>
+  <div class="notebook-peek-1"></div>
+  <article class="notebook-page" data-page-card={flipTarget ? '' : undefined}>
+    <div class="holes" aria-hidden="true">
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+    </div>
+    <div class="red-margin" aria-hidden="true"></div>
+    <div class="corner-fold" aria-hidden="true"></div>
+    {pageNumber !== undefined && <div class="page-num">— page {pageNumber} —</div>}
+    <slot />
+  </article>
+</section>
+
+<style>
+  .notebook-wrap {
+    position: relative;
+    width: min(var(--page-vw), var(--page-max-width));
+    height: min(var(--page-vh), var(--page-max-height));
+    min-height: var(--page-min-height);
+    margin: 28px auto;
+    perspective: 1800px;
+    perspective-origin: top center;
+    /* Flip-in entrance — placed when scrolled into view. */
+    opacity: 0;
+    transform: translateY(28px) rotateX(-12deg);
+    transition:
+      opacity 0.7s var(--ease-soft),
+      transform 0.7s var(--ease-soft);
+  }
+  .notebook-wrap.is-revealed {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+  .notebook-peek-1 {
+    position: absolute;
+    right: -7px;
+    top: 12px;
+    bottom: 12px;
+    width: 14px;
+    background: var(--color-paper-tinted);
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 12px 24px -8px var(--color-paper-shadow);
+    z-index: 1;
+    transform: rotate(-0.15deg);
+  }
+  .notebook-peek-2 {
+    position: absolute;
+    right: -14px;
+    top: 18px;
+    bottom: 18px;
+    width: 22px;
+    background: var(--color-paper-tinted);
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 18px 30px -12px var(--color-paper-shadow-strong);
+    z-index: 0;
+    transform: rotate(-0.3deg);
+  }
+  .notebook-page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--color-paper);
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 31px,
+      var(--color-rule) 32px
+    );
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 80px -20px var(--color-paper-shadow-strong),
+      0 8px 24px var(--color-paper-shadow);
+    z-index: 2;
+    overflow: hidden;
+    isolation: isolate;
+    transform: rotate(-0.4deg);
+    animation: pageBreathe 9s ease-in-out infinite alternate;
+  }
+  .notebook-wrap.is-static .notebook-page {
+    animation: none;
+    transform: rotate(-0.2deg);
+  }
+  .holes {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 60px 0;
+  }
+  .hole {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-paper-edge);
+    box-shadow:
+      0 0 0 1.5px rgba(0, 0, 0, 0.15) inset,
+      1px 1px 2px rgba(0, 0, 0, 0.15);
+    margin-left: 4px;
+  }
+  .red-margin {
+    position: absolute;
+    left: var(--margin-left);
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--color-margin-red);
+    z-index: 2;
+  }
+  .corner-fold {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(225deg, var(--color-paper-edge) 50%, transparent 50%);
+    box-shadow: -4px 4px 6px -2px var(--color-paper-shadow-strong);
+    z-index: 5;
+    transition:
+      width 0.4s var(--ease-soft),
+      height 0.4s var(--ease-soft),
+      box-shadow 0.4s var(--ease-soft);
+  }
+  /* Corner peel on hover — page edge lifts to suggest you can turn it. */
+  .notebook-page:hover .corner-fold {
+    width: 78px;
+    height: 78px;
+    box-shadow: -8px 8px 14px -2px var(--color-paper-shadow-strong);
+  }
+  .page-num {
+    position: absolute;
+    top: 22px;
+    right: 80px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    transform: rotate(2deg);
+    z-index: 5;
+    opacity: 0.6;
+  }
+  @media (max-width: 979px) and (min-width: 601px) {
+    .notebook-wrap {
+      width: 96vw;
+    }
+  }
+  @media (max-width: 600px) {
+    .notebook-wrap {
+      width: 100%;
+      height: auto;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .notebook-peek-1,
+    .notebook-peek-2 {
+      display: none;
+    }
+    .notebook-page {
+      height: auto;
+      min-height: 100vh;
+      transform: none;
+      animation: none;
+      padding: 18px 18px 60px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .holes,
+    .corner-fold {
+      display: none;
+    }
+    .page-num {
+      top: auto;
+      bottom: 12px;
+      right: 16px;
+      font-size: 11px;
+      opacity: 0.5;
+    }
+    .red-margin {
+      left: 18px;
+      opacity: 0.35;
+    }
+  }
+</style>

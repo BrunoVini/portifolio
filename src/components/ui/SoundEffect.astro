@@ -1,0 +1,68 @@
+---
+// Comic-book style sound effect (POW! ZAP! BOOM!) — Wimpy Kid vibe.
+interface Props {
+  text: string;
+  /** spike count for the burst shape (default 9) */
+  spikes?: number;
+  /** color for the burst fill */
+  color?: 'highlight' | 'red' | 'paper';
+  /** rotation angle in degrees */
+  rotate?: number;
+  /** size in px */
+  size?: number;
+}
+const { text, spikes = 9, color = 'highlight', rotate = -8, size = 80 } = Astro.props;
+const fill =
+  color === 'red'
+    ? 'var(--color-red-ink)'
+    : color === 'paper'
+      ? 'var(--color-paper)'
+      : 'var(--color-highlight)';
+const textColor = color === 'red' ? 'var(--color-paper)' : 'var(--color-red-ink)';
+
+// Generate burst polygon
+const cx = 50;
+const cy = 50;
+const points: string[] = [];
+const total = spikes * 2;
+for (let i = 0; i < total; i++) {
+  const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+  const r = i % 2 === 0 ? 48 : 32;
+  const x = cx + Math.cos(angle) * r;
+  const y = cy + Math.sin(angle) * r;
+  points.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+}
+const polyPoints = points.join(' ');
+---
+
+<svg
+  class="sfx"
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`width:${size}px;height:${size}px;transform:rotate(${rotate}deg);`}
+  aria-hidden="true"
+>
+  <polygon
+    points={polyPoints}
+    fill={fill}
+    stroke="var(--color-ink)"
+    stroke-width="2.5"
+    stroke-linejoin="round"></polygon>
+  <text
+    x="50"
+    y="58"
+    text-anchor="middle"
+    font-family="Caveat"
+    font-size="28"
+    font-weight="700"
+    fill={textColor}
+    stroke="none">{text}</text
+  >
+</svg>
+
+<style>
+  .sfx {
+    display: inline-block;
+    transform-origin: center;
+  }
+</style>

@@ -1,0 +1,205 @@
+---
+import './AboutPortrait.css';
+interface Props {
+  alt: string;
+}
+const { alt } = Astro.props;
+---
+
+<svg
+  class="portrait"
+  viewBox="0 0 360 420"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={alt}
+  data-reveal
+>
+  {/* COMIC PANEL FRAME */}
+  <rect
+    class="frame"
+    x="6"
+    y="6"
+    width="348"
+    height="408"
+    rx="6"
+    fill="var(--color-paper)"
+    stroke="var(--color-ink)"
+    stroke-width="3"></rect>
+
+  {/* PAGE NUMBER */}
+  <text
+    class="pg"
+    x="340"
+    y="30"
+    text-anchor="end"
+    font-family="Caveat"
+    font-size="16"
+    fill="var(--color-ink)"
+    stroke="none">— pg 47 —</text
+  >
+
+  {/* SPEECH BUBBLE */}
+  <g class="bubble">
+    <path
+      d="M 220 50 Q 220 36, 234 36 L 332 36 Q 346 36, 346 50 L 346 92 Q 346 106, 332 106 L 268 106 L 252 122 L 256 106 L 234 106 Q 220 106, 220 92 Z"
+      fill="var(--color-paper)"
+      stroke="var(--color-ink)"
+      stroke-width="2.5"
+      stroke-linejoin="round"></path>
+    <text
+      x="283"
+      y="68"
+      text-anchor="middle"
+      font-family="Caveat"
+      font-size="22"
+      font-weight="700"
+      fill="var(--color-ink)"
+      stroke="none">Oi! Eu sou</text
+    >
+    <text
+      x="283"
+      y="92"
+      text-anchor="middle"
+      font-family="Caveat"
+      font-size="26"
+      font-weight="700"
+      fill="var(--color-red-ink)"
+      stroke="none">o Bruno!</text
+    >
+  </g>
+
+  {/* BOLD CLEAN INK — NO ROUGH FILTER (Wimpy Kid is bold solid lines) */}
+  <g
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2.6"
+  >
+    {/* THREE ICONIC HAIR TUFTS — the Wimpy Kid signature */}
+    <path class="d1" d="M 110 130 Q 116 110, 124 130"></path>
+    <path class="d1" d="M 134 124 Q 142 102, 150 124"></path>
+    <path class="d1" d="M 160 130 Q 168 110, 176 130"></path>
+
+    {/* BIG ROUND HEAD */}
+    <ellipse class="d2" cx="142" cy="180" rx="64" ry="58" fill="var(--color-paper)"></ellipse>
+
+    {/* RECTANGULAR GLASSES */}
+    <g class="d3">
+      <rect x="92" y="170" width="40" height="26" rx="3" fill="var(--color-paper)"></rect>
+      <rect x="156" y="170" width="40" height="26" rx="3" fill="var(--color-paper)"></rect>
+      <line x1="132" y1="183" x2="156" y2="183"></line>
+      <line x1="92" y1="183" x2="80" y2="180" stroke-width="2"></line>
+      <line x1="196" y1="183" x2="208" y2="180" stroke-width="2"></line>
+    </g>
+
+    {/* DOT EYES — Wimpy Kid signature */}
+    <circle class="d4" cx="112" cy="183" r="3" fill="var(--color-ink)"></circle>
+    <circle class="d4" cx="176" cy="183" r="3" fill="var(--color-ink)"></circle>
+
+    {/* TINY NOSE — single short stroke */}
+    <line class="d5" x1="142" y1="200" x2="142" y2="212"></line>
+
+    {/* SIMPLE SMILE */}
+    <path class="d6" d="M 122 224 Q 142 238, 162 224"></path>
+
+    {/* SMALL CHIN-PATCH GOATEE */}
+    <path class="d7" d="M 134 234 Q 132 246, 142 250 Q 152 246, 150 234" fill="var(--color-ink)"
+    ></path>
+
+    {/* NECK */}
+    <line class="d8" x1="124" y1="238" x2="120" y2="262"></line>
+    <line class="d8" x1="160" y1="238" x2="164" y2="262"></line>
+
+    {/* SHOULDERS / T-SHIRT (athletic V-taper, kept simple) */}
+    <path class="d9" d="M 60 320 L 92 280 Q 110 264, 142 262 Q 174 264, 192 280 L 224 320"></path>
+
+    {/* T-SHIRT collar */}
+    <path class="d9" d="M 124 264 L 142 280 L 160 264"></path>
+
+    {/* T-SHIRT center seam */}
+    <line class="d9" x1="142" y1="282" x2="142" y2="320" stroke-width="1.8" opacity="0.5"></line>
+
+    {/* ARMS reaching to laptop */}
+    <path class="d10" d="M 84 290 Q 70 304, 76 326 L 116 332"></path>
+    <path class="d10" d="M 200 290 Q 214 304, 208 326 L 168 332"></path>
+
+    {/* HANDS — Wimpy Kid hands are simple ovals/circles */}
+    <ellipse class="d10" cx="118" cy="332" rx="10" ry="8" fill="var(--color-paper)"></ellipse>
+    <ellipse class="d10" cx="166" cy="332" rx="10" ry="8" fill="var(--color-paper)"></ellipse>
+
+    {/* LAPTOP — clean rectangle, no roughening */}
+    <rect class="d11" x="78" y="338" width="128" height="60" rx="4" fill="var(--color-paper)"
+    ></rect>
+    <rect class="d12" x="86" y="346" width="112" height="44" rx="2" fill="var(--color-ink)"></rect>
+
+    {/* CODE LINES on screen */}
+    <g class="d13" stroke="#7ab68b" stroke-width="2" stroke-linecap="round">
+      <line x1="96" y1="358" x2="124" y2="358"></line>
+      <line x1="100" y1="368" x2="156" y2="368"></line>
+      <line x1="106" y1="378" x2="138" y2="378"></line>
+    </g>
+
+    {/* TERMINAL CURSOR (blink) */}
+    <rect class="cursor-tick" x="160" y="375" width="6" height="8" fill="#7ab68b"></rect>
+  </g>
+
+  {/* COFFEE MUG with steam — left of laptop */}
+  <g
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2.4"
+    class="d14"
+  >
+    <path d="M 30 392 L 30 358 L 64 358 L 64 392 Z" fill="var(--color-paper)"></path>
+    <path d="M 64 364 Q 76 364, 76 374 Q 76 384, 64 384" stroke-width="2"></path>
+    <path
+      d="M 39 374 Q 36 370, 39 366 Q 42 374, 47 374 Q 50 370, 47 366 Q 50 374, 55 374 Q 47 374, 39 374 Z"
+      fill="var(--color-red-ink)"
+      stroke="var(--color-red-ink)"
+      stroke-width="1.6"></path>
+  </g>
+  <path
+    class="steam s1"
+    d="M 36 354 Q 40 348, 36 342 Q 32 336, 36 330"
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-width="2"
+    stroke-linecap="round"></path>
+  <path
+    class="steam s2"
+    d="M 46 354 Q 50 348, 46 342 Q 42 336, 46 330"
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-width="2"
+    stroke-linecap="round"></path>
+  <path
+    class="steam s3"
+    d="M 56 354 Q 60 348, 56 342 Q 52 336, 56 330"
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-width="2"
+    stroke-linecap="round"></path>
+
+  {/* "POW!" sound effect floating top-left */}
+  <g class="pow" transform="translate(34, 50) rotate(-12)">
+    <path
+      d="M -28 -2 L -14 -16 L 0 -2 L 14 -18 L 26 -2 L 22 14 L 6 4 L -8 18 L -22 6 Z"
+      fill="var(--color-highlight)"
+      stroke="var(--color-ink)"
+      stroke-width="2.5"
+      stroke-linejoin="round"></path>
+    <text
+      x="0"
+      y="6"
+      text-anchor="middle"
+      font-family="Caveat"
+      font-weight="700"
+      font-size="20"
+      fill="var(--color-red-ink)"
+      stroke="none">POW!</text
+    >
+  </g>
+</svg>

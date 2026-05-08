@@ -1,0 +1,85 @@
+---
+import { getProfile } from '../../lib/profile';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import TimelineNode from './TimelineNode.astro';
+import ExperienceDecorations from './ExperienceDecorations.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+const table = { en, pt };
+const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far';
+---
+
+<div class="exp" id="experience">
+  <ExperienceDecorations />
+  <SectionTitle
+    title={t('experience.headline', locale, table)}
+    chapter="PG. 50"
+    icon="experience"
+    aside={aside}
+  />
+  <div class="timeline" data-reveal aria-hidden="true"></div>
+  <div class="nodes">
+    {
+      p.experience.map((e) => (
+        <TimelineNode
+          company={e.company}
+          companyLogo={e.companyLogo}
+          location={e.location}
+          employmentType={e.employmentType}
+          role={e.role}
+          startDate={e.startDate}
+          endDate={e.endDate === 'present' ? t('common.present', locale, table) : e.endDate}
+          description={e.description}
+          highlights={e.highlights}
+          stats={e.stats}
+          current={e.endDate === 'present'}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .exp {
+    padding: 80px 130px;
+    position: relative;
+  }
+  /* SectionTitle component handles section heading styling */
+  .timeline {
+    position: absolute;
+    left: 158px;
+    top: 240px;
+    bottom: 80px;
+    width: 2px;
+    background: var(--color-ink);
+    opacity: 0.25;
+    z-index: 1;
+    transform-origin: top center;
+    transform: scaleY(0);
+    transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .timeline.is-revealed {
+    transform: scaleY(1);
+  }
+  .nodes {
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 600px) {
+    .exp {
+      padding: 32px 18px 32px 32px;
+    }
+    .timeline {
+      left: 54px;
+      top: 110px;
+    }
+  }
+</style>

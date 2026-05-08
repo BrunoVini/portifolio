@@ -1,0 +1,177 @@
+---
+// Marginalia: tiny hand-drawn icons scattered around the about section.
+---
+
+<div class="doodles" aria-hidden="true" data-reveal>
+  {/* Lightbulb */}
+  <svg class="doodle d-bulb" viewBox="0 0 32 40" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    >
+      <path d="M 10 18 C 10 8, 22 8, 22 18 C 22 22, 19 24, 19 28 L 13 28 C 13 24, 10 22, 10 18 Z"
+      ></path>
+      <line x1="14" y1="32" x2="18" y2="32"></line>
+      <line x1="15" y1="35" x2="17" y2="35"></line>
+      <line x1="16" y1="2" x2="16" y2="5" opacity="0.6"></line>
+      <line x1="6" y1="6" x2="8" y2="8" opacity="0.6"></line>
+      <line x1="26" y1="6" x2="24" y2="8" opacity="0.6"></line>
+    </g>
+  </svg>
+
+  {/* Code brackets */}
+  <svg class="doodle d-code" viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    >
+      <polyline points="10 4 4 12 10 20"></polyline>
+      <polyline points="26 4 32 12 26 20"></polyline>
+      <line x1="20" y1="6" x2="14" y2="20" opacity="0.6"></line>
+    </g>
+  </svg>
+
+  {/* Coffee cup */}
+  <svg class="doodle d-coffee" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    >
+      <rect x="6" y="10" width="20" height="16" rx="2"></rect>
+      <path d="M 26 13 Q 32 13, 32 18 Q 32 22, 26 22"></path>
+      <path d="M 12 6 Q 14 4, 12 2" opacity="0.7"></path>
+      <path d="M 16 6 Q 18 4, 16 2" opacity="0.7"></path>
+      <path d="M 20 6 Q 22 4, 20 2" opacity="0.7"></path>
+    </g>
+  </svg>
+
+  {/* Hand-drawn arrow */}
+  <svg class="doodle d-arrow" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="var(--color-red-ink)"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.6"
+    >
+      <path d="M 4 15 Q 22 6, 50 18"></path>
+      <path d="M 42 12 L 52 18 L 44 24"></path>
+    </g>
+  </svg>
+
+  {/* Star */}
+  <svg class="doodle d-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="var(--color-red-ink)"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    >
+      <path d="M 12 3 L 14 10 L 21 11 L 16 16 L 17 22 L 12 19 L 7 22 L 8 16 L 3 11 L 10 10 Z"
+      ></path>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .doodles {
+    color: var(--color-ink);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+  .doodle {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.6) rotate(-12deg);
+    transition:
+      opacity 0.5s var(--ease-soft),
+      transform 0.5s var(--ease-soft);
+  }
+  .doodles.is-revealed .doodle {
+    opacity: 0.55;
+    transform: scale(1) rotate(var(--rot, 0deg));
+  }
+  .d-bulb {
+    top: 6%;
+    right: 38%;
+    width: 30px;
+    height: 38px;
+    --rot: -8deg;
+    transition-delay: 0.4s;
+  }
+  .d-code {
+    top: 28%;
+    right: 6%;
+    width: 40px;
+    height: 28px;
+    --rot: 5deg;
+    transition-delay: 0.6s;
+  }
+  .d-coffee {
+    bottom: 18%;
+    right: 32%;
+    width: 36px;
+    height: 32px;
+    --rot: -6deg;
+    transition-delay: 0.8s;
+  }
+  .d-arrow {
+    bottom: 10%;
+    right: 18%;
+    width: 70px;
+    height: 32px;
+    --rot: 8deg;
+    transition-delay: 1s;
+  }
+  .d-star {
+    top: 4%;
+    right: 8%;
+    width: 22px;
+    height: 22px;
+    --rot: 12deg;
+    transition-delay: 1.2s;
+  }
+  @media (max-width: 980px) {
+    .d-arrow,
+    .d-coffee {
+      display: none;
+    }
+  }
+  @media (max-width: 600px) {
+    .d-coffee,
+    .d-arrow {
+      display: none;
+    }
+    .d-bulb {
+      top: 1%;
+      right: 4%;
+      width: 24px;
+      height: 30px;
+      opacity: 0.45;
+    }
+    .d-code {
+      top: 22%;
+      right: 2%;
+      width: 32px;
+      height: 22px;
+      opacity: 0.45;
+    }
+    .d-star {
+      top: 50%;
+      right: 4%;
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>

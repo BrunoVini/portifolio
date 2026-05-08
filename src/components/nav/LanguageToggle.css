@@ -1,0 +1,35 @@
+.lang-toggle {
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1.5px dashed currentcolor;
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.lang-toggle button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  padding: 0 2px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.lang-toggle button.on {
+  opacity: 1;
+  text-decoration: underline wavy var(--color-red-ink);
+  text-underline-offset: 4px;
+}
+
+@media (width <= 600px) {
+  .lang-toggle {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 18px;
+  }
+}

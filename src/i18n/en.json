@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "about": "about",
+    "work": "work",
+    "skills": "skills",
+    "contact": "contact",
+    "menu": "menu"
+  },
+  "hero": { "scrollHint": "↓ scroll for more pages" },
+  "experience": { "headline": "Experience" },
+  "projects": { "headline": "Selected work" },
+  "skills": { "headline": "Skills" },
+  "contact": {
+    "headline": "Get in touch",
+    "emailLabel": "Email",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn"
+  },
+  "common": { "page": "page", "present": "present" }
+}

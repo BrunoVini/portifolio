@@ -1,0 +1,50 @@
+---
+import Page from '../layouts/Page.astro';
+import NotebookPage from '../components/ui/NotebookPage.astro';
+import TearLine from '../components/ui/TearLine.astro';
+import Navigation from '../components/nav/Navigation.astro';
+import Hero from '../components/hero/Hero.astro';
+import About from '../components/about/About.astro';
+import Process from '../components/process/Process.astro';
+import Experience from '../components/experience/Experience.astro';
+import Projects from '../components/projects/Projects.astro';
+import Skills from '../components/skills/Skills.astro';
+import Contact from '../components/contact/Contact.astro';
+
+const locale = 'en' as const;
+---
+
+<Page
+  locale={locale}
+  title="Bruno Vinicius — Software Engineer"
+  description="Full-stack JavaScript developer focused on scalable, high-performance apps. TDD, end-to-end testing, CI/CD by default."
+>
+  <NotebookPage>
+    <Navigation locale={locale} />
+    <Hero locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={48} static>
+    <About locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={49} static>
+    <Process locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={50} static>
+    <Experience locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={51} static>
+    <Projects locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={52} static>
+    <Skills locale={locale} />
+  </NotebookPage>
+  <TearLine />
+  <NotebookPage pageNumber={53} static>
+    <Contact locale={locale} />
+  </NotebookPage>
+</Page>

@@ -1,0 +1,126 @@
+---
+import './ProcessDecorations.css';
+// Process / "How I work" decorations: workflow-themed bold-ink doodles.
+// Stopwatch, cycle arrow, lightbulb, debug bug, work-in-progress stamp,
+// and a checklist — all in clean comic strokes (no rough filter).
+---
+
+<div class="proc-dec" aria-hidden="true" data-reveal>
+  <svg class="x x-stopwatch" viewBox="0 0 60 64" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="30" cy="36" r="22" fill="var(--color-paper)"></circle>
+      <line x1="22" y1="6" x2="38" y2="6" stroke-width="2.6"></line>
+      <line x1="30" y1="6" x2="30" y2="14" stroke-width="2.6"></line>
+      <line x1="48" y1="18" x2="54" y2="14"></line>
+      <line x1="30" y1="36" x2="30" y2="22" stroke-width="2.4"></line>
+      <line x1="30" y1="36" x2="42" y2="42" stroke="var(--color-red-ink)" stroke-width="2.4"></line>
+      <circle cx="30" cy="36" r="2.4" fill="var(--color-ink)"></circle>
+    </g>
+  </svg>
+
+  <svg class="x x-cycle" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="var(--color-red-ink)"
+      fill="none"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M 12 32 A 20 20 0 1 1 18 46" stroke-dasharray="0" fill="none"></path>
+      <polyline points="6 40 18 46 24 34"></polyline>
+      <text
+        x="32"
+        y="38"
+        text-anchor="middle"
+        font-family="JetBrains Mono"
+        font-weight="700"
+        font-size="14"
+        fill="var(--color-red-ink)"
+        stroke="none">↻</text
+      >
+    </g>
+  </svg>
+
+  <svg class="x x-bulb" viewBox="0 0 48 60" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M 14 26 C 14 12, 34 12, 34 26 C 34 34, 30 36, 30 44 L 18 44 C 18 36, 14 34, 14 26 Z"
+        fill="var(--color-highlight)"
+        fill-opacity="0.65"></path>
+      <line x1="20" y1="50" x2="28" y2="50"></line>
+      <line x1="22" y1="54" x2="26" y2="54"></line>
+      <line x1="24" y1="2" x2="24" y2="6" opacity="0.7"></line>
+      <line x1="6" y1="10" x2="10" y2="14" opacity="0.7"></line>
+      <line x1="42" y1="10" x2="38" y2="14" opacity="0.7"></line>
+      <line x1="2" y1="26" x2="6" y2="26" opacity="0.7"></line>
+      <line x1="42" y1="26" x2="46" y2="26" opacity="0.7"></line>
+    </g>
+  </svg>
+
+  <svg class="x x-bug" viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <ellipse cx="30" cy="28" rx="14" ry="16" fill="var(--color-red-ink)" fill-opacity="0.55"
+      ></ellipse>
+      <line x1="30" y1="14" x2="30" y2="40" stroke-width="1.5" opacity="0.7"></line>
+      <path
+        d="M 22 18 L 14 12 M 38 18 L 46 12 M 16 28 L 8 28 M 44 28 L 52 28 M 18 38 L 12 44 M 42 38 L 48 44"
+      ></path>
+      <circle cx="26" cy="20" r="1.4" fill="var(--color-paper)"></circle>
+      <circle cx="34" cy="20" r="1.4" fill="var(--color-paper)"></circle>
+      <line x1="26" y1="10" x2="22" y2="4" opacity="0.8"></line>
+      <line x1="34" y1="10" x2="38" y2="4" opacity="0.8"></line>
+    </g>
+  </svg>
+
+  <svg class="x x-checklist" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect x="6" y="10" width="48" height="56" rx="3" fill="var(--color-paper)"></rect>
+      <rect x="22" y="2" width="16" height="10" rx="2" fill="var(--color-ink)"></rect>
+      <path d="M 12 22 L 16 26 L 22 18" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
+      <line x1="28" y1="22" x2="48" y2="22" stroke-width="1.4" opacity="0.5"></line>
+      <path d="M 12 36 L 16 40 L 22 32" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
+      <line x1="28" y1="36" x2="48" y2="36" stroke-width="1.4" opacity="0.5"></line>
+      <rect x="12" y="46" width="6" height="6"></rect>
+      <line x1="22" y1="50" x2="48" y2="50" stroke-width="1.4" opacity="0.5"></line>
+    </g>
+  </svg>
+
+  <span class="x x-wip" aria-hidden="true">WIP</span>
+
+  <svg class="x x-arrow" viewBox="0 0 100 36" xmlns="http://www.w3.org/2000/svg">
+    <g
+      stroke="var(--color-red-ink)"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M 4 22 Q 26 6, 50 12 T 92 18" stroke-dasharray="4 4"></path>
+      <path d="M 84 12 L 94 18 L 86 26"></path>
+    </g>
+  </svg>
+</div>

@@ -1,0 +1,257 @@
+.wrap {
+  padding: 80px 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.postcard {
+  position: relative;
+  z-index: 2;
+  background: var(--color-paper);
+  padding: 40px 48px 64px;
+  max-width: 620px;
+  width: 100%;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 24px 60px -16px var(--color-paper-shadow-strong),
+    0 6px 18px var(--color-paper-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transform: rotate(-0.6deg);
+  opacity: 0;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.postcard.is-revealed {
+  opacity: 1;
+  transform: rotate(-0.6deg);
+}
+
+.airmail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-red-ink) 0 8px,
+    transparent 8px 14px,
+    var(--color-paper) 14px 18px,
+    transparent 18px 24px
+  );
+  opacity: 0.7;
+}
+
+.stamp-area {
+  position: absolute;
+  top: 22px;
+  right: 28px;
+  width: 70px;
+  height: 84px;
+  transform: rotate(6deg);
+}
+
+.postage {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--color-red-ink);
+  background: var(--color-paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-red-ink);
+  font-family: var(--font-display);
+  box-shadow: 0 2px 6px var(--color-paper-shadow);
+  position: relative;
+}
+
+.postage::before {
+  content: '✉';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.postage-num {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 10px;
+}
+
+.postage-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.cancel-mark {
+  position: absolute;
+  top: -10px;
+  right: -28px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-red-ink);
+  opacity: 0.45;
+  box-shadow:
+    0 0 0 4px transparent,
+    inset 0 0 0 4px var(--color-paper),
+    inset 0 0 0 6px var(--color-red-ink);
+  transform: rotate(-12deg);
+}
+
+.cancel-mark::after {
+  content: '';
+  position: absolute;
+  inset: 32% -40%;
+  border-top: 1px dashed var(--color-red-ink);
+  border-bottom: 1px dashed var(--color-red-ink);
+  opacity: 0.6;
+}
+
+.addr {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  max-width: 320px;
+}
+
+.addr-label {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-red-ink);
+}
+
+.addr-line {
+  flex: 1 1 100%;
+  height: 1.5px;
+  background: var(--color-ink);
+  opacity: 0.45;
+  transform-origin: left;
+}
+
+.addr-line.a1 {
+  transform: rotate(-0.5deg);
+}
+
+.addr-line.a2 {
+  transform: rotate(0.6deg);
+  width: 75%;
+}
+
+.addr-line.a3 {
+  transform: rotate(-0.3deg);
+  width: 60%;
+}
+
+.postcard h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 56px);
+  color: var(--color-ink);
+  margin-bottom: 22px;
+}
+
+.postcard .line {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--color-ink-muted);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.postcard .line a {
+  color: var(--color-red-ink);
+  border-bottom: 1.5px dashed var(--color-red-ink);
+  padding-bottom: 1px;
+}
+
+.cta-row {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-sfx {
+  display: inline-flex;
+  pointer-events: none;
+  animation: cta-zap 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes cta-zap {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.1) rotate(-4deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .cta-sfx {
+    display: none;
+  }
+}
+
+.signoff {
+  position: absolute;
+  bottom: 18px;
+  right: 32px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--color-ink);
+  transform: rotate(-3deg);
+}
+
+.signoff::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: var(--color-ink);
+  margin-top: 4px;
+  transform: rotate(-2deg);
+  transform-origin: left;
+}
+
+@media (max-width: 600px) {
+  .wrap {
+    padding: 32px 18px 32px 32px;
+  }
+
+  .postcard {
+    padding: 32px 24px 64px;
+  }
+
+  .stamp-area {
+    width: 56px;
+    height: 68px;
+    top: 14px;
+    right: 14px;
+  }
+
+  .postage-num {
+    font-size: 28px;
+  }
+
+  .cancel-mark {
+    width: 56px;
+    height: 56px;
+    right: -22px;
+  }
+}

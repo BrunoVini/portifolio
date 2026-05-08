@@ -1,0 +1,11 @@
+dist/
+.astro/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+.superpowers/
+docs/
+wireframes.html
+wireframe-sketch.html
+package-lock.json

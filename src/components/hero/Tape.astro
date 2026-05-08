@@ -1,0 +1,44 @@
+---
+interface Props {
+  position: 'tl' | 'tr' | 'br';
+}
+const { position } = Astro.props;
+---
+
+<div class={`tape tape-${position}`} aria-hidden="true"></div>
+
+<style>
+  .tape {
+    position: absolute;
+    background: var(--color-tape);
+    border: 1px dashed var(--color-tape-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 6;
+  }
+  .tape-tl {
+    top: -10px;
+    left: 130px;
+    width: 90px;
+    height: 26px;
+    transform: rotate(-4deg);
+  }
+  .tape-tr {
+    top: -8px;
+    right: 80px;
+    width: 110px;
+    height: 28px;
+    transform: rotate(3deg);
+  }
+  .tape-br {
+    bottom: -8px;
+    right: 200px;
+    width: 100px;
+    height: 24px;
+    transform: rotate(-3deg);
+  }
+  @media (max-width: 600px) {
+    .tape {
+      display: none;
+    }
+  }
+</style>

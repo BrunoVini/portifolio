@@ -1,0 +1,107 @@
+---
+import './HeroComicStrip.css';
+import type { Locale } from '../../lib/types';
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const captions =
+  locale === 'pt'
+    ? ['oi!', 'sou o bruno', 'eu construo coisas', 'que sobrevivem em produção →']
+    : ['hi!', "i'm bruno", 'i build things', 'that survive prod →'];
+---
+
+<div class="hcs" aria-hidden="true">
+  <article class="hcs-panel">
+    <div class="hcs-art">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <g
+          stroke="var(--color-ink)"
+          fill="none"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M 20 12 Q 22 6, 26 12 M 28 8 Q 30 4, 34 10 M 36 12 Q 38 6, 42 12"></path>
+          <ellipse cx="30" cy="30" rx="18" ry="16" fill="var(--color-paper)"></ellipse>
+          <rect x="20" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <rect x="31" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <line x1="29" y1="29" x2="31" y2="29"></line>
+          <circle cx="24.5" cy="29" r="1" fill="var(--color-ink)"></circle>
+          <circle cx="35.5" cy="29" r="1" fill="var(--color-ink)"></circle>
+          <path d="M 25 38 Q 30 42, 35 38"></path>
+        </g>
+      </svg>
+      <span class="hcs-bubble">!</span>
+    </div>
+    <p class="hcs-caption">{captions[0]}</p>
+  </article>
+
+  <article class="hcs-panel">
+    <div class="hcs-art">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <g
+          stroke="var(--color-ink)"
+          fill="none"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <ellipse cx="30" cy="22" rx="14" ry="12" fill="var(--color-paper)"></ellipse>
+          <rect x="22" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <rect x="31" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <circle cx="25.5" cy="21" r="1" fill="var(--color-ink)"></circle>
+          <circle cx="34.5" cy="21" r="1" fill="var(--color-ink)"></circle>
+          <path d="M 26 28 Q 30 31, 34 28"></path>
+          <path d="M 14 50 L 22 36 Q 28 32, 38 36 L 46 50"></path>
+        </g>
+      </svg>
+    </div>
+    <p class="hcs-caption">{captions[1]}</p>
+  </article>
+
+  <article class="hcs-panel">
+    <div class="hcs-art">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <g
+          stroke="var(--color-ink)"
+          fill="none"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="8" y="20" width="44" height="28" rx="2" fill="var(--color-ink)"></rect>
+          <line x1="14" y1="28" x2="34" y2="28" stroke="#7ab68b" stroke-width="2"></line>
+          <line x1="16" y1="34" x2="42" y2="34" stroke="#7ab68b" stroke-width="2"></line>
+          <line x1="14" y1="40" x2="30" y2="40" stroke="#7ab68b" stroke-width="2"></line>
+          <line x1="6" y1="50" x2="54" y2="50" stroke-width="3"></line>
+          <path
+            d="M 38 12 L 40 18 L 46 20 L 40 22 L 38 28 L 36 22 L 30 20 L 36 18 Z"
+            fill="var(--color-highlight)"></path>
+        </g>
+      </svg>
+    </div>
+    <p class="hcs-caption">{captions[2]}</p>
+  </article>
+
+  <article class="hcs-panel">
+    <div class="hcs-art">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <g
+          stroke="var(--color-ink)"
+          fill="none"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="14" y="16" width="32" height="22" rx="2" fill="var(--color-paper)"></rect>
+          <path d="M 14 18 L 30 32 L 46 18"></path>
+          <path d="M 18 46 Q 30 50, 42 46" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
+          <path d="M 38 46 L 44 46 L 44 52" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
+        </g>
+      </svg>
+    </div>
+    <p class="hcs-caption">{captions[3]}</p>
+  </article>
+</div>

@@ -1,0 +1,104 @@
+---
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const labels =
+  locale === 'pt'
+    ? { hi: 'oi! 👋', name: 'sou o\nbruno', tip: 'role pra ler →' }
+    : { hi: 'hi! 👋', name: "I'm\nbruno", tip: 'scroll to read →' };
+---
+
+<div class="m-extras" aria-hidden="true">
+  <span class="m-sticky m-sticky-hi">{labels.hi}</span>
+  <span class="m-sticky m-sticky-name">{labels.name}</span>
+  <span class="m-sticky m-sticky-tip">{labels.tip}</span>
+</div>
+
+<style>
+  .m-extras {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .m-extras {
+      display: block;
+      pointer-events: none;
+    }
+
+    .m-sticky {
+      position: absolute;
+      font-family: var(--font-display);
+      color: var(--color-ink);
+      background: var(--color-sticky-bg);
+      padding: 6px 10px 7px;
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        inset 0 -6px 10px -6px rgba(180, 140, 40, 0.25);
+      white-space: pre-line;
+      line-height: 1.05;
+      opacity: 0;
+      animation: fadeIn 0.5s var(--ease-soft) forwards;
+    }
+
+    .m-sticky::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-4deg);
+      width: 30px;
+      height: 10px;
+      background: var(--color-tape);
+      border: 1px dashed var(--color-tape-border);
+    }
+
+    .m-sticky-hi {
+      top: 14px;
+      right: 76px;
+      font-size: 17px;
+      transform: rotate(-6deg);
+      animation-delay: 3.3s;
+      z-index: 6;
+    }
+
+    .m-sticky-name {
+      top: 220px;
+      right: 18px;
+      font-size: 16px;
+      padding: 8px 12px 9px;
+      transform: rotate(5deg);
+      animation-delay: 3.5s;
+      z-index: 6;
+      text-align: center;
+    }
+
+    .m-sticky-tip {
+      bottom: 96px;
+      right: 14px;
+      font-family: var(--font-utility);
+      font-size: 12px;
+      padding: 5px 9px;
+      transform: rotate(-3deg);
+      background: var(--color-paper);
+      border: 1.5px dashed var(--color-red-ink);
+      color: var(--color-red-ink);
+      box-shadow: 2px 2px 0 var(--color-red-ink);
+      animation-delay: 3.7s;
+      z-index: 5;
+    }
+
+    .m-sticky-tip::before {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-sticky {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

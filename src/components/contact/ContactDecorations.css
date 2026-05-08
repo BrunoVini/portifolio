@@ -1,0 +1,283 @@
+.ct-dec {
+  color: var(--color-ink);
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.c {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.6) rotate(-12deg);
+  transition:
+    opacity 0.6s var(--ease-soft),
+    transform 0.6s var(--ease-soft);
+}
+
+.ct-dec.is-revealed .c {
+  opacity: 0.85;
+  transform: scale(1) rotate(var(--rot, 0deg));
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(calc(var(--rot, 0deg) - 1deg));
+  }
+}
+
+.c-envelope {
+  top: 8%;
+  left: 6%;
+  width: 80px;
+  height: 56px;
+  --rot: -6deg;
+
+  transition-delay: 0.15s;
+}
+
+.c-plane {
+  top: 14%;
+  right: 6%;
+  width: 96px;
+  height: 60px;
+  --rot: 10deg;
+
+  transition-delay: 0.3s;
+}
+
+.c-stamp {
+  bottom: 12%;
+  right: 4%;
+  width: 60px;
+  height: 70px;
+  --rot: 6deg;
+
+  transition-delay: 0.45s;
+}
+
+.c-wax {
+  top: 28%;
+  left: 4%;
+  width: 56px;
+  height: 56px;
+  --rot: -8deg;
+
+  transition-delay: 0.6s;
+}
+
+.c-phone {
+  bottom: 26%;
+  right: 16%;
+  width: 64px;
+  height: 64px;
+  --rot: 5deg;
+
+  transition-delay: 0.75s;
+}
+
+.c-pigeon {
+  top: 30%;
+  right: 22%;
+  width: 90px;
+  height: 60px;
+  --rot: -5deg;
+
+  transition-delay: 0.9s;
+}
+
+.c-bubble {
+  top: 4%;
+  left: 32%;
+  width: 130px;
+  height: 56px;
+  --rot: -3deg;
+
+  transition-delay: 1.05s;
+}
+
+.c-compass {
+  bottom: 8%;
+  left: 18%;
+  width: 56px;
+  height: 56px;
+  --rot: 8deg;
+
+  transition-delay: 1.2s;
+}
+
+.c-postmark {
+  top: 40%;
+  left: 10%;
+  width: 76px;
+  height: 76px;
+  --rot: -12deg;
+
+  transition-delay: 1.35s;
+}
+
+.c-curl {
+  bottom: 18%;
+  left: 4%;
+  width: 50px;
+  height: 50px;
+  --rot: -10deg;
+
+  transition-delay: 1.5s;
+}
+
+.c-spark {
+  top: 50%;
+  left: 60%;
+  width: 32px;
+  height: 32px;
+  --rot: 14deg;
+
+  transition-delay: 1.65s;
+}
+
+.c-pen {
+  top: 2%;
+  right: 22%;
+  width: 90px;
+  height: 24px;
+  --rot: -8deg;
+
+  transition-delay: 1.8s;
+}
+
+.c-splatter {
+  bottom: 38%;
+  left: 38%;
+  width: 60px;
+  height: 50px;
+  --rot: 6deg;
+
+  transition-delay: 1.95s;
+}
+
+.c-at {
+  top: 6%;
+  right: 38%;
+  width: 52px;
+  height: 52px;
+  --rot: -4deg;
+
+  transition-delay: 2.1s;
+}
+
+.c-heart {
+  top: 70%;
+  left: 44%;
+  width: 36px;
+  height: 32px;
+  --rot: 10deg;
+
+  transition-delay: 2.25s;
+}
+
+.ct-dec.is-revealed .c-plane,
+.ct-dec.is-revealed .c-pigeon,
+.ct-dec.is-revealed .c-spark,
+.ct-dec.is-revealed .c-heart {
+  animation: float-y 4.5s ease-in-out infinite 2.4s;
+}
+
+.ct-dec.is-revealed .c-pigeon {
+  animation-duration: 5.5s;
+  animation-delay: 2.6s;
+}
+
+.ct-dec.is-revealed .c-spark {
+  animation-duration: 3.2s;
+  animation-delay: 2.8s;
+}
+
+.ct-dec.is-revealed .c-heart {
+  animation-duration: 3.8s;
+  animation-delay: 3s;
+}
+
+@media (max-width: 1180px) {
+  .c-pen,
+  .c-at,
+  .c-postmark,
+  .c-pigeon,
+  .c-bubble {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .c-plane,
+  .c-stamp,
+  .c-spark,
+  .c-wax,
+  .c-phone,
+  .c-compass,
+  .c-splatter {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .c-phone,
+  .c-pigeon,
+  .c-bubble,
+  .c-postmark,
+  .c-pen,
+  .c-splatter,
+  .c-at,
+  .c-spark,
+  .c-curl,
+  .c-compass {
+    display: none;
+  }
+
+  .c-stamp {
+    display: block;
+    top: auto;
+    bottom: 2%;
+    right: 4%;
+    width: 36px;
+    height: 42px;
+    opacity: 0.85;
+  }
+
+  .c-wax {
+    display: block;
+    inset: auto auto 8% 4%;
+    width: 36px;
+    height: 36px;
+    opacity: 0.85;
+  }
+
+  .c-envelope {
+    top: 1%;
+    left: 4%;
+    width: 50px;
+    height: 36px;
+    opacity: 0.6;
+  }
+
+  .c-plane {
+    top: 8%;
+    right: 4%;
+    width: 60px;
+    height: 38px;
+    opacity: 0.7;
+  }
+
+  .c-heart {
+    bottom: 4%;
+    left: 4%;
+    width: 26px;
+    height: 24px;
+  }
+}

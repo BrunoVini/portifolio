@@ -1,0 +1,101 @@
+---
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+type Fact = { label: string; value: string };
+const facts: Record<Locale, Fact[]> = {
+  en: [
+    { label: 'shipping with', value: 'JS · TS · React · Node' },
+    { label: 'currently exploring', value: 'AI-augmented dev (Claude · Cursor · agents)' },
+    { label: 'non-negotiable', value: 'TDD + CI/CD' },
+  ],
+  pt: [
+    { label: 'entregando com', value: 'JS · TS · React · Node' },
+    { label: 'explorando', value: 'dev com IA (Claude · Cursor · agents)' },
+    { label: 'inegociável', value: 'TDD + CI/CD' },
+  ],
+};
+const list = facts[locale] ?? facts.en;
+const heading = 'right now ✦';
+---
+
+<aside class="facts" aria-label={heading}>
+  <header class="facts-head">{heading}</header>
+  <dl>
+    {
+      list.map((f) => (
+        <div class="row">
+          <dt>{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</aside>
+
+<style>
+  .facts {
+    display: inline-block;
+    background: var(--color-sticky-bg);
+    color: var(--color-sticky-text);
+    padding: 18px 22px 20px;
+    transform: rotate(2deg);
+    box-shadow:
+      0 8px 18px rgba(0, 0, 0, 0.16),
+      inset 0 -10px 16px -8px rgba(180, 140, 40, 0.25);
+    max-width: 320px;
+    position: relative;
+  }
+  .facts::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 64px;
+    height: 18px;
+    background: var(--color-tape);
+    border: 1px dashed var(--color-tape-border);
+  }
+  .facts-head {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--color-red-ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  dl {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+  }
+  .row {
+    display: grid;
+    gap: 2px;
+  }
+  dt {
+    font-family: var(--font-utility);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+  }
+  dd {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-sticky-text);
+    margin: 0;
+    line-height: 1.4;
+  }
+  @media (max-width: 600px) {
+    .facts {
+      transform: rotate(-1deg);
+      max-width: 100%;
+    }
+  }
+</style>

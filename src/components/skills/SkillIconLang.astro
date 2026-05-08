@@ -1,0 +1,150 @@
+---
+type Kind = 'js' | 'ts' | 'php' | 'shell' | 'react' | 'next' | 'node' | 'mysql' | 'postgres';
+interface Props {
+  kind: Kind;
+}
+const { kind } = Astro.props;
+---
+
+<g
+  stroke="var(--color-ink)"
+  fill="none"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  {
+    kind === 'js' && (
+      <>
+        <rect x="2" y="2" width="20" height="20" rx="3" fill="var(--color-highlight)" />
+        <text
+          x="12"
+          y="17"
+          text-anchor="middle"
+          font-family="JetBrains Mono"
+          font-size="11"
+          font-weight="700"
+          fill="var(--color-ink)"
+          stroke="none"
+        >
+          JS
+        </text>
+      </>
+    )
+  }
+  {
+    kind === 'ts' && (
+      <>
+        <rect x="2" y="2" width="20" height="20" rx="3" fill="var(--color-ink)" />
+        <text
+          x="12"
+          y="17"
+          text-anchor="middle"
+          font-family="JetBrains Mono"
+          font-size="11"
+          font-weight="700"
+          fill="var(--color-paper)"
+          stroke="none"
+        >
+          TS
+        </text>
+      </>
+    )
+  }
+  {
+    kind === 'php' && (
+      <>
+        <ellipse cx="12" cy="12" rx="10" ry="6" fill="var(--color-paper)" />
+        <text
+          x="12"
+          y="15"
+          text-anchor="middle"
+          font-family="JetBrains Mono"
+          font-size="9"
+          font-weight="700"
+          fill="var(--color-ink)"
+          stroke="none"
+        >
+          php
+        </text>
+      </>
+    )
+  }
+  {
+    kind === 'shell' && (
+      <>
+        <rect x="2" y="4" width="20" height="16" rx="2" fill="var(--color-ink)" />
+        <text
+          x="6"
+          y="15"
+          font-family="JetBrains Mono"
+          font-size="9"
+          font-weight="700"
+          fill="#7ab68b"
+          stroke="none"
+        >
+          $_
+        </text>
+      </>
+    )
+  }
+  {
+    kind === 'react' && (
+      <>
+        <ellipse cx="12" cy="12" rx="10" ry="4" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-60 12 12)" />
+        <circle cx="12" cy="12" r="2" fill="var(--color-ink)" />
+      </>
+    )
+  }
+  {
+    kind === 'next' && (
+      <>
+        <circle cx="12" cy="12" r="10" fill="var(--color-ink)" />
+        <line x1="9" y1="7" x2="9" y2="17" stroke="var(--color-paper)" stroke-width="1.6" />
+        <line x1="9" y1="7" x2="16" y2="17" stroke="var(--color-paper)" stroke-width="1.6" />
+        <line x1="16" y1="7" x2="16" y2="13" stroke="var(--color-paper)" stroke-width="1.6" />
+      </>
+    )
+  }
+  {
+    kind === 'node' && (
+      <>
+        <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" fill="#7ab68b" />
+        <text
+          x="12"
+          y="15"
+          text-anchor="middle"
+          font-family="JetBrains Mono"
+          font-size="8"
+          font-weight="700"
+          fill="var(--color-ink)"
+          stroke="none"
+        >
+          JS
+        </text>
+      </>
+    )
+  }
+  {
+    kind === 'mysql' && (
+      <>
+        <ellipse cx="12" cy="6" rx="9" ry="3" />
+        <path d="M 3 6 L 3 18 Q 3 21, 12 21 Q 21 21, 21 18 L 21 6" />
+        <ellipse cx="12" cy="13" rx="9" ry="2.5" opacity="0.5" />
+      </>
+    )
+  }
+  {
+    kind === 'postgres' && (
+      <>
+        <ellipse cx="12" cy="12" rx="8" ry="9" fill="var(--color-paper)" />
+        <path d="M 7 10 Q 12 6, 17 10" stroke="var(--color-ink)" stroke-width="1.4" fill="none" />
+        <circle cx="9" cy="13" r="1" fill="var(--color-ink)" />
+        <circle cx="15" cy="13" r="1" fill="var(--color-ink)" />
+        <path d="M 8 17 Q 12 19, 16 17" stroke="var(--color-ink)" stroke-width="1.2" fill="none" />
+      </>
+    )
+  }
+</g>

@@ -1,0 +1,211 @@
+{
+  "name": "Bruno Vinicius",
+  "handle": "BrunoVini",
+  "email": "brunovinissouza@gmail.com",
+  "location": { "en": "Brazil", "pt": "Brasil" },
+  "links": {
+    "github": "https://github.com/BrunoVini",
+    "linkedin": "https://www.linkedin.com/in/brunovini",
+    "email": "mailto:brunovinissouza@gmail.com"
+  },
+  "hero": {
+    "eyebrow": {
+      "en": "bruno vinicius — full-stack js developer",
+      "pt": "bruno vinicius — desenvolvedor full-stack js"
+    },
+    "titleLine1": { "en": "Code as", "pt": "Código como" },
+    "titleLine2": { "en": "craft.", "pt": "ofício." },
+    "titleAccent": { "en": "↗ shipped", "pt": "↗ entregue" },
+    "subtitle": {
+      "en": "Full-stack developer focused on scalable, high-performance apps with JavaScript, TypeScript, React, Node.js and PHP. TDD, end-to-end testing and CI/CD by default.",
+      "pt": "Desenvolvedor full-stack focado em aplicações escaláveis e de alta performance com JavaScript, TypeScript, React, Node.js e PHP. TDD, testes end-to-end e CI/CD por padrão."
+    },
+    "primaryCTA": { "en": "view my work", "pt": "ver meu trabalho" },
+    "secondaryCTA": { "en": "say hello", "pt": "diga olá" },
+    "currentlyNote": {
+      "en": "currently: building DarkSense @ Arancia. JS / TS / React / Node / CI-CD.",
+      "pt": "agora: construindo DarkSense @ Arancia. JS / TS / React / Node / CI-CD."
+    },
+    "currentlyCycle": [
+      {
+        "en": "reading: 'A Philosophy of Software Design' by John Ousterhout.",
+        "pt": "lendo: 'A Philosophy of Software Design' de John Ousterhout."
+      },
+      {
+        "en": "drinking: too much coffee. ☕",
+        "pt": "bebendo: café demais. ☕"
+      }
+    ]
+  },
+  "about": {
+    "headline": { "en": "About", "pt": "Sobre" },
+    "bio": [
+      {
+        "en": "Full Stack Developer focused on building scalable, high-performance applications using JavaScript, TypeScript, React, Node.js, and PHP.",
+        "pt": "Desenvolvedor Full Stack focado em construir aplicações escaláveis e de alta performance com JavaScript, TypeScript, React, Node.js e PHP."
+      },
+      {
+        "en": "Passionate about software quality, I apply TDD, end-to-end testing, and CI/CD automation to ensure robust and secure deployments. Experienced in increasing test coverage and implementing user-facing features that significantly improve customer retention.",
+        "pt": "Apaixonado por qualidade de software, aplico TDD, testes end-to-end e automação de CI/CD para garantir entregas robustas e seguras. Experiência em aumentar cobertura de testes e entregar features que melhoram significativamente a retenção de usuários."
+      },
+      {
+        "en": "Lately I have been pushing into AI-augmented development with Claude, Cursor, and custom agents/skills — using these tools to ship higher-quality features faster while keeping engineering rigor.",
+        "pt": "Recentemente venho explorando desenvolvimento assistido por IA com Claude, Cursor e agents/skills — usando essas ferramentas para entregar features de mais qualidade mais rápido, sem abrir mão do rigor de engenharia."
+      }
+    ],
+    "portraitAlt": {
+      "en": "Sketched portrait of Bruno Vinicius",
+      "pt": "Retrato em traço de Bruno Vinicius"
+    }
+  },
+  "experience": [
+    {
+      "company": "Arancia",
+      "companyLogo": "/companies/arancia.svg",
+      "location": { "en": "Canada · Remote", "pt": "Canadá · Remoto" },
+      "employmentType": { "en": "Full-time", "pt": "Tempo integral" },
+      "role": { "en": "Full-Stack Developer", "pt": "Desenvolvedor Full-Stack" },
+      "startDate": "2024-01",
+      "endDate": "present",
+      "description": {
+        "en": "Working on DarkSense (https://arancia.ca/darksense/) — contributing to user-facing features, automated tests, and CI/CD pipelines.",
+        "pt": "Trabalhando no DarkSense (https://arancia.ca/darksense/) — contribuindo com features de interface, testes automatizados e pipelines de CI/CD."
+      },
+      "highlights": [
+        {
+          "en": "Increased automated test coverage across services",
+          "pt": "Aumentei a cobertura de testes automatizados nos serviços"
+        },
+        {
+          "en": "Shipped UX features that improved retention",
+          "pt": "Entreguei features de UX que melhoraram retenção"
+        }
+      ],
+      "stats": [
+        {
+          "icon": "tests",
+          "label": { "en": "test coverage ↑", "pt": "cobertura de testes ↑" }
+        },
+        {
+          "icon": "rocket",
+          "label": { "en": "UX features shipped", "pt": "features de UX entregues" }
+        },
+        {
+          "icon": "chart",
+          "label": { "en": "retention ↑", "pt": "retenção ↑" }
+        }
+      ]
+    },
+    {
+      "company": "IntruderLabs",
+      "companyLogo": "/companies/intruderlabs.svg",
+      "location": { "en": "Brazil · Remote", "pt": "Brasil · Remoto" },
+      "employmentType": { "en": "Full-time", "pt": "Tempo integral" },
+      "role": { "en": "Full-Stack Developer", "pt": "Desenvolvedor full stack" },
+      "startDate": "2023-08",
+      "endDate": "2024-01",
+      "description": {
+        "en": "Engineered and shipped TypeScript features in a fast-moving product team.",
+        "pt": "Projetei e entreguei features TypeScript em um time de produto de ritmo acelerado."
+      },
+      "highlights": [
+        {
+          "en": "Engineered and implemented critical TypeScript features",
+          "pt": "Projetei e implementei features críticas em TypeScript"
+        },
+        {
+          "en": "Spearheaded development of new user-facing features that significantly improved customer retention metrics",
+          "pt": "Liderei o desenvolvimento de novas features de interface que melhoraram significativamente as métricas de retenção"
+        }
+      ],
+      "stats": [
+        {
+          "icon": "sparkle",
+          "label": { "en": "TypeScript features", "pt": "features em TypeScript" }
+        },
+        {
+          "icon": "users",
+          "label": { "en": "retention metrics ↑", "pt": "métricas de retenção ↑" }
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": { "en": "Languages", "pt": "Linguagens" },
+      "items": [
+        { "name": "JavaScript" },
+        { "name": "TypeScript", "featured": true },
+        { "name": "PHP" },
+        { "name": "Shell Script" }
+      ]
+    },
+    {
+      "category": { "en": "Frameworks", "pt": "Frameworks" },
+      "items": [
+        { "name": "React", "featured": true },
+        { "name": "Next.js" },
+        { "name": "Node.js", "featured": true }
+      ]
+    },
+    {
+      "category": { "en": "Data", "pt": "Dados" },
+      "items": [{ "name": "MySQL", "featured": true }, { "name": "PostgreSQL" }]
+    },
+    {
+      "category": { "en": "Quality & Delivery", "pt": "Qualidade & Entrega" },
+      "items": [
+        { "name": "TDD" },
+        { "name": "End-to-end testing" },
+        { "name": "CI/CD", "featured": true }
+      ]
+    },
+    {
+      "category": { "en": "AI tooling", "pt": "Ferramentas de IA" },
+      "items": [
+        { "name": "Claude" },
+        { "name": "Cursor" },
+        { "name": "Agents / skills", "featured": true }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "darksense",
+      "title": { "en": "DarkSense", "pt": "DarkSense" },
+      "tagline": {
+        "en": "Cybersecurity product I contribute to at Arancia.",
+        "pt": "Produto de cibersegurança no qual contribuo na Arancia."
+      },
+      "description": {
+        "en": "Public product page: https://arancia.ca/darksense/. My contributions are JavaScript/TypeScript user-facing features, automated tests, and CI/CD.",
+        "pt": "Página pública do produto: https://arancia.ca/darksense/. Minhas contribuições são em features JavaScript/TypeScript, testes automatizados e CI/CD."
+      },
+      "stack": ["JavaScript", "TypeScript", "React", "Node.js", "CI/CD"],
+      "links": { "demo": "https://arancia.ca/darksense/" },
+      "thumbnail": "/projects/darksense.svg",
+      "featured": true
+    },
+    {
+      "id": "placeholder-1",
+      "title": { "en": "Project Placeholder", "pt": "Projeto Placeholder" },
+      "tagline": {
+        "en": "Bruno will replace this with a real project entry.",
+        "pt": "Bruno irá substituir por um projeto real."
+      },
+      "description": {
+        "en": "Replace this entry in src/data/profile.json. The schema in src/lib/types.ts is the contract.",
+        "pt": "Substitua esta entrada em src/data/profile.json. O schema em src/lib/types.ts é o contrato."
+      },
+      "stack": ["JavaScript"],
+      "links": {},
+      "thumbnail": "/projects/placeholder.svg",
+      "featured": false
+    }
+  ],
+  "contact": {
+    "headline": { "en": "Say hello", "pt": "Diga olá" },
+    "cta": { "en": "Send me an email", "pt": "Me envie um email" },
+    "signoff": { "en": "— bruno", "pt": "— bruno" }
+  }
+}

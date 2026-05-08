@@ -1,0 +1,116 @@
+---
+import LanguageToggle from './LanguageToggle.tsx';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import { assetUrl } from '../../lib/asset';
+import type { Locale } from '../../lib/types';
+import './LanguageToggle.css';
+import './Navigation.css';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const table = { en, pt };
+const base = import.meta.env.BASE_URL;
+const enHref = assetUrl('/', base);
+const ptHref = assetUrl('/pt/', base);
+const homeHref = locale === 'pt' ? ptHref : enHref;
+
+const items: Array<{ id: string; key: string }> = [
+  { id: 'about', key: 'nav.about' },
+  { id: 'work', key: 'nav.work' },
+  { id: 'skills', key: 'nav.skills' },
+  { id: 'contact', key: 'nav.contact' },
+];
+---
+
+<header class="nav-wrap">
+  <a class="logo" href={homeHref}>bruno.</a>
+  <nav class="nav" aria-label="primary">
+    {
+      items.map((it) => (
+        <a href={`#${it.id}`}>
+          {t(it.key, locale, table)}
+          <span class="flip-hint" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      ))
+    }
+    <LanguageToggle client:idle locale={locale} enHref={enHref} ptHref={ptHref} />
+  </nav>
+</header>
+
+<button
+  class="ribbon"
+  type="button"
+  aria-controls="chapter-index"
+  aria-expanded="false"
+  aria-label={t('nav.menu', locale, table)}
+>
+  INDEX
+</button>
+<aside class="chapter-index" id="chapter-index" aria-label="chapters">
+  <ol>
+    {
+      items.map((it, i) => (
+        <li data-section={it.id}>
+          <a href={`#${it.id}`}>
+            <b>{String(i + 1).padStart(2, '0')}</b>
+            {t(it.key, locale, table)}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <div class="passport-stamp">
+    <LanguageToggle client:idle locale={locale} enHref={enHref} ptHref={ptHref} />
+  </div>
+</aside>
+
+<script>
+  const ribbon = document.querySelector<HTMLButtonElement>('.ribbon');
+  const idx = document.querySelector<HTMLElement>('.chapter-index');
+  if (ribbon && idx) {
+    const setOpen = (open: boolean) => {
+      idx.classList.toggle('is-open', open);
+      ribbon.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    ribbon.addEventListener('click', () => setOpen(!idx.classList.contains('is-open')));
+    idx.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (!idx.classList.contains('is-open')) return;
+      const t = e.target as HTMLElement;
+      if (t.closest('.ribbon') || t.closest('.chapter-index')) return;
+      setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+
+    const sections = Array.from(idx.querySelectorAll<HTMLElement>('li[data-section]'));
+    const targets = sections
+      .map((li) => document.getElementById(li.dataset.section!))
+      .filter((el): el is HTMLElement => !!el);
+    if ('IntersectionObserver' in window && targets.length) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              sections.forEach((li) => {
+                if (li.dataset.section === en.target.id) li.setAttribute('data-active', '');
+                else li.removeAttribute('data-active');
+              });
+            }
+          });
+        },
+        { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
+      );
+      targets.forEach((t) => io.observe(t));
+    }
+  }
+</script>

@@ -1,0 +1,86 @@
+---
+interface Props {
+  /** which corner the tail points from */
+  tail?: 'bl' | 'br' | 'tl' | 'tr';
+  /** background color of the bubble */
+  bg?: 'paper' | 'highlight';
+}
+const { tail = 'bl', bg = 'paper' } = Astro.props;
+const bgFill = bg === 'highlight' ? 'var(--color-highlight)' : 'var(--color-paper)';
+---
+
+<span class={`bubble tail-${tail}`} style={`background:${bgFill}`}>
+  <slot />
+</span>
+
+<style>
+  .bubble {
+    position: relative;
+    display: inline-block;
+    padding: 12px 18px;
+    border: 2.5px solid var(--color-ink);
+    border-radius: 16px 18px 14px 20px / 18px 14px 20px 16px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.2;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+  .bubble::before,
+  .bubble::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .bubble.tail-bl::before {
+    bottom: -16px;
+    left: 22px;
+    border-width: 18px 14px 0 0;
+    border-color: var(--color-ink) transparent transparent transparent;
+  }
+  .bubble.tail-bl::after {
+    bottom: -12px;
+    left: 25px;
+    border-width: 14px 10px 0 0;
+    border-color: inherit transparent transparent transparent;
+  }
+  .bubble.tail-br::before {
+    bottom: -16px;
+    right: 22px;
+    border-width: 0 0 18px 14px;
+    border-color: transparent transparent var(--color-ink) transparent;
+  }
+  .bubble.tail-br::after {
+    bottom: -12px;
+    right: 25px;
+    border-width: 0 0 14px 10px;
+    border-color: transparent transparent inherit transparent;
+  }
+  .bubble.tail-tl::before {
+    top: -16px;
+    left: 22px;
+    border-width: 0 0 18px 14px;
+    border-color: transparent transparent var(--color-ink) transparent;
+  }
+  .bubble.tail-tl::after {
+    top: -12px;
+    left: 25px;
+    border-width: 0 0 14px 10px;
+    border-color: transparent transparent inherit transparent;
+  }
+  .bubble.tail-tr::before {
+    top: -16px;
+    right: 22px;
+    border-width: 0 18px 14px 0;
+    border-color: transparent var(--color-ink) transparent transparent;
+  }
+  .bubble.tail-tr::after {
+    top: -12px;
+    right: 25px;
+    border-width: 0 14px 10px 0;
+    border-color: transparent inherit transparent transparent;
+  }
+</style>

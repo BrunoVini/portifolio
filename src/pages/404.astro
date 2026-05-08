@@ -1,0 +1,50 @@
+---
+import Page from '../layouts/Page.astro';
+import NotebookPage from '../components/ui/NotebookPage.astro';
+import Button from '../components/ui/Button.astro';
+import { assetUrl } from '../lib/asset';
+const homeHref = assetUrl('/', import.meta.env.BASE_URL);
+---
+
+<Page locale="en" title="404 — page torn out" description="Page not found.">
+  <NotebookPage pageNumber={404} static={true} flipTarget={false}>
+    <div class="not-found">
+      <h1>404</h1>
+      <p>Looks like that page was torn out of the notebook.</p>
+      <div class="cta">
+        <Button href={homeHref} variant="primary">go home</Button>
+      </div>
+    </div>
+  </NotebookPage>
+</Page>
+
+<style>
+  .not-found {
+    padding: 130px;
+    max-width: 640px;
+  }
+  .not-found h1 {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 12vw, 140px);
+    color: var(--color-red-ink);
+    line-height: 1;
+  }
+  .not-found p {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: var(--color-ink-muted);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+  .cta {
+    margin-top: 32px;
+  }
+  @media (max-width: 600px) {
+    .not-found {
+      padding: 32px 18px 32px 32px;
+    }
+    .not-found p {
+      font-size: 18px;
+    }
+  }
+</style>

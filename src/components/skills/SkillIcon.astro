@@ -1,0 +1,61 @@
+---
+import SkillIconLang from './SkillIconLang.astro';
+import SkillIconQA from './SkillIconQA.astro';
+
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+type LangKind = 'js' | 'ts' | 'php' | 'shell' | 'react' | 'next' | 'node' | 'mysql' | 'postgres';
+type QaKind = 'tdd' | 'e2e' | 'cicd' | 'claude' | 'cursor' | 'agents';
+
+const langKinds: Record<string, LangKind> = {
+  javascript: 'js',
+  js: 'js',
+  typescript: 'ts',
+  ts: 'ts',
+  php: 'php',
+  react: 'react',
+  mysql: 'mysql',
+};
+const detectLang = (k: string): LangKind | null => {
+  if (langKinds[k]) return langKinds[k];
+  if (k.includes('postgres')) return 'postgres';
+  if (k.includes('shell')) return 'shell';
+  if (k.includes('next')) return 'next';
+  if (k.includes('node')) return 'node';
+  return null;
+};
+const detectQa = (k: string): QaKind | null => {
+  if (k === 'tdd') return 'tdd';
+  if (k.includes('endtoend') || k.includes('e2e')) return 'e2e';
+  if (k.includes('cicd')) return 'cicd';
+  if (k.includes('claude')) return 'claude';
+  if (k.includes('cursor')) return 'cursor';
+  if (k.includes('agent') || k.includes('skill')) return 'agents';
+  return null;
+};
+
+const langKind = detectLang(key);
+const qaKind = !langKind ? detectQa(key) : null;
+---
+
+{
+  (langKind || qaKind) && (
+    <svg class="ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {langKind && <SkillIconLang kind={langKind} />}
+      {qaKind && <SkillIconQA kind={qaKind} />}
+    </svg>
+  )
+}
+
+<style>
+  .ico {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transform: rotate(-2deg);
+  }
+</style>

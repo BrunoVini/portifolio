@@ -1,0 +1,117 @@
+---
+import './ContactFooter.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const year = new Date().getFullYear();
+
+const lines =
+  locale === 'pt'
+    ? {
+        ps: 'P.S.',
+        body: 'Você chegou na última página do diário. Obrigado por ler.',
+        sig: 'feito com',
+        coffee: 'café',
+        love: 'carinho',
+        and: 'e',
+        end: 'FIM',
+        signoff: '— Bruno, ' + year,
+      }
+    : {
+        ps: 'P.S.',
+        body: 'You reached the last page of the diary. Thanks for reading.',
+        sig: 'made with',
+        coffee: 'coffee',
+        love: 'love',
+        and: 'and',
+        end: 'THE END',
+        signoff: '— Bruno, ' + year,
+      };
+---
+
+<div class="cf" data-reveal>
+  <div class="cf-divider" aria-hidden="true">
+    <svg viewBox="0 0 600 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line
+        x1="0"
+        y1="12"
+        x2="600"
+        y2="12"
+        stroke="var(--color-margin-red)"
+        stroke-width="1.5"
+        stroke-dasharray="6 4"></line>
+    </svg>
+    <span class="cf-divider-icon" aria-hidden="true">★</span>
+  </div>
+
+  <div class="cf-row">
+    <div class="cf-bruno" aria-hidden="true">
+      <svg viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+        <g
+          stroke="var(--color-ink)"
+          fill="none"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M 38 14 Q 42 4, 46 14"></path>
+          <path d="M 50 12 Q 56 0, 62 12"></path>
+          <path d="M 66 14 Q 70 4, 74 14"></path>
+          <ellipse cx="55" cy="42" rx="28" ry="24" fill="var(--color-paper)"></ellipse>
+          <rect x="36" y="36" width="16" height="12" rx="2" fill="var(--color-paper)"></rect>
+          <rect x="58" y="36" width="16" height="12" rx="2" fill="var(--color-paper)"></rect>
+          <line x1="52" y1="42" x2="58" y2="42"></line>
+          <circle cx="44" cy="42" r="1.6" fill="var(--color-ink)"></circle>
+          <circle cx="66" cy="42" r="1.6" fill="var(--color-ink)"></circle>
+          <line x1="55" y1="50" x2="55" y2="56"></line>
+          <path d="M 46 60 Q 55 66, 64 60"></path>
+          <path
+            d="M 50 64 Q 50 70, 55 72 Q 60 70, 60 64"
+            fill="var(--color-ink)"
+            fill-opacity="0.85"></path>
+          <path d="M 30 84 L 16 100"></path>
+          <line x1="44" y1="74" x2="40" y2="92"></line>
+          <line x1="66" y1="74" x2="70" y2="92"></line>
+          <line x1="55" y1="76" x2="55" y2="118"></line>
+          <path d="M 30 116 Q 30 124, 38 124"></path>
+          <path d="M 80 116 Q 80 124, 72 124"></path>
+          <g class="cf-arm">
+            <path d="M 14 96 Q 8 90, 4 80" stroke="var(--color-red-ink)" stroke-width="2.6"></path>
+          </g>
+          <path
+            d="M 18 78 Q 14 76, 10 80 M 24 76 Q 20 74, 16 78 M 28 84 Q 24 82, 22 86"
+            stroke="var(--color-red-ink)"
+            stroke-width="1.8"
+            opacity="0.7"></path>
+        </g>
+      </svg>
+      <span class="cf-bye">{locale === 'pt' ? 'tchau!' : 'bye!'}</span>
+    </div>
+
+    <div class="cf-center">
+      <p class="cf-ps">
+        <strong>{lines.ps}</strong>
+        {lines.body}
+      </p>
+      <p class="cf-made">
+        {lines.sig}
+        <span class="cf-icon" aria-label={lines.coffee}>☕</span>
+        {lines.and}
+        <span class="cf-icon cf-icon-red" aria-label={lines.love}>♥</span>
+        {locale === 'pt' ? 'em' : 'in'}
+        {year}.
+      </p>
+      <p class="cf-sign">{lines.signoff}</p>
+    </div>
+
+    <div class="cf-end" aria-hidden="true">
+      <span>{lines.end}</span>
+    </div>
+  </div>
+
+  <div class="cf-tape cf-tape-l" aria-hidden="true"></div>
+  <div class="cf-tape cf-tape-r" aria-hidden="true"></div>
+</div>

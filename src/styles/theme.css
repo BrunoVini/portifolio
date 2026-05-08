@@ -1,0 +1,54 @@
+:root {
+  /* ====== Colors ====== */
+  --color-paper: #faf7ee;
+  --color-paper-edge: #e8e0d0;
+  --color-paper-tinted: #f4ede0;
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #3a2f24;
+  --color-ink-soft: #5a4a3a;
+  --color-red-ink: #d63333;
+  --color-red-stamp: #a8332a;
+  --color-highlight: #ffe066;
+  --color-highlight-strong: #ffd633;
+  --color-highlight-soft: rgba(255, 224, 102, 0.6);
+  --color-tape: rgba(255, 235, 150, 0.65);
+  --color-tape-border: rgba(180, 140, 40, 0.25);
+  --color-coffee: rgba(124, 76, 40, 0.35);
+  --color-coffee-fill: rgba(124, 76, 40, 0.18);
+  --color-paper-shadow: rgba(0, 0, 0, 0.08);
+  --color-paper-shadow-strong: rgba(0, 0, 0, 0.28);
+  --color-rule: rgba(120, 90, 60, 0.09);
+  --color-margin-red: rgba(214, 51, 51, 0.45);
+  --color-pencil-margin: rgba(180, 140, 60, 0.25);
+  --color-sticky-bg: #fff7a8;
+  --color-sticky-text: #2a2a10;
+
+  /* ====== Typography ====== */
+  --font-display: 'Caveat', cursive;
+  --font-body: 'Kalam', cursive;
+  --font-utility: 'Architects Daughter', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ====== Sizing ====== */
+  --page-max-width: 1500px;
+  --page-max-height: 920px;
+  --page-min-height: 680px;
+  --page-vw: 94vw;
+  --page-vh: 86vh;
+  --margin-left: 90px;
+  --gutter: 32px;
+
+  /* ====== Motion ====== */
+  --ease-default: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-stroke: 2s;
+  --duration-fade: 0.6s;
+  --duration-flip: 0.7s;
+}
+
+@media (width <= 600px) {
+  :root {
+    --margin-left: 18px;
+    --gutter: 16px;
+  }
+}

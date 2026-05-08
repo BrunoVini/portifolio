@@ -1,0 +1,76 @@
+---
+import { getProfile } from '../../lib/profile';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import Button from '../ui/Button.astro';
+import ScrollHint from '../ui/ScrollHint.astro';
+import VitruvianFigure from './VitruvianFigure.astro';
+import Gear from './Gear.astro';
+import StickyNote from './StickyNote.astro';
+import Polaroid from './Polaroid.astro';
+import CoffeeRing from './CoffeeRing.astro';
+import Tape from './Tape.astro';
+import Signature from './Signature.astro';
+import SoundEffect from '../ui/SoundEffect.astro';
+import HeroComicStrip from './HeroComicStrip.astro';
+import HeroMobileStickies from './HeroMobileStickies.astro';
+import './Hero.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+const table = { en, pt };
+const dateFmt = locale === 'pt' ? 'pt-BR' : 'en-US';
+const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
+---
+
+<Tape position="tl" />
+<Tape position="tr" />
+<Tape position="br" />
+<div class="date">{today}</div>
+
+<VitruvianFigure />
+<Gear />
+<Polaroid caption="DarkSense ✦ 2025" />
+<StickyNote
+  text={p.hero.currentlyNote}
+  cycle={p.hero.currentlyCycle ?? []}
+  label={locale === 'pt' ? 'agora:' : 'currently:'}
+/>
+<CoffeeRing />
+
+<div class="content">
+  <div class="eyebrow">{p.hero.eyebrow}</div>
+  <h1 class="title">
+    <span class="line-1">{p.hero.titleLine1}</span>
+    <span class="line-2">
+      <span class="highlight">{p.hero.titleLine2}</span>
+      <span class="arrow">{p.hero.titleAccent}</span>
+      <span class="cursor" aria-hidden="true"></span>
+    </span>
+  </h1>
+  <p class="sub">{p.hero.subtitle}</p>
+  <div class="ctas">
+    <Button variant="primary" href="#work">{p.hero.primaryCTA} →</Button>
+    <Button href="#contact">{p.hero.secondaryCTA}</Button>
+  </div>
+</div>
+
+<div class="diary-sticker" aria-hidden="true">
+  <span class="ds-of">{locale === 'pt' ? 'O DIÁRIO DE' : 'THE DIARY OF'}</span>
+  <strong class="ds-name">Bruno Vinicius</strong>
+  <span class="ds-vol">VOL. 1</span>
+</div>
+
+<div class="sfx-1"><SoundEffect text="ZAP!" color="highlight" rotate={-12} size={90} /></div>
+<div class="sfx-2"><SoundEffect text="POW!" color="red" rotate={10} size={76} /></div>
+<div class="sfx-3"><SoundEffect text="SHIP!" color="highlight" rotate={-6} size={84} /></div>
+
+<HeroComicStrip locale={locale} />
+<HeroMobileStickies locale={locale} />
+<Signature />
+<div class="scroll-hint-pos"><ScrollHint label={t('hero.scrollHint', locale, table)} /></div>

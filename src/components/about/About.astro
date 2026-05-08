@@ -1,0 +1,87 @@
+---
+import { getProfile } from '../../lib/profile';
+import { splitOnTerms } from '../../lib/highlight';
+import ProfilePost from './ProfilePost.astro';
+import AboutDoodles from './AboutDoodles.astro';
+import AboutFunFacts from './AboutFunFacts.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import './About.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+
+const TERMS: Record<Locale, string[]> = {
+  en: ['TDD', 'CI/CD', 'AI-augmented', 'high-performance', 'scalable', 'customer retention'],
+  pt: ['TDD', 'CI/CD', 'IA', 'alta performance', 'escaláveis', 'retenção'],
+};
+const terms = TERMS[locale] ?? TERMS.en;
+const paragraphs = p.about.bio.map((para) => splitOnTerms(para, terms));
+const aside = locale === 'pt' ? '* quem é esse cara?' : '* who is this guy?';
+---
+
+<div class="about-wrap" id="about" data-reveal>
+  <AboutDoodles />
+  <div class="about-grid">
+    <div class="bio">
+      <SectionTitle title={p.about.headline} chapter="PG. 48" icon="about" aside={aside} />
+      {
+        paragraphs.map((frags, idx) => (
+          <p class="para">
+            {frags.map((f) =>
+              f.kind === 'mark' ? <mark class="hl">{f.value}</mark> : <>{f.value}</>,
+            )}
+            {idx === 0 && (
+              <span class="annot annot-1">
+                <span class="annot-arrow">↙</span>
+                <span class="annot-text">
+                  {locale === 'pt' ? 'verdade absoluta' : 'true story'}
+                </span>
+              </span>
+            )}
+            {idx === 1 && (
+              <span class="annot annot-2">
+                <span class="annot-arrow">↖</span>
+                <span class="annot-text">{locale === 'pt' ? 'inegociável' : 'non-negotiable'}</span>
+              </span>
+            )}
+            {idx === 2 && (
+              <span class="annot annot-3">
+                <span class="annot-arrow">↘</span>
+                <span class="annot-text">
+                  {locale === 'pt' ? 'ainda explorando' : 'still exploring'}
+                </span>
+              </span>
+            )}
+          </p>
+        ))
+      }
+      <p class="ps-note">
+        <strong class="ps-label">P.S.</strong>
+        {
+          locale === 'pt' ? (
+            <>
+              <s>Eu sei de tudo.</s> <s>Estou aprendendo.</s> Eu escrevo testes e pergunto pro
+              Claude quando travo.
+            </>
+          ) : (
+            <>
+              <s>I know everything.</s> <s>I'm learning.</s> I write tests and ask Claude when I'm
+              stuck.
+            </>
+          )
+        }
+      </p>
+    </div>
+
+    <div class="portrait-col">
+      <ProfilePost alt={p.about.portraitAlt} locale={locale} />
+      <div class="facts-row">
+        <AboutFunFacts locale={locale} />
+      </div>
+    </div>
+  </div>
+</div>

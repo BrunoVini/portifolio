@@ -1,0 +1,127 @@
+---
+interface Props {
+  /** Free-form category name in any locale; we match keywords to pick an icon. */
+  name: string;
+}
+const { name } = Astro.props;
+const lower = name.toLowerCase();
+
+type Kind = 'languages' | 'frameworks' | 'data' | 'quality' | 'ai' | 'tools' | 'default';
+
+const detect = (s: string): Kind => {
+  if (/lang|linguag/.test(s)) return 'languages';
+  if (/framework|biblio/.test(s)) return 'frameworks';
+  if (/data|dados|db|database/.test(s)) return 'data';
+  if (/quality|qualidade|test|delivery|entrega/.test(s)) return 'quality';
+  if (/ai|ia|intelig|tooling|ferramenta/.test(s)) return 'ai';
+  if (/tool|ferramenta/.test(s)) return 'tools';
+  return 'default';
+};
+const kind: Kind = detect(lower);
+---
+
+<svg
+  class={`cat-icon cat-${kind}`}
+  viewBox="0 0 48 48"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <g
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    {
+      kind === 'languages' && (
+        <>
+          {/* curly braces { } */}
+          <path d="M 16 8 Q 8 8, 8 18 L 8 22 Q 8 24, 5 24 Q 8 24, 8 26 L 8 30 Q 8 40, 16 40" />
+          <path d="M 32 8 Q 40 8, 40 18 L 40 22 Q 40 24, 43 24 Q 40 24, 40 26 L 40 30 Q 40 40, 32 40" />
+          <line x1="20" y1="24" x2="28" y2="24" opacity="0.6" />
+        </>
+      )
+    }
+    {
+      kind === 'frameworks' && (
+        <>
+          {/* React-style atom */}
+          <ellipse cx="24" cy="24" rx="20" ry="8" />
+          <ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)" />
+          <ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(-60 24 24)" />
+          <circle cx="24" cy="24" r="3" fill="currentColor" />
+        </>
+      )
+    }
+    {
+      kind === 'data' && (
+        <>
+          {/* database cylinder */}
+          <ellipse cx="24" cy="12" rx="16" ry="5" />
+          <path d="M 8 12 L 8 36 Q 8 41, 24 41 Q 40 41, 40 36 L 40 12" />
+          <ellipse cx="24" cy="24" rx="16" ry="5" opacity="0.55" />
+        </>
+      )
+    }
+    {
+      kind === 'quality' && (
+        <>
+          {/* checklist clipboard */}
+          <rect x="10" y="8" width="28" height="34" rx="2" />
+          <rect x="18" y="4" width="12" height="6" rx="1" fill="currentColor" fill-opacity="0.85" />
+          <path d="M 14 18 L 18 22 L 24 14" stroke="var(--color-red-ink)" />
+          <line x1="28" y1="20" x2="36" y2="20" opacity="0.55" />
+          <path d="M 14 28 L 18 32 L 24 24" stroke="var(--color-red-ink)" />
+          <line x1="28" y1="30" x2="36" y2="30" opacity="0.55" />
+        </>
+      )
+    }
+    {
+      kind === 'ai' && (
+        <>
+          {/* sparkle + brain hint */}
+          <path
+            d="M 24 4 L 27 18 L 40 20 L 27 22 L 24 36 L 21 22 L 8 20 L 21 18 Z"
+            stroke="var(--color-red-ink)"
+            fill="var(--color-red-ink)"
+            fill-opacity="0.85"
+          />
+          <path
+            d="M 38 32 L 40 38 L 44 40 L 40 42 L 38 46 L 36 42 L 32 40 L 36 38 Z"
+            stroke="var(--color-red-ink)"
+            fill="var(--color-red-ink)"
+            fill-opacity="0.7"
+          />
+        </>
+      )
+    }
+    {
+      (kind === 'tools' || kind === 'default') && (
+        <>
+          {/* gear */}
+          <circle cx="24" cy="24" r="10" />
+          <circle cx="24" cy="24" r="4" />
+          <line x1="24" y1="14" x2="24" y2="8" />
+          <line x1="24" y1="34" x2="24" y2="40" />
+          <line x1="14" y1="24" x2="8" y2="24" />
+          <line x1="34" y1="24" x2="40" y2="24" />
+          <line x1="17" y1="17" x2="13" y2="13" />
+          <line x1="31" y1="17" x2="35" y2="13" />
+          <line x1="17" y1="31" x2="13" y2="35" />
+          <line x1="31" y1="31" x2="35" y2="35" />
+        </>
+      )
+    }
+  </g>
+</svg>
+
+<style>
+  .cat-icon {
+    width: 38px;
+    height: 38px;
+    color: var(--color-ink);
+    flex-shrink: 0;
+    transform: rotate(-3deg);
+  }
+</style>

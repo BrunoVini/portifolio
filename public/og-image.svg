@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf7ee"/>
+  <line x1="180" y1="0" x2="180" y2="630" stroke="#d63333" stroke-width="2" opacity="0.4"/>
+  <g font-family="Caveat, cursive">
+    <text x="220" y="120" font-size="32" fill="#5a4a3a">// bruno vinicius</text>
+    <text x="220" y="280" font-size="160" fill="#1a1a1a" font-weight="700">Code as</text>
+    <text x="220" y="430" font-size="160" fill="#1a1a1a" font-weight="700">craft.</text>
+  </g>
+  <rect x="220" y="370" width="280" height="60" fill="#ffe066" opacity="0.7"/>
+  <text x="900" y="540" font-family="Architects Daughter" font-size="22" fill="#5a4a3a">brunovini.github.io/portifolio</text>
+</svg>

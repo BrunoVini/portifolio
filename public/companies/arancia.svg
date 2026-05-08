@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
+  <defs>
+    <filter id="r-a">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3"/>
+      <feDisplacementMap in="SourceGraphic" scale="1.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#r-a)" stroke="#1a1a1a" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+    <circle cx="28" cy="28" r="22"/>
+    <path d="M 18 36 L 28 16 L 38 36 M 22 30 L 34 30"/>
+  </g>
+</svg>

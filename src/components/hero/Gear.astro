@@ -1,0 +1,89 @@
+---
+// Hand-drawn double gear, primary clockwise + smaller red counter-clockwise.
+---
+
+<div class="gear-wrap" aria-hidden="true">
+  <svg viewBox="-65 -65 130 130" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="gear-rough">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="5"
+        ></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="2"></feDisplacementMap>
+      </filter>
+    </defs>
+    <g
+      class="spin"
+      filter="url(#gear-rough)"
+      stroke="var(--color-ink)"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle r="42" stroke-width="1.6"></circle>
+      <circle r="18" stroke-width="1.4"></circle>
+      <g stroke-width="1.6">
+        <line x1="0" y1="-42" x2="0" y2="-54"></line>
+        <line x1="0" y1="42" x2="0" y2="54"></line>
+        <line x1="-42" y1="0" x2="-54" y2="0"></line>
+        <line x1="42" y1="0" x2="54" y2="0"></line>
+        <line x1="-30" y1="-30" x2="-38" y2="-38"></line>
+        <line x1="30" y1="-30" x2="38" y2="-38"></line>
+        <line x1="-30" y1="30" x2="-38" y2="38"></line>
+        <line x1="30" y1="30" x2="38" y2="38"></line>
+      </g>
+      <line x1="-12" y1="0" x2="12" y2="0" stroke-width="1"></line>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke-width="1"></line>
+    </g>
+    <g
+      class="spin-rev"
+      filter="url(#gear-rough)"
+      stroke="var(--color-red-ink)"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      opacity="0.7"
+    >
+      <circle r="10" stroke-width="1.3"></circle>
+      <g stroke-width="1.3">
+        <line x1="0" y1="-10" x2="0" y2="-15"></line>
+        <line x1="0" y1="10" x2="0" y2="15"></line>
+        <line x1="-10" y1="0" x2="-15" y2="0"></line>
+        <line x1="10" y1="0" x2="15" y2="0"></line>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .gear-wrap {
+    position: absolute;
+    right: 5%;
+    bottom: 18%;
+    width: 130px;
+    height: 130px;
+    z-index: 5;
+  }
+  .spin {
+    animation: rotateLoop 18s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .spin-rev {
+    animation: rotateLoop 14s linear infinite reverse;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @media (max-width: 979px) and (min-width: 601px) {
+    .gear-wrap {
+      width: 100px;
+      height: 100px;
+      right: 6%;
+      bottom: 16%;
+    }
+  }
+  @media (max-width: 600px) {
+    .gear-wrap {
+      display: none;
+    }
+  }
+</style>

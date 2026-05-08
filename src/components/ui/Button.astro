@@ -1,0 +1,74 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost';
+  ariaLabel?: string;
+  external?: boolean;
+}
+const { href, variant = 'ghost', ariaLabel, external = false } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const externalAttrs = external && href ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<Tag class={`btn ${variant}`} href={href} aria-label={ariaLabel} {...externalAttrs}>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    padding: 12px 26px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 999px / 80%;
+    transition:
+      transform 0.18s var(--ease-soft),
+      background 0.18s ease,
+      color 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+  .btn:hover,
+  .btn:focus-visible {
+    transform: translate(-1px, -1px) rotate(-1.5deg) scale(1.04);
+    background: var(--color-highlight);
+    box-shadow: 5px 5px 0 var(--color-ink);
+    outline: none;
+  }
+  .btn:active {
+    transform: translate(2px, 2px) rotate(-1deg) scale(1);
+    box-shadow: 1px 1px 0 var(--color-ink);
+  }
+  .btn.primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    box-shadow: 3px 3px 0 var(--color-red-ink);
+  }
+  .btn.primary:hover,
+  .btn.primary:focus-visible {
+    background: var(--color-red-ink);
+    color: var(--color-paper);
+    border-color: var(--color-red-ink);
+    box-shadow: 5px 5px 0 var(--color-ink);
+  }
+  .btn.primary:active {
+    box-shadow: 1px 1px 0 var(--color-red-ink);
+  }
+  @media (max-width: 600px) {
+    .btn {
+      font-size: 21px;
+      padding: 14px 22px;
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+  }
+</style>

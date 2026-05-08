@@ -1,0 +1,114 @@
+.exp-dec {
+  color: var(--color-ink);
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.x {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.6) rotate(-10deg);
+  transition:
+    opacity 0.6s var(--ease-soft),
+    transform 0.6s var(--ease-soft);
+}
+
+.exp-dec.is-revealed .x {
+  opacity: 0.7;
+  transform: scale(1) rotate(var(--rot, 0deg));
+}
+
+.x-clock {
+  top: 6%;
+  right: 8%;
+  width: 52px;
+  height: 52px;
+  --rot: -6deg;
+
+  transition-delay: 0.2s;
+}
+
+.x-cal {
+  bottom: 14%;
+  right: 6%;
+  width: 48px;
+  height: 52px;
+  --rot: 4deg;
+
+  transition-delay: 0.4s;
+}
+
+.x-growth {
+  top: 30%;
+  right: 4%;
+  width: 110px;
+  height: 60px;
+  --rot: -3deg;
+
+  transition-delay: 0.6s;
+}
+
+.x-bag {
+  bottom: 40%;
+  right: 14%;
+  width: 50px;
+  height: 48px;
+  --rot: 6deg;
+
+  transition-delay: 0.8s;
+}
+
+.x-pencil {
+  top: 12%;
+  right: 22%;
+  width: 90px;
+  height: 28px;
+  --rot: -8deg;
+
+  transition-delay: 1s;
+}
+
+.x-check {
+  top: 60%;
+  right: 18%;
+  width: 36px;
+  height: 36px;
+  --rot: 12deg;
+
+  transition-delay: 1.2s;
+}
+
+@media (max-width: 980px) {
+  .x-growth,
+  .x-pencil,
+  .x-bag {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .x-growth,
+  .x-pencil,
+  .x-bag,
+  .x-cal {
+    display: none;
+  }
+
+  .x-clock {
+    top: 1%;
+    right: 4%;
+    width: 36px;
+    height: 36px;
+    opacity: 0.45;
+  }
+
+  .x-check {
+    top: 60%;
+    right: 4%;
+    width: 28px;
+    height: 28px;
+  }
+}

@@ -1,0 +1,98 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+  cycle?: string[];
+}
+const { text, label = 'currently:', cycle = [] } = Astro.props;
+const all = [text, ...cycle];
+---
+
+<div class="sticky" data-sticky-cycle={all.length > 1 ? JSON.stringify(all) : undefined}>
+  <strong>{label}</strong>
+  <span class="sticky-text">{text}</span>
+</div>
+
+<style>
+  .sticky {
+    position: absolute;
+    right: 7%;
+    bottom: 12%;
+    width: 175px;
+    background: var(--color-sticky-bg);
+    padding: 20px 18px;
+    transform: rotate(4deg);
+    box-shadow:
+      0 6px 14px rgba(0, 0, 0, 0.15),
+      inset 0 -10px 16px -8px rgba(180, 140, 40, 0.25);
+    font-family: var(--font-utility);
+    font-size: 15px;
+    color: var(--color-sticky-text);
+    line-height: 1.45;
+    z-index: 8;
+    opacity: 0;
+    animation:
+      stickyIn 0.5s ease-out 3.2s forwards,
+      stickyJiggle 6s ease-in-out 4s infinite;
+  }
+  @keyframes stickyJiggle {
+    0%,
+    92%,
+    100% {
+      transform: rotate(4deg);
+    }
+    94% {
+      transform: rotate(2.6deg);
+    }
+    96% {
+      transform: rotate(5.4deg);
+    }
+    98% {
+      transform: rotate(3.4deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sticky {
+      animation: stickyIn 0.001s linear forwards;
+    }
+  }
+  .sticky::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-6deg);
+    width: 50px;
+    height: 16px;
+    background: var(--color-tape);
+    border: 1px dashed var(--color-tape-border);
+  }
+  .sticky strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    margin-bottom: 4px;
+    color: var(--color-red-ink);
+    font-weight: 700;
+  }
+  @media (max-width: 979px) and (min-width: 601px) {
+    .sticky {
+      width: 165px;
+      right: 6%;
+      bottom: 14%;
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 600px) {
+    .sticky {
+      position: static;
+      transform: rotate(-1.5deg);
+      width: 220px;
+      margin: 36px auto 0;
+      font-size: 15px;
+    }
+    .sticky::before {
+      display: none;
+    }
+  }
+</style>

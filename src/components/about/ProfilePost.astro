@@ -1,0 +1,108 @@
+---
+import { assetUrl } from '../../lib/asset';
+import './ProfilePost.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  alt: string;
+  locale: Locale;
+}
+const { alt, locale } = Astro.props;
+const imgSrc = assetUrl('/profile.png', import.meta.env.BASE_URL);
+
+const labels =
+  locale === 'pt'
+    ? {
+        handle: '@brunovini',
+        location: 'Brasil',
+        time: 'há um tempinho',
+        caption: 'Codando com calma. ☕✨',
+        likes: '128 curtidas',
+        liked: 'curtir',
+        comment: 'comentar',
+        share: 'compartilhar',
+        save: 'salvar',
+      }
+    : {
+        handle: '@brunovini',
+        location: 'Brazil',
+        time: 'just now',
+        caption: 'Coding away. ☕✨',
+        likes: '128 likes',
+        liked: 'like',
+        comment: 'comment',
+        share: 'share',
+        save: 'save',
+      };
+---
+
+<article class="post" data-reveal>
+  <span class="post-tape" aria-hidden="true"></span>
+  <header class="post-head">
+    <div class="post-avatar" aria-hidden="true">
+      <img src={imgSrc} alt="" loading="lazy" />
+    </div>
+    <div class="post-id">
+      <strong class="post-handle">{labels.handle}</strong>
+      <span class="post-loc">{labels.location} · {labels.time}</span>
+    </div>
+    <button class="post-menu" aria-label="more" type="button">⋯</button>
+  </header>
+
+  <div class="post-img">
+    <img src={imgSrc} alt={alt} loading="lazy" />
+    <span class="post-tag" aria-hidden="true">📍 dev mode</span>
+  </div>
+
+  <div class="post-actions">
+    <button class="post-action like" type="button" aria-label={labels.liked}>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M 12 21 C 4 14, 2 10, 4 6 Q 8 2, 12 7 Q 16 2, 20 6 C 22 10, 20 14, 12 21 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="currentColor"
+          fill-opacity="0.85"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button class="post-action" type="button" aria-label={labels.comment}>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M 4 6 Q 4 4, 6 4 L 18 4 Q 20 4, 20 6 L 20 14 Q 20 16, 18 16 L 12 16 L 8 20 L 8 16 L 6 16 Q 4 16, 4 14 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button class="post-action share" type="button" aria-label={labels.share}>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M 4 12 L 22 4 L 14 22 L 12 14 L 4 12 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button class="post-action save" type="button" aria-label={labels.save}>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M 6 4 L 18 4 L 18 22 L 12 17 L 6 22 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="post-meta">
+    <p class="post-likes">{labels.likes}</p>
+    <p class="post-caption">
+      <strong>{labels.handle}</strong>
+      {labels.caption}
+    </p>
+  </div>
+</article>

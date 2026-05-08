@@ -1,0 +1,65 @@
+---
+import { getProfile } from '../../lib/profile';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import Button from '../ui/Button.astro';
+import ContactDecorations from './ContactDecorations.astro';
+import ContactFooter from './ContactFooter.astro';
+import SoundEffect from '../ui/SoundEffect.astro';
+import './Contact.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+const table = { en, pt };
+---
+
+<div class="wrap" id="contact">
+  <ContactDecorations />
+  <article class="postcard" data-reveal>
+    <div class="airmail" aria-hidden="true"></div>
+    <div class="stamp-area" aria-hidden="true">
+      <div class="postage">
+        <span class="postage-num">26</span>
+        <span class="postage-label">BR · 2026</span>
+      </div>
+      <div class="cancel-mark"></div>
+    </div>
+    <h2>{p.contact.headline}</h2>
+    <p class="line">
+      {t('contact.emailLabel', locale, table)}: <a href={`mailto:${p.email}`}>{p.email}</a>
+    </p>
+    <p class="line">
+      {t('contact.githubLabel', locale, table)}: <a
+        href={p.links.github}
+        target="_blank"
+        rel="noopener noreferrer">github.com/{p.handle}</a
+      >
+    </p>
+    <p class="line">
+      {t('contact.linkedinLabel', locale, table)}: <a
+        href={p.links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer">linkedin.com/in/brunovini</a
+      >
+    </p>
+    <div class="cta-row">
+      <Button variant="primary" href={`mailto:${p.email}`}>{p.contact.cta} →</Button>
+      <span class="cta-sfx" aria-hidden="true">
+        <SoundEffect text="ZAP!" color="highlight" rotate={12} size={64} />
+      </span>
+    </div>
+    <div class="addr" aria-hidden="true">
+      <span class="addr-label">to:</span>
+      <span class="addr-line a1"></span>
+      <span class="addr-line a2"></span>
+      <span class="addr-line a3"></span>
+    </div>
+    <div class="signoff">{p.contact.signoff}</div>
+  </article>
+  <ContactFooter locale={locale} />
+</div>

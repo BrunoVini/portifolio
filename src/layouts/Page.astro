@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import '../styles/skill-modal.css';
+import { assetUrl } from '../lib/asset';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+const { locale, title, description } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const ogImage = assetUrl('/og-image.svg', base);
+const favicon = assetUrl('/favicon.svg', base);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <script>
+      import { initReveal } from '../lib/reveal';
+      import { attachPageFlip } from '../lib/page-flip';
+      import { initTilt } from '../lib/tilt';
+      import { initRocketCursor } from '../lib/rocket-cursor';
+      import { initSkillModal } from '../lib/skill-modal';
+      import { initProfilePost } from '../lib/profile-post';
+      import { initEasterEggs } from '../lib/easter-eggs';
+      const locale = document.documentElement.lang === 'pt' ? 'pt' : 'en';
+      initReveal();
+      attachPageFlip();
+      initTilt();
+      initRocketCursor();
+      initSkillModal(locale);
+      initProfilePost();
+      initEasterEggs();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  main {
+    display: block;
+  }
+</style>

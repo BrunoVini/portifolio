@@ -1,0 +1,59 @@
+---
+import './ProjectPolaroid.css';
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  stack: string[];
+  href?: string;
+  featured?: boolean;
+  panel?: string;
+}
+const { title, tagline, description, stack, href, featured = false, panel } = Astro.props;
+const Tag = href ? 'a' : 'article';
+const linkAttrs = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<Tag class={`proj ${featured ? 'is-featured' : ''}`} data-reveal data-tilt {...linkAttrs}>
+  <span class="tape tilt-layer" data-depth="1.4" aria-hidden="true"></span>
+  {
+    panel && (
+      <span class="panel-label tilt-layer" data-depth="0.8" aria-hidden="true">
+        PANEL {panel}
+      </span>
+    )
+  }
+  {
+    featured && (
+      <span class="featured-stamp tilt-layer" data-depth="1.6" aria-hidden="true">
+        <span>SHIPPED</span>
+      </span>
+    )
+  }
+  <div class="thumb">
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="200" height="130" fill="var(--color-ink)"></rect>
+      <g stroke="#7ab68b" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <polyline points="14,100 50,70 80,86 120,40 158,60 192,46"></polyline>
+        <line x1="14" y1="115" x2="186" y2="115" opacity="0.5"></line>
+      </g>
+      <text x="14" y="24" font-family="JetBrains Mono" font-size="9" fill="#7ab68b" opacity="0.95">
+        $ {title}
+      </text>
+    </svg>
+  </div>
+  <div class="meta">
+    <h3>{title}</h3>
+    <p class="tag">{tagline}</p>
+    <p class="desc">{description}</p>
+    {
+      stack.length > 0 && (
+        <ul class="stack" aria-label="Stack">
+          {stack.map((s) => (
+            <li>{s}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Tag>

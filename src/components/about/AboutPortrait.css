@@ -1,0 +1,149 @@
+.portrait {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  color: var(--color-ink);
+  display: block;
+}
+
+@keyframes portrait-draw {
+  0% {
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+  }
+
+  100% {
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 0;
+  }
+}
+
+.portrait.is-revealed path,
+.portrait.is-revealed circle,
+.portrait.is-revealed ellipse,
+.portrait.is-revealed rect,
+.portrait.is-revealed line {
+  animation: portrait-draw 1.2s ease-out forwards;
+}
+
+.portrait.is-revealed .d1 {
+  animation-delay: 0.45s;
+}
+
+.portrait.is-revealed .d2 {
+  animation-delay: 0.55s;
+}
+
+.portrait.is-revealed .d3 {
+  animation-delay: 0.7s;
+}
+
+.portrait.is-revealed .d4 {
+  animation-delay: 0.85s;
+}
+
+.portrait.is-revealed .d5 {
+  animation-delay: 0.95s;
+}
+
+.portrait.is-revealed .d6 {
+  animation-delay: 1.05s;
+}
+
+.portrait.is-revealed .d7 {
+  animation-delay: 1.15s;
+}
+
+.portrait.is-revealed .d8 {
+  animation-delay: 1.25s;
+}
+
+.portrait.is-revealed .d9 {
+  animation-delay: 1.35s;
+}
+
+.portrait.is-revealed .d10 {
+  animation-delay: 1.5s;
+}
+
+.portrait.is-revealed .d11 {
+  animation-delay: 1.65s;
+}
+
+.portrait.is-revealed .d12 {
+  animation-delay: 1.8s;
+}
+
+.portrait.is-revealed .d13 {
+  animation-delay: 1.95s;
+}
+
+.portrait.is-revealed .d14 {
+  animation-delay: 2.1s;
+}
+
+@keyframes bubble-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-8deg);
+  }
+
+  60% {
+    transform: scale(1.08) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.portrait .bubble,
+.portrait .pow {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.portrait.is-revealed .bubble {
+  animation: bubble-pop 0.6s var(--ease-soft) 2.4s forwards;
+}
+
+.portrait.is-revealed .pow {
+  animation: bubble-pop 0.5s var(--ease-soft) 3s forwards;
+}
+
+@keyframes steam-rise {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.45;
+  }
+}
+
+.portrait .steam {
+  transform-origin: bottom center;
+  animation: steam-rise 2.4s ease-in-out infinite;
+}
+
+.portrait .steam.s2 {
+  animation-delay: -0.8s;
+}
+
+.portrait .steam.s3 {
+  animation-delay: -1.6s;
+}
+
+.portrait .cursor-tick {
+  animation: blink 1s step-end infinite;
+}
+
+.portrait .pg {
+  font-style: italic;
+  opacity: 0.7;
+}

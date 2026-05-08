@@ -1,0 +1,198 @@
+.proj {
+  display: block;
+  background: var(--color-paper);
+  padding: 14px 14px 22px;
+  box-shadow: 5px 5px 0 var(--color-ink);
+  transform: rotate(-1.2deg);
+  border: 3px solid var(--color-ink);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.25s var(--ease-soft),
+    box-shadow 0.25s ease;
+  position: relative;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.proj.is-revealed {
+  opacity: 1;
+  transform: rotate(-1.2deg);
+}
+
+.proj:nth-child(2n) {
+  transform: rotate(1.6deg);
+  box-shadow: -5px 5px 0 var(--color-ink);
+}
+
+.proj:nth-child(2n).is-revealed {
+  transform: rotate(1.6deg);
+}
+
+.proj:hover,
+.proj:focus-visible {
+  transform: rotate(0) translateY(-4px) scale(1.02);
+  box-shadow: 7px 7px 0 var(--color-red-ink);
+  outline: none;
+  z-index: 3;
+}
+
+.proj:nth-child(2n):hover,
+.proj:nth-child(2n):focus-visible {
+  box-shadow: -7px 7px 0 var(--color-red-ink);
+}
+
+.tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 70px;
+  height: 18px;
+  background: var(--color-tape);
+  border: 1px dashed var(--color-tape-border);
+  z-index: 1;
+}
+
+.panel-label {
+  position: absolute;
+  top: -18px;
+  left: -14px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 3px 10px 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  transform: rotate(-6deg);
+  border: 2px solid var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-red-ink);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.featured-stamp {
+  position: absolute;
+  top: 18px;
+  right: -14px;
+  z-index: 4;
+  transform: rotate(14deg);
+  pointer-events: none;
+}
+
+.featured-stamp span {
+  display: inline-block;
+  border: 2.5px solid var(--color-red-ink);
+  color: var(--color-red-ink);
+  background: rgba(250, 247, 238, 0.7);
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  box-shadow: 1.5px 1.5px 0 rgba(214, 51, 51, 0.4);
+}
+
+@keyframes stamp-slam {
+  0% {
+    transform: scale(2.4);
+    filter: blur(2px);
+  }
+
+  55% {
+    transform: scale(0.9);
+    filter: blur(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.proj:hover .featured-stamp span,
+.proj:focus-visible .featured-stamp span {
+  animation: stamp-slam 0.45s cubic-bezier(0.34, 1.6, 0.64, 1);
+}
+
+.thumb {
+  aspect-ratio: 200 / 130;
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+.thumb svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.meta {
+  margin-top: 14px;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.tag {
+  font-family: var(--font-utility);
+  font-size: 14px;
+  color: var(--color-red-ink);
+  margin-top: 4px;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-ink-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.stack li {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--color-paper-edge);
+  color: var(--color-ink-muted);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+@media (max-width: 600px) {
+  /* Mobile: flat polaroids (no rotation) so they appear wider and never
+       overlap the section title or each other. Keep the tape decoration. */
+  .proj,
+  .proj.is-revealed,
+  .proj:nth-child(2n),
+  .proj:nth-child(2n).is-revealed {
+    transform: none;
+  }
+
+  .proj {
+    padding: 10px 10px 18px;
+  }
+
+  .proj:hover,
+  .proj:focus-visible {
+    transform: scale(1.01);
+  }
+
+  .tape {
+    width: 56px;
+    height: 14px;
+    top: -8px;
+  }
+}

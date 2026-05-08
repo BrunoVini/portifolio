@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<div class="hint">{label}</div>
+
+<style>
+  .hint {
+    font-family: var(--font-utility);
+    font-size: 15px;
+    color: var(--color-ink-muted);
+    animation:
+      fadeIn 0.6s ease-out 4s forwards,
+      hintBounce 2s ease-in-out 4.6s infinite;
+    opacity: 0;
+  }
+</style>

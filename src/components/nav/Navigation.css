@@ -1,0 +1,241 @@
+.nav-wrap {
+  position: absolute;
+  top: 22px;
+  left: 130px;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--color-ink);
+  margin-right: auto;
+  padding-right: 20px;
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 4px;
+  height: 6px;
+  background: var(--color-highlight);
+  z-index: -1;
+  transform: skewX(-8deg);
+}
+
+.nav {
+  display: flex;
+  gap: 26px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  align-items: center;
+}
+
+.nav > a {
+  position: relative;
+}
+
+.nav > a::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -1px;
+  height: 6px;
+  background: var(--color-highlight);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav > a:hover,
+.nav > a:focus-visible {
+  color: var(--color-ink);
+  outline: none;
+}
+
+.nav > a:hover::after,
+.nav > a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.flip-hint {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.6em;
+  color: var(--color-red-ink);
+  opacity: 0;
+  transform: translate(-4px, 4px) rotate(-12deg);
+  transition:
+    opacity 0.18s ease,
+    transform 0.25s var(--ease-soft);
+}
+
+.nav > a:hover .flip-hint,
+.nav > a:focus-visible .flip-hint {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg);
+}
+
+.ribbon {
+  display: none;
+}
+
+.chapter-index {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .nav-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    padding: 4px 14px;
+    margin-bottom: 8px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .ribbon {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 18px;
+    width: 36px;
+    min-height: 80px;
+    padding: 14px 0 22px;
+    background: linear-gradient(180deg, var(--color-red-ink), var(--color-red-stamp));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 88%, 0 100%);
+    box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    border: none;
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 3px;
+    writing-mode: vertical-rl;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      min-height 0.32s var(--ease-soft),
+      filter 0.2s ease;
+  }
+
+  .ribbon[aria-expanded='true'] {
+    min-height: 110px;
+  }
+
+  .ribbon:active {
+    filter: brightness(1.1);
+  }
+
+  .chapter-index {
+    display: block;
+    position: fixed;
+    top: 92px;
+    right: 12px;
+    width: 230px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink);
+    box-shadow: 5px 5px 0 var(--color-ink);
+    transform-origin: top right;
+    z-index: 29;
+    pointer-events: none;
+    opacity: 0;
+    transform: rotate(-1.4deg) scaleY(0.05);
+    transition:
+      opacity 0.32s var(--ease-soft),
+      transform 0.32s var(--ease-soft);
+  }
+
+  .chapter-index.is-open {
+    pointer-events: auto;
+    opacity: 1;
+    transform: rotate(-1.4deg) scaleY(1);
+  }
+
+  .chapter-index ol {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .chapter-index li {
+    position: relative;
+  }
+
+  .chapter-index li a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 9px 18px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .chapter-index li a b {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-red-ink);
+    letter-spacing: 1px;
+  }
+
+  .chapter-index li[data-active] a {
+    background: var(--color-highlight);
+  }
+
+  .chapter-index li[data-active] a b {
+    color: var(--color-ink);
+  }
+
+  .chapter-index li::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 6px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink);
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+
+  .chapter-index li[data-active]::after {
+    opacity: 1;
+  }
+
+  .chapter-index .passport-stamp {
+    border-top: 2px dashed var(--color-tape-border);
+    padding: 12px 18px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ribbon,
+    .chapter-index {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+---
+import { getProfile } from '../../lib/profile';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
+import ProjectPolaroid from './ProjectPolaroid.astro';
+import ProjectsDecorations from './ProjectsDecorations.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = getProfile(locale);
+const table = { en, pt };
+const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀';
+---
+
+<div class="wrap" id="work">
+  <ProjectsDecorations />
+  <SectionTitle
+    title={t('projects.headline', locale, table)}
+    chapter="PG. 51"
+    icon="work"
+    aside={aside}
+  />
+  <div class="grid">
+    {
+      p.projects.map((proj, i) => (
+        <ProjectPolaroid
+          title={proj.title}
+          tagline={proj.tagline}
+          description={proj.description}
+          stack={proj.stack}
+          href={proj.links.demo ?? proj.links.repo}
+          featured={proj.featured}
+          panel={String(i + 1).padStart(2, '0')}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .wrap {
+    padding: 80px 130px;
+    position: relative;
+    display: block;
+  }
+  /* SectionTitle component handles section heading styling */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+    gap: 32px;
+    position: relative;
+    z-index: 2;
+    justify-content: start;
+  }
+  @media (max-width: 600px) {
+    .wrap {
+      padding: 28px 12px 32px 22px;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+</style>

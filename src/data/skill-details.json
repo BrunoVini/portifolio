@@ -1,0 +1,300 @@
+{
+  "javascript": {
+    "title": "JavaScript",
+    "since": "2019",
+    "en": {
+      "intro": "My daily driver. Native fluency.",
+      "highlights": [
+        "Built dozens of features in production apps with vanilla JS, ES2020+",
+        "Comfortable with closures, async/await, generators, Proxies",
+        "Author of internal utilities used across multiple repos at github.com/BrunoVini"
+      ]
+    },
+    "pt": {
+      "intro": "Minha língua materna no dev. Fluência nativa.",
+      "highlights": [
+        "Dezenas de features em produção com vanilla JS, ES2020+",
+        "Confortável com closures, async/await, generators, Proxies",
+        "Autor de utilitários internos usados em múltiplos repos em github.com/BrunoVini"
+      ]
+    }
+  },
+  "typescript": {
+    "title": "TypeScript",
+    "since": "2021",
+    "en": {
+      "intro": "Strict mode is the only mode.",
+      "highlights": [
+        "Designed type-safe domain models for production apps at IntruderLabs and Arancia",
+        "Comfortable with mapped types, conditional types, generics, branded types",
+        "Migrated existing JS codebases to TS preserving runtime behavior"
+      ]
+    },
+    "pt": {
+      "intro": "Strict mode é o único mode.",
+      "highlights": [
+        "Modelagem type-safe de domínios em produção na IntruderLabs e Arancia",
+        "Confortável com mapped/conditional types, generics, branded types",
+        "Migrações de bases JS pra TS preservando comportamento de runtime"
+      ]
+    }
+  },
+  "php": {
+    "title": "PHP",
+    "since": "2018",
+    "en": {
+      "intro": "Server-side classics. Where I started.",
+      "highlights": [
+        "Built REST APIs and CMS plugins",
+        "Comfortable with Composer, PSR standards, and modern PHP 8 features",
+        "Maintained legacy systems while modernizing them piece by piece"
+      ]
+    },
+    "pt": {
+      "intro": "Clássico do server-side. Onde comecei.",
+      "highlights": [
+        "APIs REST e plugins de CMS",
+        "Confortável com Composer, PSR e features do PHP 8",
+        "Manutenção de sistemas legados modernizando aos poucos"
+      ]
+    }
+  },
+  "shellscript": {
+    "title": "Shell Script",
+    "since": "2020",
+    "en": {
+      "intro": "Glue for everything else.",
+      "highlights": [
+        "Build/deploy scripts, dev environment setup, log parsing one-liners",
+        "Comfortable with bash idioms, pipes, traps, signal handling"
+      ]
+    },
+    "pt": {
+      "intro": "Cola pra tudo que sobra.",
+      "highlights": [
+        "Scripts de build/deploy, setup de ambiente, one-liners pra logs",
+        "Confortável com bash idiomático, pipes, traps, sinais"
+      ]
+    }
+  },
+  "react": {
+    "title": "React",
+    "since": "2020",
+    "en": {
+      "intro": "My main UI weapon.",
+      "highlights": [
+        "Component architecture, hooks, context, suspense — all in production",
+        "Built design-system-aligned UIs at IntruderLabs and Arancia",
+        "Optimization: memoization, code-splitting, virtualization where it matters"
+      ]
+    },
+    "pt": {
+      "intro": "Minha arma principal de UI.",
+      "highlights": [
+        "Arquitetura de componentes, hooks, context, suspense — tudo em produção",
+        "UIs alinhadas a design systems na IntruderLabs e Arancia",
+        "Otimização: memoization, code-splitting, virtualização onde importa"
+      ]
+    }
+  },
+  "nextjs": {
+    "title": "Next.js",
+    "since": "2022",
+    "en": {
+      "intro": "React with batteries.",
+      "highlights": [
+        "App router + server components in real apps",
+        "API routes, ISR, streaming SSR for SEO-sensitive surfaces",
+        "Vercel + GitHub Actions deploy pipelines"
+      ]
+    },
+    "pt": {
+      "intro": "React com pilhas inclusas.",
+      "highlights": [
+        "App router + server components em apps reais",
+        "API routes, ISR, streaming SSR pra surfaces sensíveis a SEO",
+        "Pipelines Vercel + GitHub Actions"
+      ]
+    }
+  },
+  "nodejs": {
+    "title": "Node.js",
+    "since": "2019",
+    "en": {
+      "intro": "Backend daily driver.",
+      "highlights": [
+        "REST APIs, Express + Fastify, custom middlewares",
+        "Comfortable with streams, worker threads, child processes",
+        "Production deployments behind reverse proxies (NGINX, traefik)"
+      ]
+    },
+    "pt": {
+      "intro": "Backend do dia-a-dia.",
+      "highlights": [
+        "APIs REST, Express + Fastify, middlewares customizados",
+        "Confortável com streams, worker threads, child processes",
+        "Deployments em produção atrás de reverse proxies (NGINX, traefik)"
+      ]
+    }
+  },
+  "mysql": {
+    "title": "MySQL",
+    "since": "2018",
+    "en": {
+      "intro": "Default RDBMS pick.",
+      "highlights": [
+        "Schema design, indexing strategy, query optimization",
+        "Stored procedures, triggers, transactions",
+        "Migration tooling and zero-downtime deploys"
+      ]
+    },
+    "pt": {
+      "intro": "RDBMS de partida.",
+      "highlights": [
+        "Design de schema, indexação, otimização de queries",
+        "Stored procedures, triggers, transações",
+        "Tooling de migrations e deploys zero-downtime"
+      ]
+    }
+  },
+  "postgresql": {
+    "title": "PostgreSQL",
+    "since": "2023",
+    "en": {
+      "intro": "Reaching for it more often lately.",
+      "highlights": [
+        "JSONB columns + GIN indexes for flexible schemas",
+        "CTEs, window functions, full-text search",
+        "Comfortable with explain plans and tuning"
+      ]
+    },
+    "pt": {
+      "intro": "Tenho usado cada vez mais.",
+      "highlights": [
+        "Colunas JSONB + GIN indexes pra schemas flexíveis",
+        "CTEs, window functions, busca full-text",
+        "Confortável com explain plans e tuning"
+      ]
+    }
+  },
+  "tdd": {
+    "title": "TDD",
+    "since": "2020",
+    "en": {
+      "intro": "Red, green, refactor — non-negotiable.",
+      "highlights": [
+        "Vitest + Jest for unit tests, Playwright for E2E",
+        "Significantly raised test coverage at IntruderLabs and Arancia",
+        "Test pyramid as a delivery shape, not a vanity metric"
+      ]
+    },
+    "pt": {
+      "intro": "Red, green, refactor — inegociável.",
+      "highlights": [
+        "Vitest + Jest pra unit, Playwright pra E2E",
+        "Aumentei significativamente cobertura na IntruderLabs e Arancia",
+        "Pirâmide de testes como forma de entrega, não vanity metric"
+      ]
+    }
+  },
+  "endtoendtesting": {
+    "title": "End-to-end testing",
+    "since": "2022",
+    "en": {
+      "intro": "User journeys, not unit-test theater.",
+      "highlights": [
+        "Playwright across multiple viewports + reduced-motion paths",
+        "Critical-path coverage that catches regressions before users do",
+        "Visual snapshots for design-system regressions"
+      ]
+    },
+    "pt": {
+      "intro": "Jornadas de usuário, não teatro de unit.",
+      "highlights": [
+        "Playwright em múltiplos viewports + paths reduced-motion",
+        "Cobertura de critical-path que pega regressão antes do usuário",
+        "Snapshots visuais pra regressões de design system"
+      ]
+    }
+  },
+  "cicd": {
+    "title": "CI/CD",
+    "since": "2020",
+    "en": {
+      "intro": "Pipelines that run boring deploys.",
+      "highlights": [
+        "GitHub Actions for build/test/deploy across multiple repos",
+        "Branch-aware previews, secrets management, artifact caching",
+        "Zero-touch shipping is the goal"
+      ]
+    },
+    "pt": {
+      "intro": "Pipelines que fazem deploy chato.",
+      "highlights": [
+        "GitHub Actions pra build/test/deploy em múltiplos repos",
+        "Previews por branch, secrets, cache de artefatos",
+        "Zero-touch shipping é o objetivo"
+      ]
+    }
+  },
+  "claude": {
+    "title": "Claude",
+    "since": "2024",
+    "en": {
+      "intro": "My coding partner. Daily.",
+      "highlights": [
+        "Claude Code for repo-aware refactors, planning, code review",
+        "Claude API for embeddings + agentic flows in side projects",
+        "Prompt engineering as a real engineering discipline"
+      ]
+    },
+    "pt": {
+      "intro": "Meu parceiro de código. Diário.",
+      "highlights": [
+        "Claude Code pra refatorações repo-aware, planejamento, code review",
+        "Claude API pra embeddings + flows agentic em side projects",
+        "Prompt engineering como disciplina de engenharia de verdade"
+      ]
+    }
+  },
+  "cursor": {
+    "title": "Cursor",
+    "since": "2024",
+    "en": {
+      "intro": "AI-pair-programming IDE.",
+      "highlights": [
+        "Inline completions + chat for tight feedback loops",
+        "Custom rules per project for code style consistency",
+        "Spike-and-keep workflow for fast experiments"
+      ]
+    },
+    "pt": {
+      "intro": "IDE de pair-programming com IA.",
+      "highlights": [
+        "Completions inline + chat pra ciclos curtos de feedback",
+        "Rules customizadas por projeto pra consistência",
+        "Workflow spike-and-keep pra experimentos rápidos"
+      ]
+    }
+  },
+  "agentsskills": {
+    "title": "Agents / skills",
+    "since": "2024",
+    "en": {
+      "intro": "Composing AI workflows that ship.",
+      "highlights": [
+        "Custom Claude skills for repo-specific tasks",
+        "Multi-agent orchestration for code review + planning + execution loops",
+        "Tools-first design — agents that act, not chat"
+      ]
+    },
+    "pt": {
+      "intro": "Compondo workflows de IA que entregam.",
+      "highlights": [
+        "Skills Claude customizadas pra tarefas específicas de repo",
+        "Orquestração multi-agent pra ciclos de code review + plan + execute",
+        "Design tools-first — agents que agem, não conversam"
+      ]
+    }
+  }
+}

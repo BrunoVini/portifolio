@@ -1,0 +1,22 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "ignoreFiles": ["dist/**", ".astro/**", "node_modules/**"],
+  "overrides": [{ "files": ["src/styles/theme.css"], "rules": { "color-no-hex": null } }],
+  "rules": {
+    "color-no-hex": [
+      true,
+      {
+        "message": "Use a CSS custom property from theme.css (no hex literals outside theme.css)."
+      }
+    ],
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "keyframes-name-pattern": null,
+    "declaration-block-single-line-max-declarations": null,
+    "media-feature-range-notation": null,
+    "custom-property-empty-line-before": null,
+    "value-keyword-case": null
+  }
+}
