@@ -35,6 +35,7 @@ export const ACHIEVEMENTS: Record<string, Title> = {
   spidey: { en: 'thwip', pt: 'thwip' },
   'mjolnir-worthy': { en: 'worthy', pt: 'digno' },
   'mailto-confetti': { en: 'reach out', pt: 'puxar conversa' },
+  'menu-emptied': { en: 'all gone', pt: 'tudo apagado' },
 };
 
 const TOTAL = Object.keys(ACHIEVEMENTS).length;

@@ -97,16 +97,36 @@ const initSave = (post: HTMLElement) => {
   });
 };
 
+const spawnMenuEgg = async (post: HTMLElement, lang: 'en' | 'pt') => {
+  if (post.querySelector('.menu-egg')) return;
+  const text =
+    lang === 'pt'
+      ? 'tudo removido. agora vai querer um café?'
+      : 'all gone. fancy a coffee instead?';
+  const egg = document.createElement('div');
+  egg.className = 'menu-egg';
+  egg.innerHTML = `<span aria-hidden="true">🤷</span><span>${text}</span>`;
+  post.appendChild(egg);
+  setTimeout(() => egg.remove(), 3200);
+  const { unlock } = await import('./achievements');
+  unlock('menu-emptied');
+};
+
 const initMenu = (post: HTMLElement) => {
   const btn = post.querySelector<HTMLButtonElement>('.post-menu');
   const pop = post.querySelector<HTMLElement>('.post-menu-pop');
   if (!btn || !pop) return;
+  const lang: 'en' | 'pt' = document.documentElement.lang === 'pt' ? 'pt' : 'en';
   const setOpen = (open: boolean) => {
     pop.hidden = !open;
     btn.setAttribute('aria-expanded', String(open));
   };
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
+    if (pop.children.length === 0) {
+      spawnMenuEgg(post, lang);
+      return;
+    }
     setOpen(pop.hidden);
   });
   document.addEventListener('click', (e) => {
@@ -115,10 +135,33 @@ const initMenu = (post: HTMLElement) => {
   });
   pop.querySelectorAll('li').forEach((li) => {
     li.addEventListener('click', () => {
+      const h = li.getBoundingClientRect().height;
       li.animate(
-        [{ transform: 'translateX(0)' }, { transform: 'translateX(180px)', opacity: 0.2 }],
-        { duration: 420, easing: 'ease-in', fill: 'forwards' },
-      ).onfinish = () => setOpen(false);
+        [
+          {
+            opacity: 1,
+            transform: 'translateX(0) scale(1)',
+            height: `${h}px`,
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingTop: '6px',
+            paddingBottom: '6px',
+          },
+          {
+            opacity: 0,
+            transform: 'translateX(40px) scale(0.92)',
+            height: '0px',
+            marginTop: '0px',
+            marginBottom: '0px',
+            paddingTop: '0px',
+            paddingBottom: '0px',
+          },
+        ],
+        { duration: 320, easing: 'cubic-bezier(0.4, 0, 0.6, 1)', fill: 'forwards' },
+      ).onfinish = () => {
+        li.remove();
+        if (pop.children.length === 0) setOpen(false);
+      };
     });
   });
 };

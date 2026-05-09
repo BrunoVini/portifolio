@@ -18,6 +18,7 @@ interface Props {
   current?: boolean;
   kind?: 'work' | 'education';
   schoolLabel?: string;
+  compact?: boolean;
 }
 const {
   company,
@@ -33,6 +34,7 @@ const {
   current = false,
   kind,
   schoolLabel,
+  compact = false,
 } = Astro.props;
 const initials = company
   .split(/\s+/)
@@ -44,7 +46,7 @@ const logoSrc = companyLogo ? assetUrl(companyLogo, import.meta.env.BASE_URL) : 
 ---
 
 <article
-  class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''}`}
+  class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''} ${compact ? 'is-compact' : ''}`}
   data-reveal
 >
   {kind === 'education' && schoolLabel && <span class="school-stamp">{schoolLabel}</span>}

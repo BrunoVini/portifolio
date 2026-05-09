@@ -50,6 +50,7 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
           stats={e.stats}
           current={e.endDate === 'present'}
           kind={e.kind}
+          compact={e.kind === 'education'}
           schoolLabel={locale === 'pt' ? 'BOLETIM' : 'SCHOOL RECORDS'}
         />
       ))
@@ -59,15 +60,15 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
 
 <style>
   .exp {
-    padding: 80px 130px;
+    padding: 56px 130px 12px;
     position: relative;
   }
   /* SectionTitle component handles section heading styling */
   .timeline {
     position: absolute;
     left: 158px;
-    top: 240px;
-    bottom: 80px;
+    top: 180px;
+    bottom: 40px;
     width: 2px;
     background: var(--color-ink);
     opacity: 0.25;

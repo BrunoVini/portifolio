@@ -7,6 +7,7 @@ import SkillGroup from './SkillGroup.astro';
 import SkillsDecorations from './SkillsDecorations.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import BugMargin from '../ui/BugMargin.astro';
+import ReachFor from '../about/ReachFor.astro';
 import type { Locale } from '../../lib/types';
 
 interface Props {
@@ -51,6 +52,9 @@ const aside = locale === 'pt' ? '* ferramentas do ofício' : '* tools of the tra
       </div>
     )
   }
+  <div class="reach-slot">
+    <ReachFor locale={locale} />
+  </div>
 </div>
 
 <style>
@@ -91,6 +95,25 @@ const aside = locale === 'pt' ? '* ferramentas do ofício' : '* tools of the tra
   }
   .ai-row :global(ul) {
     justify-content: center;
+  }
+  .reach-slot {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    z-index: 3;
+    max-width: 320px;
+  }
+  .reach-slot :global(.reach-for) {
+    margin-top: 0;
+  }
+  @media (max-width: 980px) {
+    .reach-slot {
+      position: static;
+      margin-top: 28px;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
   @media (max-width: 760px) {
     .cols {
