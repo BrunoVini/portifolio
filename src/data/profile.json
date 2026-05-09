@@ -17,8 +17,8 @@
     "titleLine2": { "en": "craft.", "pt": "ofício." },
     "titleAccent": { "en": "↗ shipped", "pt": "↗ entregue" },
     "subtitle": {
-      "en": "Full-stack developer focused on scalable, high-performance apps with JavaScript, TypeScript, React, Node.js and PHP. TDD, end-to-end testing and CI/CD by default.",
-      "pt": "Desenvolvedor full-stack focado em aplicações escaláveis e de alta performance com JavaScript, TypeScript, React, Node.js e PHP. TDD, testes end-to-end e CI/CD por padrão."
+      "en": "I build user-facing pieces of DarkSense — the cybersecurity product Arancia ships to security teams. TypeScript, React, Node; TDD and CI/CD by reflex, not by mandate.",
+      "pt": "Construo as partes do DarkSense que o usuário vê — produto de cibersegurança que a Arancia entrega pra times de segurança. TypeScript, React, Node; TDD e CI/CD por reflexo, não por imposição."
     },
     "primaryCTA": { "en": "view my work", "pt": "ver meu trabalho" },
     "secondaryCTA": { "en": "say hello", "pt": "diga olá" },
@@ -41,16 +41,16 @@
     "headline": { "en": "About", "pt": "Sobre" },
     "bio": [
       {
-        "en": "Full Stack Developer focused on building scalable, high-performance applications using JavaScript, TypeScript, React, Node.js, and PHP.",
-        "pt": "Desenvolvedor Full Stack focado em construir aplicações escaláveis e de alta performance com JavaScript, TypeScript, React, Node.js e PHP."
+        "en": "I'm Bruno. I work on DarkSense at Arancia, a Canadian cybersecurity company. The pieces I build are the ones analysts stare at while an incident is unfolding — every wrong click costs minutes.",
+        "pt": "Sou o Bruno. Trabalho no DarkSense na Arancia, empresa canadense de cibersegurança. As peças que construo são as que analistas olham enquanto um incidente está rolando — cada clique errado custa minutos."
       },
       {
-        "en": "Passionate about software quality, I apply TDD, end-to-end testing, and CI/CD automation to ensure robust and secure deployments. Experienced in increasing test coverage and implementing user-facing features that significantly improve customer retention.",
-        "pt": "Apaixonado por qualidade de software, aplico TDD, testes end-to-end e automação de CI/CD para garantir entregas robustas e seguras. Experiência em aumentar cobertura de testes e entregar features que melhoram significativamente a retenção de usuários."
+        "en": "TypeScript and React on the front, Node services on the back. I write tests because I have shipped without them and I remember the bugs by name. CI/CD because Friday deploys should be boring.",
+        "pt": "TypeScript e React no front, serviços Node no back. Escrevo testes porque já entreguei sem e ainda lembro o nome dos bugs. CI/CD porque deploy de sexta deveria ser sem graça."
       },
       {
-        "en": "Lately I have been pushing into AI-augmented development with Claude, Cursor, and custom agents/skills — using these tools to ship higher-quality features faster while keeping engineering rigor.",
-        "pt": "Recentemente venho explorando desenvolvimento assistido por IA com Claude, Cursor e agents/skills — usando essas ferramentas para entregar features de mais qualidade mais rápido, sem abrir mão do rigor de engenharia."
+        "en": "Lately I've been pairing with Claude Code daily. Not as a replacement — as a fast intern who never sleeps and occasionally insists `var` is fine. I run the agents; I still own the diff.",
+        "pt": "Ultimamente venho pareando com Claude Code todo dia. Não como substituto — como um estagiário rápido que nunca dorme e às vezes insiste que `var` tá ok. Eu rodo os agents; o diff continua sendo meu."
       }
     ],
     "portraitAlt": {
@@ -68,17 +68,17 @@
       "startDate": "2024-01",
       "endDate": "present",
       "description": {
-        "en": "Working on DarkSense (https://arancia.ca/darksense/) — contributing to user-facing features, automated tests, and CI/CD pipelines.",
-        "pt": "Trabalhando no DarkSense (https://arancia.ca/darksense/) — contribuindo com features de interface, testes automatizados e pipelines de CI/CD."
+        "en": "Working on DarkSense (https://arancia.ca/darksense/) — the analyst console. I own front-end pieces and the tests/CI plumbing that lets us deploy them without flinching.",
+        "pt": "Trabalhando no DarkSense (https://arancia.ca/darksense/) — o console do analista. Eu cuido das peças de front-end e do encanamento de testes/CI que deixa a gente entregar sem suar."
       },
       "highlights": [
         {
-          "en": "Increased automated test coverage across services",
-          "pt": "Aumentei a cobertura de testes automatizados nos serviços"
+          "en": "Raised automated test coverage on the services I touched",
+          "pt": "Aumentei a cobertura de testes automatizados nos serviços que toquei"
         },
         {
-          "en": "Shipped UX features that improved retention",
-          "pt": "Entreguei features de UX que melhoraram retenção"
+          "en": "Shipped UX changes that lifted weekly active analyst retention",
+          "pt": "Entreguei mudanças de UX que aumentaram a retenção semanal de analistas ativos"
         }
       ],
       "stats": [
@@ -105,17 +105,17 @@
       "startDate": "2023-08",
       "endDate": "2024-01",
       "description": {
-        "en": "Engineered and shipped TypeScript features in a fast-moving product team.",
-        "pt": "Projetei e entreguei features TypeScript em um time de produto de ritmo acelerado."
+        "en": "Shipped TypeScript features in a fast-moving product team.",
+        "pt": "Entreguei features TypeScript em um time de produto rápido."
       },
       "highlights": [
         {
-          "en": "Engineered and implemented critical TypeScript features",
-          "pt": "Projetei e implementei features críticas em TypeScript"
+          "en": "Built critical TypeScript features end-to-end",
+          "pt": "Construí features críticas em TypeScript de ponta a ponta"
         },
         {
-          "en": "Spearheaded development of new user-facing features that significantly improved customer retention metrics",
-          "pt": "Liderei o desenvolvimento de novas features de interface que melhoraram significativamente as métricas de retenção"
+          "en": "Delivered new user-facing features that lifted retention metrics",
+          "pt": "Entreguei novas features de interface que aumentaram métricas de retenção"
         }
       ],
       "stats": [
