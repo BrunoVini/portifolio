@@ -8,7 +8,9 @@ interface Props {
   locale: Locale;
 }
 const { alt, locale } = Astro.props;
-const imgSrc = assetUrl('/profile.png', import.meta.env.BASE_URL);
+const base = import.meta.env.BASE_URL;
+const profileSrc = assetUrl('/profile.png', base);
+const miranhaSrc = assetUrl('/miranha.png', base);
 
 const labels =
   locale === 'pt'
@@ -22,6 +24,16 @@ const labels =
         comment: 'comentar',
         share: 'compartilhar',
         save: 'salvar',
+        prev: 'imagem anterior',
+        next: 'próxima imagem',
+        menuLabel: 'mais opções',
+        menuItems: [
+          { icon: '🦸', text: 'reportar (isso é o homem-aranha?)' },
+          { icon: '👀', text: 'seguir esse cara' },
+          { icon: '📌', text: 'fixar nas memórias' },
+          { icon: '🐞', text: 'desativar bugs' },
+        ],
+        miranhaAlt: 'Desenho do Homem-Aranha (miranha)',
       }
     : {
         handle: '@brunovini',
@@ -33,6 +45,16 @@ const labels =
         comment: 'comment',
         share: 'share',
         save: 'save',
+        prev: 'previous image',
+        next: 'next image',
+        menuLabel: 'more options',
+        menuItems: [
+          { icon: '🦸', text: 'report (is that Spider-Man?)' },
+          { icon: '👀', text: 'follow this guy' },
+          { icon: '📌', text: 'pin to memories' },
+          { icon: '🐞', text: 'mute bugs' },
+        ],
+        miranhaAlt: 'Hand-drawn Spider-Man sketch (miranha)',
       };
 ---
 
@@ -40,34 +62,63 @@ const labels =
   <span class="post-tape" aria-hidden="true"></span>
   <header class="post-head">
     <div class="post-avatar" aria-hidden="true">
-      <img src={imgSrc} alt="" loading="lazy" />
+      <img src={profileSrc} alt="" loading="lazy" />
     </div>
     <div class="post-id">
       <strong class="post-handle">{labels.handle}</strong>
       <span class="post-loc">{labels.location} · {labels.time}</span>
     </div>
-    <button class="post-menu" aria-label="more" type="button">⋯</button>
+    <button
+      class="post-menu"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-label={labels.menuLabel}>⋯</button
+    >
+    <ul class="post-menu-pop" role="menu" hidden>
+      {
+        labels.menuItems.map((m) => (
+          <li role="menuitem">
+            <span aria-hidden="true">{m.icon}</span>
+            {m.text}
+          </li>
+        ))
+      }
+    </ul>
   </header>
 
-  <div class="post-img">
-    <img src={imgSrc} alt={alt} loading="lazy" />
+  <div class="post-img" data-slide="0">
+    <button class="slide-nav slide-prev" type="button" aria-label={labels.prev}>‹</button>
+    <button class="slide-nav slide-next" type="button" aria-label={labels.next}>›</button>
+    <span class="slide-dots" aria-hidden="true"><i></i><i></i></span>
+    <div class="post-slides">
+      <img src={profileSrc} alt={alt} loading="lazy" />
+      <img src={miranhaSrc} alt={labels.miranhaAlt} loading="lazy" class="is-miranha" />
+    </div>
     <span class="post-tag" aria-hidden="true">📍 dev mode</span>
   </div>
 
   <div class="post-actions">
-    <button class="post-action like" type="button" aria-label={labels.liked}>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <button class="post-action like" type="button" aria-pressed="true" aria-label={labels.liked}>
+      <svg class="ic-outline" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M 12 21 C 4 14, 2 10, 4 6 Q 8 2, 12 7 Q 16 2, 20 6 C 22 10, 20 14, 12 21 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+          stroke-linejoin="round"></path>
+      </svg>
+      <svg class="ic-filled" viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M 12 21 C 4 14, 2 10, 4 6 Q 8 2, 12 7 Q 16 2, 20 6 C 22 10, 20 14, 12 21 Z"
           stroke="currentColor"
           stroke-width="2"
           fill="currentColor"
-          fill-opacity="0.85"
           stroke-linejoin="round"></path>
       </svg>
     </button>
     <button class="post-action" type="button" aria-label={labels.comment}>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M 4 6 Q 4 4, 6 4 L 18 4 Q 20 4, 20 6 L 20 14 Q 20 16, 18 16 L 12 16 L 8 20 L 8 16 L 6 16 Q 4 16, 4 14 Z"
           stroke="currentColor"
@@ -77,7 +128,7 @@ const labels =
       </svg>
     </button>
     <button class="post-action share" type="button" aria-label={labels.share}>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M 4 12 L 22 4 L 14 22 L 12 14 L 4 12 Z"
           stroke="currentColor"
@@ -86,13 +137,21 @@ const labels =
           stroke-linejoin="round"></path>
       </svg>
     </button>
-    <button class="post-action save" type="button" aria-label={labels.save}>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <button class="post-action save" type="button" aria-pressed="false" aria-label={labels.save}>
+      <svg class="ic-outline" viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M 6 4 L 18 4 L 18 22 L 12 17 L 6 22 Z"
           stroke="currentColor"
           stroke-width="2"
           fill="none"
+          stroke-linejoin="round"></path>
+      </svg>
+      <svg class="ic-filled" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M 6 4 L 18 4 L 18 22 L 12 17 L 6 22 Z"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="currentColor"
           stroke-linejoin="round"></path>
       </svg>
     </button>
