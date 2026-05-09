@@ -16,6 +16,9 @@ interface Props {
   highlights: string[];
   stats?: ResolvedExperienceStat[];
   current?: boolean;
+  kind?: 'work' | 'education';
+  schoolLabel?: string;
+  compact?: boolean;
 }
 const {
   company,
@@ -29,6 +32,9 @@ const {
   highlights,
   stats,
   current = false,
+  kind,
+  schoolLabel,
+  compact = false,
 } = Astro.props;
 const initials = company
   .split(/\s+/)
@@ -39,7 +45,11 @@ const initials = company
 const logoSrc = companyLogo ? assetUrl(companyLogo, import.meta.env.BASE_URL) : undefined;
 ---
 
-<article class={`node ${current ? 'is-current' : ''}`} data-reveal>
+<article
+  class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''} ${compact ? 'is-compact' : ''}`}
+  data-reveal
+>
+  {kind === 'education' && schoolLabel && <span class="school-stamp">{schoolLabel}</span>}
   <div class="logo" aria-hidden="true">
     {
       logoSrc ? (

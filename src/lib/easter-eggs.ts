@@ -1,14 +1,20 @@
 /**
- * Hidden interactions that reward curiosity. None of them block primary
- * navigation or required functionality. All gated by prefers-reduced-motion
- * for the heavy animations; the toggles themselves still work.
+ * Hidden interactions that reward curiosity.
  *
  *  1. Konami code  → diary sticker spins 720° and "VOL. 1" becomes "VOL. ∞"
  *  2. Hold "R" 2s  → rocket cursor barrel-roll + triple confetti burst
  *  3. Type "bruno" → ProfilePost likes spike to 1.21k briefly with confetti
  *  4. Click sticky note 7×  → fourth secret line appears
  *  5. Dbl-click PG.label → toggles "margin-secrets" body attribute
+ *
+ * v3 features (bug squash, Wimpy Kid set, Marvel set) live in sibling
+ * files: bug-squash.ts, wimpy-eggs.ts, marvel-eggs.ts.
  */
+import { spawnConfetti, KeyArraySequenceBuffer, KeySequenceBuffer } from './eggs-utils';
+import { initBugSquash } from './bug-squash';
+import { initWimpyEggs } from './wimpy-eggs';
+import { initMarvelEggs } from './marvel-eggs';
+import { initAchievements, unlock } from './achievements';
 
 const KONAMI = [
   'ArrowUp',
@@ -32,45 +38,10 @@ const triggerKonami = () => {
     duration: 1200,
     easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
   });
+  unlock('konami');
 };
 
-const spawnConfetti = (x: number, y: number) => {
-  for (let i = 0; i < 14; i++) {
-    const dot = document.createElement('div');
-    const a = (i / 14) * Math.PI * 2;
-    const r = 60 + Math.random() * 40;
-    Object.assign(dot.style, {
-      position: 'fixed',
-      left: `${x}px`,
-      top: `${y}px`,
-      width: '8px',
-      height: '8px',
-      background: i % 2 === 0 ? 'var(--color-red-ink)' : 'var(--color-highlight)',
-      borderRadius: '50%',
-      pointerEvents: 'none',
-      zIndex: '9998',
-      transition: 'transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.7s ease',
-    });
-    document.body.appendChild(dot);
-    requestAnimationFrame(() => {
-      dot.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r}px) scale(0.4)`;
-      dot.style.opacity = '0';
-    });
-    setTimeout(() => dot.remove(), 800);
-  }
-};
-
-const initKonami = () => {
-  let buf: string[] = [];
-  document.addEventListener('keydown', (e) => {
-    buf.push(e.key);
-    if (buf.length > KONAMI.length) buf.shift();
-    if (buf.length === KONAMI.length && buf.every((k, i) => k === KONAMI[i])) {
-      triggerKonami();
-      buf.length = 0;
-    }
-  });
-};
+const initKonami = () => new KeyArraySequenceBuffer(KONAMI, triggerKonami).attach();
 
 const initRocketRoll = () => {
   const rocket = document.querySelector<HTMLElement>('[data-rocket-cursor] > div');
@@ -83,6 +54,7 @@ const initRocketRoll = () => {
       const r = rocket.getBoundingClientRect();
       spawnConfetti(r.left + r.width / 2, r.top + r.height / 2);
       spawnConfetti(r.left + r.width / 2, r.top + r.height / 2 - 30);
+      unlock('rocket-roll');
     }, 1800);
   });
   document.addEventListener('keyup', (e) => {
@@ -93,29 +65,22 @@ const initRocketRoll = () => {
   });
 };
 
-const initBrunoTyping = () => {
-  let buf = '';
-  document.addEventListener('keydown', (e) => {
-    if (e.key.length !== 1) {
-      if (e.key === 'Backspace') buf = buf.slice(0, -1);
-      return;
-    }
-    buf = (buf + e.key.toLowerCase()).slice(-6);
-    if (buf.endsWith('bruno')) {
-      const likes = document.querySelector<HTMLElement>('.post-likes');
-      if (!likes) return;
-      const original = likes.textContent ?? '';
-      likes.textContent = original.replace(/\d+/, '1.21k');
-      likes.style.color = 'var(--color-red-ink)';
-      const r = likes.getBoundingClientRect();
-      spawnConfetti(r.left + r.width / 2, r.top);
-      setTimeout(() => {
-        likes.textContent = original;
-        likes.style.color = '';
-      }, 1800);
-    }
-  });
+const triggerBruno = () => {
+  const likes = document.querySelector<HTMLElement>('.post-likes');
+  if (!likes) return;
+  const original = likes.textContent ?? '';
+  likes.textContent = original.replace(/\d+/, '1.21k');
+  likes.style.color = 'var(--color-red-ink)';
+  const r = likes.getBoundingClientRect();
+  spawnConfetti(r.left + r.width / 2, r.top);
+  unlock('bruno-typed');
+  setTimeout(() => {
+    likes.textContent = original;
+    likes.style.color = '';
+  }, 1800);
 };
+
+const initBrunoTyping = () => new KeySequenceBuffer('bruno', triggerBruno).attach();
 
 const initStickyClicks = () => {
   const sticky = document.querySelector<HTMLElement>('.sticky');
@@ -135,6 +100,7 @@ const initStickyClicks = () => {
         fontSize: '14px',
       });
       sticky.appendChild(extra);
+      unlock('sticky-7');
     }
   });
 };
@@ -179,16 +145,33 @@ const initMarginSecrets = () => {
     el.addEventListener('dblclick', () => {
       const cur = document.body.dataset.marginSecrets === 'on';
       document.body.dataset.marginSecrets = cur ? 'off' : 'on';
+      unlock('margin-secrets');
     });
   });
 };
 
-export const initEasterEggs = (): void => {
+const initMailtoConfetti = () => {
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const r = a.getBoundingClientRect();
+      spawnConfetti(r.left + r.width / 2, r.top + r.height / 2, 18);
+      unlock('mailto-confetti');
+      void e;
+    });
+  });
+};
+
+export const initEasterEggs = (locale: 'en' | 'pt' = 'en'): void => {
   if (typeof document === 'undefined') return;
+  initAchievements();
   initKonami();
   initRocketRoll();
   initBrunoTyping();
   initStickyClicks();
   initStickyCycle();
   initMarginSecrets();
+  initMailtoConfetti();
+  initBugSquash(locale);
+  initWimpyEggs(locale);
+  initMarvelEggs(locale);
 };

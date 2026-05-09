@@ -22,6 +22,9 @@
   --color-pencil-margin: rgba(180, 140, 60, 0.25);
   --color-sticky-bg: #fff7a8;
   --color-sticky-text: #2a2a10;
+  --color-cheese: #f4c430;
+  --color-comic-shadow: rgba(0, 0, 0, 0.55);
+  --color-paper-warm: #faf1e8;
 
   /* ====== Typography ====== */
   --font-display: 'Caveat', cursive;

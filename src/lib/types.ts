@@ -21,6 +21,8 @@ export type ExperienceEntry = {
   description: I18nString;
   highlights: I18nString[];
   stats?: ExperienceStat[];
+  /** "work" (default) renders as a job; "education" gets school styling. */
+  kind?: 'work' | 'education';
 };
 
 export type SkillItem = { name: string; note?: I18nString; featured?: boolean };
@@ -74,6 +76,7 @@ export type ResolvedExperienceEntry = Omit<
   location?: string;
   employmentType?: string;
   stats?: ResolvedExperienceStat[];
+  kind?: 'work' | 'education';
 };
 
 export type ResolvedSkillGroup = {

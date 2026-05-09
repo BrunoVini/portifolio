@@ -58,11 +58,14 @@ const data: { title: string; items: Item[]; foot: string } =
   .reach-for {
     margin-top: 36px;
     padding: 22px 26px 24px;
-    background: var(--color-paper);
-    border: 2px solid var(--color-ink);
-    box-shadow: 4px 4px 0 var(--color-ink);
-    transform: rotate(-0.6deg);
-    max-width: 520px;
+    background: var(--color-sticky-bg);
+    color: var(--color-sticky-text);
+    border: none;
+    box-shadow:
+      0 8px 18px rgba(0, 0, 0, 0.18),
+      inset 0 -10px 16px -8px rgba(180, 140, 40, 0.25);
+    transform: rotate(-1.5deg);
+    max-width: 320px;
     position: relative;
     opacity: 0;
     transform-origin: left top;
@@ -72,7 +75,7 @@ const data: { title: string; items: Item[]; foot: string } =
   }
   .reach-for.is-revealed {
     opacity: 1;
-    transform: rotate(-0.6deg);
+    transform: rotate(-1.5deg);
   }
   .reach-for::before {
     content: '';
@@ -110,15 +113,21 @@ const data: { title: string; items: Item[]; foot: string } =
   }
   .rf-list li {
     font-family: var(--font-body);
-    font-size: 16px;
-    color: var(--color-ink-muted);
-    line-height: 1.45;
+    font-size: 14px;
+    color: var(--color-sticky-text);
+    line-height: 1.4;
     opacity: 0;
     transform: translateX(-6px);
     transition:
       opacity 0.4s var(--ease-soft),
       transform 0.4s var(--ease-soft);
     transition-delay: calc(var(--i) * 90ms + 200ms);
+  }
+  .rf-list strong {
+    color: var(--color-sticky-text);
+  }
+  .rf-foot {
+    color: var(--color-ink-soft);
   }
   .reach-for.is-revealed .rf-list li {
     opacity: 1;
