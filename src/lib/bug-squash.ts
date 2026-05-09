@@ -44,14 +44,14 @@ const STRINGS: Record<Locale, Strings> = {
 
 const SPLAT_SVG = `
 <svg viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <g fill="var(--color-red-ink)" stroke="var(--color-red-ink)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.6">
-    <ellipse cx="16" cy="14" rx="8" ry="3.6" opacity="0.85"/>
-    <path d="M 24 13 L 28 11 L 26 14 Z"/>
-    <path d="M 8 13 L 4 11 L 6 14 Z"/>
-    <path d="M 14 9 L 12 5 L 16 8 Z"/>
-    <path d="M 18 9 L 20 5 L 16 8 Z"/>
-    <path d="M 14 19 L 12 22 L 16 20 Z"/>
-    <path d="M 18 19 L 20 22 L 16 20 Z"/>
+  <g fill="var(--color-red-ink)" stroke="var(--color-ink)" stroke-linejoin="round" stroke-width="1.2">
+    <ellipse cx="16" cy="13" rx="9.5" ry="4.5"/>
+    <path d="M 25 11 L 30 8 L 27 13 Z"/>
+    <path d="M 7 11 L 2 8 L 5 13 Z"/>
+    <path d="M 14 6 L 11 1 L 17 5 Z"/>
+    <path d="M 19 6 L 23 1 L 17 5 Z"/>
+    <circle cx="22" cy="16" r="1.2" opacity="0.6"/>
+    <circle cx="11" cy="17" r="0.9" opacity="0.6"/>
   </g>
 </svg>`;
 
@@ -116,10 +116,12 @@ const squash = (wrap: HTMLElement, bubble: HTMLElement | null, s: Strings) => {
     if (bubble) {
       bubble.textContent = s.ow;
       bubble.classList.add('is-ow');
+      bubble.style.transform = `rotate(${5 + Math.random() * 6}deg) scale(1.08)`;
     }
     const count = readCount() + 1;
     writeCount(count);
     document.body.dataset.bugsSquashed = String(count);
+    document.body.title = count > 0 ? `🐞 ×${count}` : '';
     const stage = count >= 10 ? 'union' : count >= 6 ? 'ghost' : count >= 3 ? 'bandaid' : 'plain';
     try {
       localStorage.setItem(SAGA_KEY, stage);
@@ -140,8 +142,12 @@ const squash = (wrap: HTMLElement, bubble: HTMLElement | null, s: Strings) => {
     return;
   }
   bug.animate(
-    [{ transform: 'rotate(-6deg) scale(1, 1)' }, { transform: 'rotate(-6deg) scale(1.6, 0.3)' }],
-    { duration: 220, easing: 'cubic-bezier(0.4,0,0.2,1)', fill: 'forwards' },
+    [
+      { transform: 'rotate(-6deg) scale(1, 1)' },
+      { transform: 'rotate(-6deg) scale(0.9, 1.15)', offset: 0.25 },
+      { transform: 'rotate(-6deg) scale(1.7, 0.25)' },
+    ],
+    { duration: 280, easing: 'cubic-bezier(0.5,0,0.75,0)', fill: 'forwards' },
   ).onfinish = finalize;
 };
 
@@ -165,7 +171,7 @@ export const initBugSquash = (locale: Locale = 'en'): void => {
     const bubble = wrap.querySelector<HTMLElement>('.bug-line');
     if (!bug) return;
     bug.setAttribute('role', 'button');
-    bug.setAttribute('tabindex', '0');
+    bug.setAttribute('tabindex', '-1');
     bug.setAttribute('aria-label', s.ariaLabel);
     bug.setAttribute('data-no-key-egg', 'true');
     bug.style.cursor = 'pointer';

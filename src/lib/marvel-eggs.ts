@@ -13,11 +13,15 @@ import { KeySequenceBuffer, prefersReducedMotion } from './eggs-utils';
 type Locale = 'en' | 'pt';
 
 const MJOLNIR_KEY = 'portifolio:mjolnir-attempts';
+const MJOLNIR_TS_KEY = 'portifolio:mjolnir-ts';
+const MJOLNIR_TTL = 86_400_000;
 
 const getDoodleNodes = (): HTMLElement[] =>
   Array.from(
     document.querySelectorAll<HTMLElement>(
-      '.bug-margin, .doodle, .diary-sticker, .sticky, .sfx-1, .sfx-2, .sfx-3',
+      '.bug-margin, .doodle, .diary-sticker, .sticky, [class*="sfx-"], ' +
+        '.polaroid, .coffee, .gear-wrap, .scroll-hint, .ribbon, .vitruvian, ' +
+        '.tape, .signature, .featured-stamp',
     ),
   );
 
@@ -89,14 +93,14 @@ const initExcelsior = () => {
     sl.innerHTML = `
       <span class="sl-bubble">Excelsior!</span>
       <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g stroke="var(--color-ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="var(--color-ink)">
+        <g stroke="var(--color-ink)" stroke-width="1.8" stroke-linejoin="round" fill="var(--color-ink)">
           <ellipse cx="32" cy="22" rx="14" ry="16" fill="var(--color-paper)"/>
-          <rect x="20" y="20" width="10" height="6" rx="1" fill="none"/>
-          <rect x="34" y="20" width="10" height="6" rx="1" fill="none"/>
-          <line x1="30" y1="23" x2="34" y2="23"/>
-          <path d="M 22 32 Q 32 38, 42 32" fill="none"/>
-          <path d="M 18 30 Q 14 36, 18 38 Q 24 36, 28 34" stroke-width="1.4"/>
-          <path d="M 46 30 Q 50 36, 46 38 Q 40 36, 36 34" stroke-width="1.4"/>
+          <rect x="18" y="19" width="11" height="7" rx="1.5" fill="var(--color-ink)" opacity="0.85"/>
+          <rect x="35" y="19" width="11" height="7" rx="1.5" fill="var(--color-ink)" opacity="0.85"/>
+          <line x1="29" y1="22" x2="35" y2="22" stroke-width="1.4"/>
+          <path d="M 22 31 Q 26 35, 32 33 Q 38 35, 42 31 Q 38 29, 32 31 Q 26 29, 22 31 Z" fill="var(--color-paper)" stroke-width="1.2"/>
+          <path d="M 18 26 Q 16 32, 19 36" fill="none" stroke-width="1.4"/>
+          <path d="M 46 26 Q 48 32, 45 36" fill="none" stroke-width="1.4"/>
           <rect x="18" y="38" width="28" height="32" fill="var(--color-ink)" rx="2"/>
           <line x1="32" y1="40" x2="32" y2="68" stroke="var(--color-paper)" stroke-width="1"/>
         </g>
@@ -137,7 +141,10 @@ const initMjolnir = (locale: Locale) => {
   if (!sticker) return;
   let attempts = 0;
   try {
-    attempts = Number(localStorage.getItem(MJOLNIR_KEY) ?? '0') || 0;
+    const ts = Number(localStorage.getItem(MJOLNIR_TS_KEY) ?? '0');
+    if (Date.now() - ts < MJOLNIR_TTL) {
+      attempts = Number(localStorage.getItem(MJOLNIR_KEY) ?? '0') || 0;
+    }
   } catch {
     /* noop */
   }
@@ -159,6 +166,7 @@ const initMjolnir = (locale: Locale) => {
       attempts = Math.min(attempts + 1, 3);
       try {
         localStorage.setItem(MJOLNIR_KEY, String(attempts));
+        localStorage.setItem(MJOLNIR_TS_KEY, String(Date.now()));
       } catch {
         /* noop */
       }

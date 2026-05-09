@@ -75,12 +75,12 @@ const initCheeseTouch = (locale: Locale) => {
     dot.style.top = `${e.clientY - 6}px`;
     document.body.appendChild(dot);
     dots.push(dot);
-    if (dots.length > 30) dots.shift()?.remove();
+    if (dots.length > 45) dots.shift()?.remove();
     requestAnimationFrame(() => {
       dot.style.opacity = '0';
       dot.style.transform = 'scale(0.4)';
     });
-    setTimeout(() => dot.remove(), 600);
+    setTimeout(() => dot.remove(), 450);
   });
 };
 
@@ -113,7 +113,7 @@ const initZoowee = (locale: Locale) => {
       </div>
       <div class="zoowee-panel" style="--end-rot:2deg">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="var(--color-red-ink)" stroke-width="3" fill="none" stroke-linecap="round">
+          <g stroke="var(--color-red-ink)" stroke-width="2.4" fill="none" stroke-linecap="round">
             <path d="M 20 20 L 28 32 M 80 20 L 72 32 M 50 14 L 50 30 M 14 50 L 30 50 M 70 50 L 86 50"/>
           </g>
           <text x="50" y="62" font-family="Caveat" font-size="22" font-weight="700" fill="var(--color-ink)" text-anchor="middle">ZOO-WEE-</text>

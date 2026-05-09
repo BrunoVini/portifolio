@@ -254,8 +254,14 @@
   }
 }
 
-body[data-spidey] {
+body[data-spidey],
+body[data-spidey].rocket-on,
+body[data-spidey].rocket-on * {
   cursor: crosshair !important;
+}
+
+body[data-spidey] [data-rocket-cursor] {
+  display: none;
 }
 
 .manny-balloon {
@@ -321,8 +327,15 @@ body[data-spidey] {
 
 @media (max-width: 600px) {
   .loded-diper {
+    bottom: 26px;
     font-size: 11px;
     padding: 3px 8px;
+  }
+
+  .bugs-unionized {
+    bottom: 28px;
+    right: 12px;
+    font-size: 13px;
   }
 
   .stan-lee .sl-bubble {
