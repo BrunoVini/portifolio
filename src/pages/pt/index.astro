@@ -54,14 +54,16 @@ const locale = 'pt' as const;
 
 <style>
   .torn-slot {
-    padding: 12px 24px 24px;
-    background: var(--color-paper-shadow);
+    padding: 28px 24px 36px;
+    background:
+      radial-gradient(ellipse at top, var(--color-paper-shadow-strong), transparent 70%),
+      var(--color-paper-shadow);
     display: flex;
     justify-content: center;
   }
   @media (max-width: 600px) {
     .torn-slot {
-      padding: 8px 14px 18px;
+      padding: 18px 14px 22px;
     }
   }
 </style>

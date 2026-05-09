@@ -16,7 +16,7 @@ const { en, pt, locale, position = 'middle', side = 'left' } = Astro.props;
 const line = locale === 'pt' ? pt : en;
 ---
 
-<aside class={`bug-margin pos-${position} side-${side}`} aria-hidden="true">
+<div class={`bug-margin pos-${position} side-${side}`} role="presentation" aria-hidden="true">
   <svg
     class="bug"
     viewBox="0 0 32 24"
@@ -56,7 +56,7 @@ const line = locale === 'pt' ? pt : en;
     </g>
   </svg>
   <span class="bug-line">{line}</span>
-</aside>
+</div>
 
 <style>
   .bug-margin {
@@ -92,7 +92,7 @@ const line = locale === 'pt' ? pt : en;
     width: 28px;
     height: 22px;
     transform: rotate(-6deg);
-    animation: bugCrawl 7s ease-in-out infinite;
+    animation: bugCrawl 11s ease-in-out infinite;
     transform-origin: center;
     flex-shrink: 0;
   }
@@ -106,8 +106,8 @@ const line = locale === 'pt' ? pt : en;
     padding: 4px 9px 5px;
     transform: rotate(-2deg);
     box-shadow: 1.5px 1.5px 0 var(--color-ink);
-    white-space: nowrap;
-    max-width: 220px;
+    line-height: 1.25;
+    max-width: 200px;
   }
   .bug-margin.side-right .bug-line {
     border-radius: 12px 12px 4px 12px;
@@ -138,17 +138,15 @@ const line = locale === 'pt' ? pt : en;
   }
   @keyframes bugCrawl {
     0%,
+    60%,
     100% {
       transform: rotate(-6deg) translateX(0);
     }
-    25% {
+    72% {
       transform: rotate(-3deg) translateX(2px) translateY(-1px);
     }
-    50% {
+    84% {
       transform: rotate(-7deg) translateX(-1px) translateY(1px);
-    }
-    75% {
-      transform: rotate(-4deg) translateX(1px);
     }
   }
   @media (max-width: 600px) {

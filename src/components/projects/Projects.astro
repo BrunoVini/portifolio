@@ -45,6 +45,7 @@ const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀
           featured={proj.featured}
           panel={String(i + 1).padStart(2, '0')}
           tradeOffs={proj.tradeOffs}
+          locale={locale}
         />
       ))
     }

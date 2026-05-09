@@ -1,6 +1,7 @@
 ---
 import './ProjectPolaroid.css';
 import './ProjectPolaroidFlip.css';
+import type { Locale } from '../../lib/types';
 interface Props {
   title: string;
   tagline: string;
@@ -10,6 +11,7 @@ interface Props {
   featured?: boolean;
   panel?: string;
   tradeOffs?: string[];
+  locale?: Locale;
 }
 const {
   title,
@@ -20,7 +22,11 @@ const {
   featured = false,
   panel,
   tradeOffs,
+  locale = 'en',
 } = Astro.props;
+const flipLabel = locale === 'pt' ? 'ver trade-offs' : 'see trade-offs';
+const backTitle = locale === 'pt' ? 'por que esses trade-offs' : 'why these trade-offs';
+const backFoot = locale === 'pt' ? 'voltar ↺' : 'flip back ↺';
 const Tag = href ? 'a' : 'article';
 const linkAttrs = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
 const hasFlip = (tradeOffs?.length ?? 0) > 0;
@@ -77,24 +83,24 @@ const hasFlip = (tradeOffs?.length ?? 0) > 0;
   </Tag>
   {
     hasFlip && tradeOffs && (
-      <button class="flip-btn" type="button" aria-pressed="false" aria-label="show trade-offs">
+      <button class="flip-btn" type="button" aria-pressed="false" aria-label={flipLabel}>
         <span class="flip-icon" aria-hidden="true">
           ↺
         </span>
-        <span class="flip-label">trade-offs</span>
+        <span class="flip-label">{flipLabel}</span>
       </button>
     )
   }
   {
     hasFlip && tradeOffs && (
       <aside class="proj-back" aria-hidden="true">
-        <h4>why these trade-offs</h4>
+        <h4>{backTitle}</h4>
         <ol>
           {tradeOffs.map((t) => (
             <li>{t}</li>
           ))}
         </ol>
-        <p class="back-foot">flip back ↺</p>
+        <p class="back-foot">{backFoot}</p>
       </aside>
     )
   }

@@ -58,9 +58,17 @@ const data =
 <aside class="confessions" data-reveal aria-label={data.eyebrow}>
   <span class="tear-edge tear-top" aria-hidden="true"></span>
   <span class="tear-edge tear-bottom" aria-hidden="true"></span>
-  <span class="paperclip" aria-hidden="true">📎</span>
+  <svg class="paperclip" viewBox="0 0 32 48" aria-hidden="true">
+    <path
+      d="M10 6 Q10 2 16 2 T22 6 V32 Q22 38 16 38 T10 32 V12 Q10 8 14 8 T18 12 V28"
+      stroke="var(--color-ink)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"></path>
+  </svg>
   <p class="conf-eyebrow">{data.eyebrow}</p>
-  <h3 class="conf-title">{data.title}</h3>
+  <p class="conf-title">{data.title}</p>
   <ol class="conf-list">
     {
       data.items.map((it, i) => (

@@ -17,8 +17,8 @@
     "titleLine2": { "en": "craft.", "pt": "ofício." },
     "titleAccent": { "en": "↗ shipped", "pt": "↗ entregue" },
     "subtitle": {
-      "en": "I build user-facing pieces of DarkSense — the cybersecurity product Arancia ships to security teams. TypeScript, React, Node; TDD and CI/CD by reflex, not by mandate.",
-      "pt": "Construo as partes do DarkSense que o usuário vê — produto de cibersegurança que a Arancia entrega pra times de segurança. TypeScript, React, Node; TDD e CI/CD por reflexo, não por imposição."
+      "en": "I build user-facing pieces of DarkSense — Arancia's cybersecurity product. TypeScript, React, Node. TDD and CI/CD by reflex.",
+      "pt": "Construo as partes do DarkSense que o usuário vê — produto de cibersegurança da Arancia. TypeScript, React, Node. TDD e CI/CD por reflexo."
     },
     "primaryCTA": { "en": "view my work", "pt": "ver meu trabalho" },
     "secondaryCTA": { "en": "say hello", "pt": "diga olá" },
@@ -28,16 +28,16 @@
     },
     "currentlyCycle": [
       {
-        "en": "wed: rewrote a flaky Playwright retry — root cause was a hydration race.",
-        "pt": "qua: reescrevi um retry flaky no Playwright — culpa era hydration race."
+        "en": "wed 5/6: rewrote a flaky Playwright retry — root cause was a hydration race.",
+        "pt": "qua 6/5: reescrevi um retry flaky no Playwright — culpa era hydration race."
       },
       {
-        "en": "thu: PR review caught a logic bug in my own code from 3 weeks ago.",
-        "pt": "qui: review pegou um bug de lógica em código meu de 3 semanas atrás."
+        "en": "thu 5/7: PR review caught a logic bug in my own code from 3 weeks ago.",
+        "pt": "qui 7/5: review pegou um bug de lógica em código meu de 3 semanas atrás."
       },
       {
-        "en": "fri: shipped portfolio v2. the bug doodle was the most fun to write.",
-        "pt": "sex: entreguei portfolio v2. o doodle do bug foi o mais divertido de escrever."
+        "en": "fri 5/8: shipped portfolio v2. the bug doodle was the most fun to write.",
+        "pt": "sex 8/5: entreguei portfolio v2. o doodle do bug foi o mais divertido de escrever."
       }
     ]
   },
