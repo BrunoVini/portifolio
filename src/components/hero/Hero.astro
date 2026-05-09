@@ -61,7 +61,11 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
 </div>
 
 <div class="diary-sticker" aria-hidden="true">
-  <span class="ds-of">{locale === 'pt' ? 'O DIÁRIO DE' : 'THE DIARY OF'}</span>
+  <span class="ds-of"
+    >{locale === 'pt' ? 'O ' : 'THE '}<span data-journal
+      >{locale === 'pt' ? 'DIÁRIO' : 'DIARY'}</span
+    >{locale === 'pt' ? ' DE' : ' OF'}</span
+  >
   <strong class="ds-name">Bruno Vinicius</strong>
   <span class="ds-vol">VOL. 1</span>
 </div>
