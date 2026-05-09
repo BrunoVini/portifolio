@@ -5,7 +5,7 @@
   "location": { "en": "Brazil", "pt": "Brasil" },
   "links": {
     "github": "https://github.com/BrunoVini",
-    "linkedin": "https://www.linkedin.com/in/brunovini",
+    "linkedin": "https://www.linkedin.com/in/brunovini04",
     "email": "mailto:brunovinissouza@gmail.com"
   },
   "hero": {
@@ -130,6 +130,29 @@
         {
           "icon": "users",
           "label": { "en": "retention metrics ↑", "pt": "métricas de retenção ↑" }
+        }
+      ]
+    },
+    {
+      "company": "Estácio",
+      "kind": "education",
+      "location": { "en": "Brazil · Distance learning", "pt": "Brasil · EAD" },
+      "employmentType": { "en": "CST · 2.5 years", "pt": "CST · 2,5 anos" },
+      "role": {
+        "en": "CST in Systems Analysis and Development",
+        "pt": "Tecnólogo em Análise e Desenvolvimento de Sistemas"
+      },
+      "startDate": "2021-07",
+      "endDate": "2023-12",
+      "description": {
+        "en": "Where the fundamentals got named: data structures, OOP, databases, software engineering — the vocabulary I now use on the job.",
+        "pt": "Onde os fundamentos ganharam nome: estruturas de dados, POO, bancos, engenharia de software — o vocabulário que uso no trabalho hoje."
+      },
+      "highlights": [],
+      "stats": [
+        {
+          "icon": "sparkle",
+          "label": { "en": "completed Dec 2023", "pt": "concluído em dez/2023" }
         }
       ]
     }

@@ -49,6 +49,8 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
           highlights={e.highlights}
           stats={e.stats}
           current={e.endDate === 'present'}
+          kind={e.kind}
+          schoolLabel={locale === 'pt' ? 'BOLETIM' : 'SCHOOL RECORDS'}
         />
       ))
     }
