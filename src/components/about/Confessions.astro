@@ -1,0 +1,92 @@
+---
+import './Confessions.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const data =
+  locale === 'pt'
+    ? {
+        eyebrow: '— página rasgada —',
+        title: 'coisas que prefiro\nnão colocar no LinkedIn',
+        items: [
+          {
+            line: 'deploy de sexta uma vez.',
+            crossed: 'foi tudo bem.',
+            tail: '(não foi.)',
+          },
+          {
+            line: '4 horas debugando.',
+            crossed: '',
+            tail: 'faltava uma vírgula.',
+          },
+          {
+            line: 'escrevi o teste',
+            crossed: 'antes',
+            tail: 'DEPOIS da feature. só dessa vez.',
+          },
+        ],
+        signoff: '— mas ninguém precisa saber.',
+      }
+    : {
+        eyebrow: '— page torn out —',
+        title: "things I'd rather\nnot put on LinkedIn",
+        items: [
+          {
+            line: 'deployed on a Friday once.',
+            crossed: 'it was fine.',
+            tail: "(it wasn't.)",
+          },
+          {
+            line: 'spent 4 hours debugging.',
+            crossed: '',
+            tail: 'it was a missing comma.',
+          },
+          {
+            line: 'wrote the test',
+            crossed: 'before',
+            tail: 'AFTER the feature. just this once.',
+          },
+        ],
+        signoff: '— but nobody needs to know.',
+      };
+---
+
+<aside class="confessions" data-reveal aria-label={data.eyebrow}>
+  <span class="tear-edge tear-top" aria-hidden="true"></span>
+  <span class="tear-edge tear-bottom" aria-hidden="true"></span>
+  <svg class="paperclip" viewBox="0 0 32 48" aria-hidden="true">
+    <path
+      d="M10 6 Q10 2 16 2 T22 6 V32 Q22 38 16 38 T10 32 V12 Q10 8 14 8 T18 12 V28"
+      stroke="var(--color-ink)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"></path>
+  </svg>
+  <p class="conf-eyebrow">{data.eyebrow}</p>
+  <p class="conf-title">{data.title}</p>
+  <ol class="conf-list">
+    {
+      data.items.map((it, i) => (
+        <li style={`--i:${i}`}>
+          <span class="conf-num">{i + 1}.</span>
+          <span class="conf-text">
+            {it.line}
+            {it.crossed && (
+              <>
+                {' '}
+                <s>{it.crossed}</s>
+              </>
+            )}{' '}
+            {it.tail}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="conf-signoff">{data.signoff}</p>
+</aside>

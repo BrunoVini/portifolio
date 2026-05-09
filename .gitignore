@@ -33,3 +33,6 @@ test-results/
 .superpowers/
 wireframes.html
 wireframe-sketch.html
+
+# claude code (per-project skill installs etc)
+.claude/

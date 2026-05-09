@@ -13,6 +13,7 @@ export default [
     ignores: [
       'dist/**',
       '.astro/**',
+      '.claude/**',
       'node_modules/**',
       'wireframes.html',
       'wireframe-sketch.html',

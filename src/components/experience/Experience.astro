@@ -6,6 +6,7 @@ import { t } from '../../lib/i18n';
 import TimelineNode from './TimelineNode.astro';
 import ExperienceDecorations from './ExperienceDecorations.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
+import BugMargin from '../ui/BugMargin.astro';
 import type { Locale } from '../../lib/types';
 
 interface Props {
@@ -19,6 +20,13 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
 
 <div class="exp" id="experience">
   <ExperienceDecorations />
+  <BugMargin
+    locale={locale}
+    en="I live here now."
+    pt="moro aqui agora."
+    position="bottom"
+    side="right"
+  />
   <SectionTitle
     title={t('experience.headline', locale, table)}
     chapter="PG. 50"

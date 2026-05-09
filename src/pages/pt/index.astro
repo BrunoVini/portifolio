@@ -7,6 +7,7 @@ import Hero from '../../components/hero/Hero.astro';
 import About from '../../components/about/About.astro';
 import Process from '../../components/process/Process.astro';
 import Experience from '../../components/experience/Experience.astro';
+import Confessions from '../../components/about/Confessions.astro';
 import Projects from '../../components/projects/Projects.astro';
 import Skills from '../../components/skills/Skills.astro';
 import Contact from '../../components/contact/Contact.astro';
@@ -35,7 +36,9 @@ const locale = 'pt' as const;
   <NotebookPage pageNumber={50} static>
     <Experience locale={locale} />
   </NotebookPage>
-  <TearLine />
+  <div class="torn-slot">
+    <Confessions locale={locale} />
+  </div>
   <NotebookPage pageNumber={51} static>
     <Projects locale={locale} />
   </NotebookPage>
@@ -48,3 +51,19 @@ const locale = 'pt' as const;
     <Contact locale={locale} />
   </NotebookPage>
 </Page>
+
+<style>
+  .torn-slot {
+    padding: 28px 24px 36px;
+    background:
+      radial-gradient(ellipse at top, var(--color-paper-shadow-strong), transparent 70%),
+      var(--color-paper-shadow);
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .torn-slot {
+      padding: 18px 14px 22px;
+    }
+  }
+</style>

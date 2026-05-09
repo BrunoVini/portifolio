@@ -35,6 +35,7 @@ export type Project = {
   links: { repo?: string; demo?: string };
   thumbnail: string;
   featured: boolean;
+  tradeOffs?: I18nString[];
 };
 
 export type Profile = {
@@ -80,10 +81,11 @@ export type ResolvedSkillGroup = {
   items: { name: string; note?: string; featured?: boolean }[];
 };
 
-export type ResolvedProject = Omit<Project, 'title' | 'tagline' | 'description'> & {
+export type ResolvedProject = Omit<Project, 'title' | 'tagline' | 'description' | 'tradeOffs'> & {
   title: string;
   tagline: string;
   description: string;
+  tradeOffs?: string[];
 };
 
 export type ResolvedProfile = {

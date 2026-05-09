@@ -1,0 +1,200 @@
+.proj-shell {
+  position: relative;
+}
+
+.proj-shell.has-flip {
+  perspective: 1400px;
+}
+
+.proj-shell.has-flip > .proj,
+.proj-shell.has-flip > .proj-back {
+  backface-visibility: hidden;
+}
+
+.proj-shell.has-flip > .proj {
+  transition:
+    transform 0.6s var(--ease-soft),
+    box-shadow 0.25s ease,
+    opacity 0.6s ease-out;
+  transform-style: preserve-3d;
+}
+
+.proj-shell.has-flip.is-flipped > .proj {
+  transform: rotateY(180deg) !important;
+  pointer-events: none;
+}
+
+.proj-back {
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-ink);
+  padding: 28px 26px 30px;
+  transform: rotateY(180deg) rotate(-1.2deg);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.6s var(--ease-soft),
+    opacity 0.4s ease;
+}
+
+.proj-back::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 36%;
+  width: 56px;
+  height: 16px;
+  background: var(--color-tape);
+  border: 1px dashed var(--color-tape-border);
+  transform: rotate(-3deg);
+}
+
+.proj-shell.is-flipped > .proj-back {
+  transform: rotateY(0deg) rotate(-1.2deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.proj-back h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-red-ink);
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+}
+
+.proj-back ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: tradeoff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.proj-back ol li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-ink-muted);
+  padding-left: 26px;
+  position: relative;
+  counter-increment: tradeoff;
+}
+
+.proj-back ol li::before {
+  content: counter(tradeoff);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-red-ink);
+}
+
+.back-foot {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--color-ink-soft);
+  text-align: right;
+  margin: 8px 0 0;
+  font-style: italic;
+}
+
+.flip-btn {
+  position: absolute;
+  bottom: -12px;
+  right: -10px;
+  z-index: 8;
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-red-ink);
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--color-ink);
+  padding: 4px 10px 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transform: rotate(3deg);
+  transition: transform 0.2s var(--ease-soft);
+  animation: flipNudge 1.4s var(--ease-soft) 2.2s 2;
+}
+
+@keyframes flipNudge {
+  0%,
+  100% {
+    transform: rotate(3deg);
+  }
+
+  50% {
+    transform: rotate(3deg) translateY(-3px) scale(1.06);
+  }
+}
+
+.flip-btn:hover,
+.flip-btn:focus-visible {
+  transform: rotate(0) scale(1.05);
+  outline: none;
+}
+
+.flip-icon {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-red-ink);
+  display: inline-block;
+  line-height: 1;
+  transition: transform 0.55s var(--ease-soft);
+}
+
+.proj-shell.is-flipped .flip-icon {
+  transform: rotate(-180deg);
+}
+
+@media (max-width: 600px) {
+  .flip-btn {
+    bottom: -8px;
+    right: -6px;
+    font-size: 12px;
+    padding: 3px 8px 4px;
+  }
+
+  .proj-back {
+    padding: 16px 16px 18px;
+  }
+
+  .proj-back h4 {
+    font-size: 19px;
+  }
+
+  .proj-back ol li {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .proj-back ol {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proj-shell.has-flip > .proj,
+  .proj-back,
+  .flip-icon {
+    transition-duration: 0.001ms;
+  }
+
+  .flip-btn {
+    animation: none;
+  }
+}

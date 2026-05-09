@@ -132,6 +132,10 @@
   justify-content: center;
 }
 
+.bio .reach-for::before {
+  display: none;
+}
+
 .ps-note {
   margin-top: 32px;
   font-family: var(--font-body);
