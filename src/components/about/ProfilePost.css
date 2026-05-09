@@ -124,10 +124,7 @@
 }
 
 .post-slides img.is-miranha {
-  object-fit: contain;
-  background:
-    radial-gradient(ellipse at center, var(--color-highlight-soft), transparent 70%),
-    var(--color-paper);
+  object-fit: cover;
 }
 
 .post:hover .post-slides img:not(.is-miranha) {
