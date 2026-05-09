@@ -1,6 +1,7 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
 import ProcessDecorations from './ProcessDecorations.astro';
+import BugMargin from '../ui/BugMargin.astro';
 import './Process.css';
 import type { Locale } from '../../lib/types';
 
@@ -29,6 +30,7 @@ const title = locale === 'pt' ? 'Como eu trabalho' : 'How I work';
 
 <div class="proc" id="process">
   <ProcessDecorations />
+  <BugMargin locale={locale} en="caught. ☹" pt="pego. ☹" position="middle" side="left" />
   <SectionTitle title={title} chapter="PG. 49" icon="experience" aside={aside} />
   <div class="strip">
     {

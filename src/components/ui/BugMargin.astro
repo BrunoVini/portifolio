@@ -1,0 +1,184 @@
+---
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  /** EN line for the speech bubble */
+  en: string;
+  /** PT line for the speech bubble */
+  pt: string;
+  locale: Locale;
+  /** Vertical placement; defaults to "top" */
+  position?: 'top' | 'middle' | 'bottom';
+  /** Right-side margin instead of left (default: left) */
+  side?: 'left' | 'right';
+}
+const { en, pt, locale, position = 'middle', side = 'left' } = Astro.props;
+const line = locale === 'pt' ? pt : en;
+---
+
+<aside class={`bug-margin pos-${position} side-${side}`} aria-hidden="true">
+  <svg
+    class="bug"
+    viewBox="0 0 32 24"
+    xmlns="http://www.w3.org/2000/svg"
+    role="presentation"
+    focusable="false"
+  >
+    <defs>
+      <filter id="bug-rough">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="9"
+        ></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="0.6"></feDisplacementMap>
+      </filter>
+    </defs>
+    <g
+      filter="url(#bug-rough)"
+      stroke="var(--color-ink)"
+      stroke-width="1.4"
+      stroke-linecap="round"
+      fill="none"
+    >
+      <ellipse cx="16" cy="14" rx="7" ry="5.5" fill="var(--color-red-ink)" stroke="none"></ellipse>
+      <ellipse cx="16" cy="14" rx="7" ry="5.5"></ellipse>
+      <line x1="16" y1="9" x2="16" y2="19"></line>
+      <circle cx="13" cy="13" r="0.9" fill="var(--color-ink)" stroke="none"></circle>
+      <circle cx="19" cy="13" r="0.9" fill="var(--color-ink)" stroke="none"></circle>
+      <line x1="11" y1="9" x2="9" y2="6"></line>
+      <line x1="21" y1="9" x2="23" y2="6"></line>
+      <line x1="9" y1="6" x2="8" y2="4"></line>
+      <line x1="23" y1="6" x2="24" y2="4"></line>
+      <line x1="9" y1="14" x2="6" y2="13"></line>
+      <line x1="9" y1="16" x2="6" y2="17"></line>
+      <line x1="23" y1="14" x2="26" y2="13"></line>
+      <line x1="23" y1="16" x2="26" y2="17"></line>
+      <line x1="11" y1="19" x2="9" y2="22"></line>
+      <line x1="21" y1="19" x2="23" y2="22"></line>
+    </g>
+  </svg>
+  <span class="bug-line">{line}</span>
+</aside>
+
+<style>
+  .bug-margin {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+    animation: bugIn 0.5s var(--ease-soft) 1.6s forwards;
+  }
+  .bug-margin.side-right {
+    flex-direction: row-reverse;
+  }
+  .bug-margin.pos-top {
+    top: 32px;
+  }
+  .bug-margin.pos-middle {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .bug-margin.pos-bottom {
+    bottom: 32px;
+  }
+  .bug-margin.side-left {
+    left: 6px;
+  }
+  .bug-margin.side-right {
+    right: 12px;
+  }
+  .bug {
+    width: 28px;
+    height: 22px;
+    transform: rotate(-6deg);
+    animation: bugCrawl 7s ease-in-out infinite;
+    transform-origin: center;
+    flex-shrink: 0;
+  }
+  .bug-line {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--color-ink-muted);
+    background: var(--color-paper);
+    border: 1.5px solid var(--color-ink);
+    border-radius: 12px 12px 12px 4px;
+    padding: 4px 9px 5px;
+    transform: rotate(-2deg);
+    box-shadow: 1.5px 1.5px 0 var(--color-ink);
+    white-space: nowrap;
+    max-width: 220px;
+  }
+  .bug-margin.side-right .bug-line {
+    border-radius: 12px 12px 4px 12px;
+    transform: rotate(2deg);
+  }
+  @keyframes bugIn {
+    from {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .bug-margin.pos-middle {
+    animation-name: bugInMiddle;
+  }
+  @keyframes bugInMiddle {
+    from {
+      opacity: 0;
+      transform: translateX(-12px) translateY(-50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) translateY(-50%);
+    }
+  }
+  @keyframes bugCrawl {
+    0%,
+    100% {
+      transform: rotate(-6deg) translateX(0);
+    }
+    25% {
+      transform: rotate(-3deg) translateX(2px) translateY(-1px);
+    }
+    50% {
+      transform: rotate(-7deg) translateX(-1px) translateY(1px);
+    }
+    75% {
+      transform: rotate(-4deg) translateX(1px);
+    }
+  }
+  @media (max-width: 600px) {
+    .bug-margin.side-left {
+      left: 2px;
+    }
+    .bug-margin.side-right {
+      right: 4px;
+    }
+    .bug-line {
+      font-size: 11px;
+      padding: 3px 7px;
+      max-width: 150px;
+    }
+    .bug {
+      width: 22px;
+      height: 18px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bug-margin {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .bug {
+      animation: none;
+    }
+    .bug-margin.pos-middle {
+      transform: translateY(-50%);
+    }
+  }
+</style>

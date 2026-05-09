@@ -7,6 +7,7 @@ import Button from '../ui/Button.astro';
 import ContactDecorations from './ContactDecorations.astro';
 import ContactFooter from './ContactFooter.astro';
 import SoundEffect from '../ui/SoundEffect.astro';
+import BugMargin from '../ui/BugMargin.astro';
 import './Contact.css';
 import type { Locale } from '../../lib/types';
 
@@ -20,6 +21,13 @@ const table = { en, pt };
 
 <div class="wrap" id="contact">
   <ContactDecorations />
+  <BugMargin
+    locale={locale}
+    en="wait — email me instead."
+    pt="espera — manda pra mim."
+    position="bottom"
+    side="left"
+  />
   <article class="postcard" data-reveal>
     <div class="airmail" aria-hidden="true"></div>
     <div class="stamp-area" aria-hidden="true">

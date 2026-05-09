@@ -6,6 +6,7 @@ import { t } from '../../lib/i18n';
 import ProjectPolaroid from './ProjectPolaroid.astro';
 import ProjectsDecorations from './ProjectsDecorations.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
+import BugMargin from '../ui/BugMargin.astro';
 import type { Locale } from '../../lib/types';
 
 interface Props {
@@ -19,6 +20,13 @@ const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀
 
 <div class="wrap" id="work">
   <ProjectsDecorations />
+  <BugMargin
+    locale={locale}
+    en="still hiding in placeholder-1."
+    pt="ainda escondido no placeholder-1."
+    position="bottom"
+    side="right"
+  />
   <SectionTitle
     title={t('projects.headline', locale, table)}
     chapter="PG. 51"

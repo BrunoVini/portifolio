@@ -6,6 +6,7 @@ import { t } from '../../lib/i18n';
 import SkillGroup from './SkillGroup.astro';
 import SkillsDecorations from './SkillsDecorations.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
+import BugMargin from '../ui/BugMargin.astro';
 import type { Locale } from '../../lib/types';
 
 interface Props {
@@ -25,6 +26,13 @@ const aside = locale === 'pt' ? '* ferramentas do ofício' : '* tools of the tra
 
 <div class="wrap" id="skills">
   <SkillsDecorations />
+  <BugMargin
+    locale={locale}
+    en="TDD didn't catch me."
+    pt="TDD não me pegou."
+    position="bottom"
+    side="left"
+  />
   <SectionTitle
     title={t('skills.headline', locale, table)}
     chapter="PG. 52"
