@@ -1,0 +1,166 @@
+---
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+type Item = { tool: string; rationale: string };
+const data: { title: string; items: Item[]; foot: string } =
+  locale === 'pt'
+    ? {
+        title: 'coisas que eu uso de verdade',
+        items: [
+          { tool: 'ripgrep', rationale: 'no lugar de fd. memória muscular.' },
+          { tool: 'Playwright', rationale: 'no lugar de Cypress. fluxos auth multi-tab.' },
+          { tool: 'enums no PHP 8.2', rationale: 'substituíram 200 linhas de validação.' },
+          { tool: 'VS Code + Claude Code', rationale: 'no lugar de Cursor. menos superfície.' },
+          { tool: 'feature flags', rationale: 'no lugar de branches. rollback em 1 clique.' },
+        ],
+        foot: 'opinião não convida pra debate, convida a tentar.',
+      }
+    : {
+        title: 'stuff I actually reach for',
+        items: [
+          { tool: 'ripgrep', rationale: 'over fd. muscle memory.' },
+          { tool: 'Playwright', rationale: 'over Cypress. multi-tab auth flows.' },
+          { tool: 'PHP 8.2 enums', rationale: 'replaced 200 lines of validation.' },
+          { tool: 'VS Code + Claude Code', rationale: 'over Cursor. less surface area.' },
+          { tool: 'feature flags', rationale: 'over branches. rollback in 1 click.' },
+        ],
+        foot: "opinion isn't an invitation to debate, it's an invitation to try.",
+      };
+---
+
+<aside class="reach-for" aria-label={data.title} data-reveal>
+  <header class="rf-head">
+    <span class="rf-bullet" aria-hidden="true">✦</span>
+    {data.title}
+  </header>
+  <ul class="rf-list">
+    {
+      data.items.map((it, i) => (
+        <li style={`--i:${i}`}>
+          <strong>{it.tool}</strong>{' '}
+          <span class="rf-sep" aria-hidden="true">
+            —
+          </span>{' '}
+          <span class="rf-rationale">{it.rationale}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="rf-foot">{data.foot}</p>
+</aside>
+
+<style>
+  .reach-for {
+    margin-top: 36px;
+    padding: 22px 26px 24px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+    transform: rotate(-0.6deg);
+    max-width: 520px;
+    position: relative;
+    opacity: 0;
+    transform-origin: left top;
+    transition:
+      opacity 0.6s var(--ease-soft),
+      transform 0.5s var(--ease-soft);
+  }
+  .reach-for.is-revealed {
+    opacity: 1;
+    transform: rotate(-0.6deg);
+  }
+  .reach-for::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    width: 56px;
+    height: 16px;
+    background: var(--color-tape);
+    border: 1px dashed var(--color-tape-border);
+    transform: rotate(-4deg);
+  }
+  .rf-head {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-red-ink);
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rf-bullet {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .rf-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rf-list li {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-ink-muted);
+    line-height: 1.45;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.4s var(--ease-soft),
+      transform 0.4s var(--ease-soft);
+    transition-delay: calc(var(--i) * 90ms + 200ms);
+  }
+  .reach-for.is-revealed .rf-list li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .rf-list strong {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--color-ink);
+  }
+  .rf-sep {
+    color: var(--color-red-ink);
+    margin: 0 2px;
+  }
+  .rf-rationale {
+    font-style: italic;
+  }
+  .rf-foot {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-ink-soft);
+    font-size: 14px;
+    margin: 16px 0 0;
+    text-align: right;
+  }
+  @media (max-width: 600px) {
+    .reach-for {
+      padding: 18px 18px 20px;
+      transform: rotate(-0.4deg);
+    }
+    .rf-head {
+      font-size: 18px;
+    }
+    .rf-list li {
+      font-size: 15px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reach-for,
+    .rf-list li {
+      transition: none;
+    }
+  }
+</style>
