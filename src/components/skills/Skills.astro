@@ -7,7 +7,8 @@ import SkillGroup from './SkillGroup.astro';
 import SkillsDecorations from './SkillsDecorations.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
 import BugMargin from '../ui/BugMargin.astro';
-import ReachFor from '../about/ReachFor.astro';
+// TODO: re-import ReachFor when its placement is fixed (see commented JSX below).
+// import ReachFor from '../about/ReachFor.astro';
 import type { Locale } from '../../lib/types';
 
 interface Props {
@@ -52,9 +53,15 @@ const aside = locale === 'pt' ? '* ferramentas do ofício' : '* tools of the tra
       </div>
     )
   }
+  {
+    /* TODO: ReachFor sticky overlaps Quality & Delivery chips on PC.
+       Find a non-overlapping placement (own slot? compact strip below
+       AI tooling? collapse into a drawer?). Re-enable after.
   <div class="reach-slot">
     <ReachFor locale={locale} />
   </div>
+  */
+  }
 </div>
 
 <style>
