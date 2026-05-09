@@ -28,12 +28,16 @@
     },
     "currentlyCycle": [
       {
-        "en": "reading: 'A Philosophy of Software Design' by John Ousterhout.",
-        "pt": "lendo: 'A Philosophy of Software Design' de John Ousterhout."
+        "en": "wed: rewrote a flaky Playwright retry — root cause was a hydration race.",
+        "pt": "qua: reescrevi um retry flaky no Playwright — culpa era hydration race."
       },
       {
-        "en": "drinking: too much coffee. ☕",
-        "pt": "bebendo: café demais. ☕"
+        "en": "thu: PR review caught a logic bug in my own code from 3 weeks ago.",
+        "pt": "qui: review pegou um bug de lógica em código meu de 3 semanas atrás."
+      },
+      {
+        "en": "fri: shipped portfolio v2. the bug doodle was the most fun to write.",
+        "pt": "sex: entreguei portfolio v2. o doodle do bug foi o mais divertido de escrever."
       }
     ]
   },
