@@ -14,6 +14,7 @@ import { spawnConfetti, KeyArraySequenceBuffer, KeySequenceBuffer } from './eggs
 import { initBugSquash } from './bug-squash';
 import { initWimpyEggs } from './wimpy-eggs';
 import { initMarvelEggs } from './marvel-eggs';
+import { initAchievements, unlock } from './achievements';
 
 const KONAMI = [
   'ArrowUp',
@@ -37,6 +38,7 @@ const triggerKonami = () => {
     duration: 1200,
     easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
   });
+  unlock('konami');
 };
 
 const initKonami = () => new KeyArraySequenceBuffer(KONAMI, triggerKonami).attach();
@@ -52,6 +54,7 @@ const initRocketRoll = () => {
       const r = rocket.getBoundingClientRect();
       spawnConfetti(r.left + r.width / 2, r.top + r.height / 2);
       spawnConfetti(r.left + r.width / 2, r.top + r.height / 2 - 30);
+      unlock('rocket-roll');
     }, 1800);
   });
   document.addEventListener('keyup', (e) => {
@@ -70,6 +73,7 @@ const triggerBruno = () => {
   likes.style.color = 'var(--color-red-ink)';
   const r = likes.getBoundingClientRect();
   spawnConfetti(r.left + r.width / 2, r.top);
+  unlock('bruno-typed');
   setTimeout(() => {
     likes.textContent = original;
     likes.style.color = '';
@@ -96,6 +100,7 @@ const initStickyClicks = () => {
         fontSize: '14px',
       });
       sticky.appendChild(extra);
+      unlock('sticky-7');
     }
   });
 };
@@ -140,6 +145,7 @@ const initMarginSecrets = () => {
     el.addEventListener('dblclick', () => {
       const cur = document.body.dataset.marginSecrets === 'on';
       document.body.dataset.marginSecrets = cur ? 'off' : 'on';
+      unlock('margin-secrets');
     });
   });
 };
@@ -149,6 +155,7 @@ const initMailtoConfetti = () => {
     a.addEventListener('click', (e) => {
       const r = a.getBoundingClientRect();
       spawnConfetti(r.left + r.width / 2, r.top + r.height / 2, 18);
+      unlock('mailto-confetti');
       void e;
     });
   });
@@ -156,6 +163,7 @@ const initMailtoConfetti = () => {
 
 export const initEasterEggs = (locale: 'en' | 'pt' = 'en'): void => {
   if (typeof document === 'undefined') return;
+  initAchievements();
   initKonami();
   initRocketRoll();
   initBrunoTyping();

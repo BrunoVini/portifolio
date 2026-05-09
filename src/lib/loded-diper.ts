@@ -4,6 +4,7 @@
  * (body shake). Reduced-motion: button still works, just no shake.
  */
 import { prefersReducedMotion } from './eggs-utils';
+import { unlock } from './achievements';
 
 export const initLodedDiper = (): void => {
   if (typeof document === 'undefined') return;
@@ -16,6 +17,7 @@ export const initLodedDiper = (): void => {
   sticker.setAttribute('data-no-key-egg', 'true');
   document.body.appendChild(sticker);
   const screech = () => {
+    unlock('loded-diper');
     if (prefersReducedMotion()) return;
     document.body.animate(
       [

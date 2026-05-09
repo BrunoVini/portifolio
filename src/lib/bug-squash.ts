@@ -14,6 +14,7 @@
  * never intercepts the click.
  */
 import { prefersReducedMotion } from './eggs-utils';
+import { unlock } from './achievements';
 
 const KEY = 'portifolio:bugs-squashed';
 const SAGA_KEY = 'portifolio:bug-saga-stage';
@@ -128,6 +129,10 @@ const squash = (wrap: HTMLElement, bubble: HTMLElement | null, s: Strings) => {
     } catch {
       /* noop */
     }
+    unlock('bug-squashed');
+    if (count === 3) unlock('bug-bandaid');
+    if (count === 6) unlock('bug-ghost');
+    if (count === 10) unlock('bug-union');
     if (stage === 'bandaid' && !wrap.querySelector('.bug-bandaid')) {
       const ba = document.createElement('span');
       ba.innerHTML = BANDAID_SVG;

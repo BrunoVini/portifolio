@@ -10,6 +10,7 @@
  */
 import { KeySequenceBuffer, prefersReducedMotion } from './eggs-utils';
 import { initLodedDiper } from './loded-diper';
+import { unlock } from './achievements';
 
 type Locale = 'en' | 'pt';
 
@@ -43,6 +44,7 @@ const initCheeseTouch = (locale: Locale) => {
       /* noop */
     }
     document.body.dataset.cheeseTouch = '1';
+    unlock('cheese-touched');
     if (!sessionStorage.getItem('cheese-shown')) {
       sessionStorage.setItem('cheese-shown', '1');
       const tip = document.createElement('div');
@@ -141,6 +143,7 @@ const initZoowee = (locale: Locale) => {
       },
       { once: true },
     );
+    unlock('zoowee');
   };
   new KeySequenceBuffer('zoowee', trigger).attach();
 };
@@ -154,6 +157,7 @@ const initManny = () => {
     balloon.style.top = `${20 + Math.random() * 50}vh`;
     document.body.appendChild(balloon);
     setTimeout(() => balloon.remove(), 1900);
+    unlock('manny');
   };
   new KeySequenceBuffer('manny', trigger).attach();
 };
@@ -178,6 +182,7 @@ const initJournalCorrection = (locale: Locale) => {
       } catch {
         /* noop */
       }
+      unlock('journal-corrected');
     });
   });
 };
