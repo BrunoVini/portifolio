@@ -184,7 +184,21 @@
       "stack": ["JavaScript", "TypeScript", "React", "Node.js", "CI/CD"],
       "links": { "demo": "https://arancia.ca/darksense/" },
       "thumbnail": "/projects/darksense.svg",
-      "featured": true
+      "featured": true,
+      "tradeOffs": [
+        {
+          "en": "TypeScript over JavaScript on the analyst console — type errors at compile time beat type errors at 3am.",
+          "pt": "TypeScript no lugar de JavaScript no console do analista — erro de tipo em compile-time é melhor que erro de tipo às 3 da manhã."
+        },
+        {
+          "en": "Playwright over Cypress for E2E — multi-tab auth flows we needed; cost: ~40% slower CI, paid back on incident reproductions.",
+          "pt": "Playwright no lugar de Cypress pra E2E — precisávamos de fluxos auth multi-tab; custo: CI ~40% mais lento, pago de volta na reprodução de incidentes."
+        },
+        {
+          "en": "Feature flags over feature branches for risky shipping — rollback in 1 click instead of the git revert dance.",
+          "pt": "Feature flags no lugar de branches pra deploy arriscado — rollback em 1 clique ao invés do balé de git revert."
+        }
+      ]
     },
     {
       "id": "placeholder-1",
