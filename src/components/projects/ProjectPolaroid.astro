@@ -27,7 +27,12 @@ const hasFlip = (tradeOffs?.length ?? 0) > 0;
 ---
 
 <div class={`proj-shell ${hasFlip ? 'has-flip' : ''}`}>
-  <Tag class={`proj ${featured ? 'is-featured' : ''}`} data-reveal data-tilt {...linkAttrs}>
+  <Tag
+    class={`proj ${featured ? 'is-featured' : ''}`}
+    data-reveal
+    {...hasFlip ? {} : { 'data-tilt': true }}
+    {...linkAttrs}
+  >
     <span class="tape tilt-layer" data-depth="1.4" aria-hidden="true"></span>
     {
       panel && (
