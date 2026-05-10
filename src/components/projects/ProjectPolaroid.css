@@ -171,6 +171,24 @@ h3 {
   border-radius: 999px;
 }
 
+.stack li.is-tests {
+  background: var(--color-highlight-soft);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-red-ink);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 1.5px 1.5px 0 var(--color-red-ink);
+  position: relative;
+  transform: rotate(-2deg);
+}
+
+.stack li.is-tests::before {
+  content: '✓';
+  margin-right: 4px;
+  color: var(--color-red-ink);
+  font-weight: 700;
+}
+
 @media (max-width: 600px) {
   /* Mobile: flat polaroids (no rotation) so they appear wider and never
        overlap the section title or each other. Keep the tape decoration. */

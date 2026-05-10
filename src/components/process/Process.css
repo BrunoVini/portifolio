@@ -119,14 +119,306 @@
   animation: blink 1s step-end infinite;
 }
 
+/* ============= Per-step hover flourishes (rest state stays complete) ============= */
+
+/* SKETCH — pencil keeps drawing on hover */
+@keyframes sk-pencil-draw {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  35% {
+    transform: translate(-2px, 1px) rotate(-6deg);
+  }
+  65% {
+    transform: translate(2px, -1px) rotate(4deg);
+  }
+}
+
+@keyframes sk-stroke-pulse {
+  0%, 100% {
+    stroke-width: 2.4;
+    opacity: 1;
+  }
+  50% {
+    stroke-width: 3.2;
+    opacity: 0.85;
+  }
+}
+
+@keyframes sk-line-shimmer {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.45;
+    transform: translateX(1px);
+  }
+}
+
+.p-sketch .sk-pencil {
+  transform-origin: 75px 41px;
+  transform-box: fill-box;
+}
+
+.p-sketch.is-flourishing .sk-pencil,
+.p-sketch:hover .sk-pencil {
+  animation: sk-pencil-draw 0.9s ease-in-out infinite;
+}
+
+.p-sketch.is-flourishing .sk-stroke,
+.p-sketch:hover .sk-stroke {
+  animation: sk-stroke-pulse 0.9s ease-in-out infinite;
+}
+
+.p-sketch.is-flourishing .sk-line-1,
+.p-sketch:hover .sk-line-1 {
+  animation: sk-line-shimmer 1.2s ease-in-out 0s infinite;
+}
+
+.p-sketch.is-flourishing .sk-line-2,
+.p-sketch:hover .sk-line-2 {
+  animation: sk-line-shimmer 1.2s ease-in-out 0.18s infinite;
+}
+
+.p-sketch.is-flourishing .sk-line-3,
+.p-sketch:hover .sk-line-3 {
+  animation: sk-line-shimmer 1.2s ease-in-out 0.36s infinite;
+}
+
+/* TDD — red→green pass, tube shakes, bubbles rise */
+@keyframes tdd-shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes tdd-bubble-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-22px);
+    opacity: 0;
+  }
+}
+
+@keyframes tdd-fail-shake {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  25%, 75% {
+    transform: translate(-1.2px, 0.6px);
+  }
+  50% {
+    transform: translate(1px, -0.4px);
+    opacity: 0.55;
+  }
+}
+
+@keyframes tdd-pass-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.5);
+  }
+}
+
+@keyframes tdd-arrow-shoot {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(2px);
+    opacity: 1;
+  }
+}
+
+.p-tdd .tdd-liquid,
+.p-tdd .tdd-bubble,
+.p-tdd .tdd-fail,
+.p-tdd .tdd-pass,
+.p-tdd .tdd-arrow {
+  transform-box: fill-box;
+}
+
+.p-tdd.is-flourishing .tdd-liquid,
+.p-tdd:hover .tdd-liquid {
+  animation: tdd-shake 0.7s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.p-tdd.is-flourishing .tdd-b1,
+.p-tdd:hover .tdd-b1 {
+  transform-origin: center;
+  animation: tdd-bubble-rise 1.4s ease-out infinite;
+}
+
+.p-tdd.is-flourishing .tdd-b2,
+.p-tdd:hover .tdd-b2 {
+  transform-origin: center;
+  animation: tdd-bubble-rise 1.4s ease-out 0.45s infinite;
+}
+
+.p-tdd.is-flourishing .tdd-fail,
+.p-tdd:hover .tdd-fail {
+  transform-origin: center;
+  animation: tdd-fail-shake 0.6s ease-in-out infinite;
+}
+
+.p-tdd.is-flourishing .tdd-pass,
+.p-tdd:hover .tdd-pass {
+  transform-origin: center;
+  animation: tdd-pass-pulse 0.9s ease-in-out 0.3s infinite;
+}
+
+.p-tdd.is-flourishing .tdd-arrow,
+.p-tdd:hover .tdd-arrow {
+  transform-origin: left center;
+  animation: tdd-arrow-shoot 0.9s ease-in-out 0.15s infinite;
+}
+
+/* BUILD — code lines flash green sequentially, sparkle spins */
+@keyframes bd-code-flash {
+  0%, 100% {
+    stroke: #7ab68b;
+    stroke-width: 2;
+  }
+  50% {
+    stroke: #b5e6c2;
+    stroke-width: 2.6;
+  }
+}
+
+@keyframes bd-spark-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.25);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.p-build .bd-spark {
+  transform-origin: 70px 28px;
+  transform-box: fill-box;
+}
+
+.p-build.is-flourishing .bd-code-1,
+.p-build:hover .bd-code-1 {
+  animation: bd-code-flash 1.2s ease-in-out infinite;
+}
+
+.p-build.is-flourishing .bd-code-2,
+.p-build:hover .bd-code-2 {
+  animation: bd-code-flash 1.2s ease-in-out 0.2s infinite;
+}
+
+.p-build.is-flourishing .bd-code-3,
+.p-build:hover .bd-code-3 {
+  animation: bd-code-flash 1.2s ease-in-out 0.4s infinite;
+}
+
+.p-build.is-flourishing .build-cursor,
+.p-build:hover .build-cursor {
+  animation: blink 0.45s step-end infinite;
+}
+
+.p-build.is-flourishing .bd-spark,
+.p-build:hover .bd-spark {
+  animation: bd-spark-spin 1.6s linear infinite;
+}
+
+/* SHIP — rocket lifts off, flames extend & flicker, stamp wobbles */
+@keyframes sh-rocket-bob {
+  0%, 100% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(-13px) rotate(0.8deg);
+  }
+}
+
+@keyframes sh-flame-flicker {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(3px) scaleY(1.35);
+    opacity: 0.85;
+  }
+}
+
+@keyframes sh-stamp-wiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(-4deg) scale(1.08);
+  }
+  60% {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+
+.p-ship .sh-rocket,
+.p-ship .sh-flames,
+.p-ship .sh-stamp {
+  transform-box: fill-box;
+}
+
+.p-ship.is-flourishing .sh-rocket,
+.p-ship:hover .sh-rocket {
+  transform-origin: 50% 80%;
+  animation: sh-rocket-bob 1.4s ease-in-out infinite;
+}
+
+.p-ship.is-flourishing .sh-flames,
+.p-ship:hover .sh-flames {
+  transform-origin: 50% 0%;
+  animation: sh-flame-flicker 0.32s ease-in-out infinite;
+}
+
+.p-ship.is-flourishing .sh-stamp,
+.p-ship:hover .sh-stamp {
+  transform-origin: center;
+  animation: sh-stamp-wiggle 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel *,
+  .panel.is-flourishing * {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .proc {
+    padding: 60px 56px;
+  }
+}
+
 @media (max-width: 980px) {
   .strip {
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
-  }
-
-  .proc {
-    padding: 60px 80px;
   }
 }
 

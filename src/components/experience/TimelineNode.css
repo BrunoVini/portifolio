@@ -1,7 +1,7 @@
 .node {
   position: relative;
   padding-left: 80px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
   opacity: 0;
   transform: translateY(12px);
   transition:
@@ -26,6 +26,12 @@
   box-shadow: 0 0 0 6px var(--color-paper);
   overflow: hidden;
   transform: rotate(-3deg);
+  transition: transform 0.35s var(--ease-soft);
+}
+
+.node:not(.is-current).is-open .logo,
+.node:not(.is-current) .exp-toggle:hover ~ .logo {
+  transform: rotate(0);
 }
 
 .node .current-sfx {
@@ -106,61 +112,6 @@
   }
 }
 
-@media (min-width: 601px) {
-  .node.is-compact {
-    margin-bottom: 0;
-    margin-top: 4px;
-    padding-left: 60px;
-  }
-
-  .node.is-compact .logo {
-    width: 36px;
-    height: 36px;
-    box-shadow: 0 0 0 4px var(--color-paper);
-    top: 4px;
-  }
-
-  .node.is-compact .initials {
-    font-size: 14px;
-  }
-
-  .node.is-compact h3 {
-    font-size: 17px;
-  }
-
-  .node.is-compact .desc {
-    display: none;
-  }
-
-  .node.is-compact ul,
-  .node.is-compact .stats-row {
-    display: none;
-  }
-
-  .node.is-compact .school-stamp {
-    left: 50px;
-    top: -8px;
-    font-size: 9px;
-    padding: 2px 6px;
-    letter-spacing: 0.14em;
-  }
-
-  .node.is-compact time {
-    font-size: 11px;
-    margin-top: 0;
-  }
-
-  .node.is-compact .company,
-  .node.is-compact .emp,
-  .node.is-compact .loc {
-    font-size: 12px;
-  }
-
-  .node.is-compact .hd {
-    gap: 6px;
-  }
-}
-
 .node .logo img {
   position: absolute;
   inset: 6px;
@@ -180,7 +131,40 @@
   color: var(--color-ink);
 }
 
-.node .hd {
+/* ============= Accordion: clickable header ============= */
+.exp-toggle {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'hd chev' 'hint chev';
+  column-gap: 14px;
+  width: 100%;
+  max-width: 880px;
+  background: transparent;
+  border: 0;
+  padding: 6px 8px 6px 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  border-radius: 6px;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s var(--ease-soft);
+}
+
+.exp-toggle:focus-visible {
+  outline: 2px dashed var(--color-red-ink);
+  outline-offset: 4px;
+}
+
+.node:not(.is-open) .exp-toggle:hover {
+  background-color: rgba(214, 51, 51, 0.05);
+  transform: translateX(2px) rotate(-0.15deg);
+}
+
+.exp-toggle .hd {
+  grid-area: hd;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -192,6 +176,29 @@
   font-size: 28px;
   color: var(--color-ink);
   margin: 0;
+  position: relative;
+}
+
+.node .role-text {
+  position: relative;
+  display: inline-block;
+  padding: 0 2px;
+}
+
+/* Highlighter sweep across role on open */
+.node .role-text::before {
+  content: '';
+  position: absolute;
+  inset: 35% -2px 12%;
+  background: var(--color-highlight-soft);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s var(--ease-soft);
+}
+
+.node.is-open .role-text::before {
+  transform: scaleX(1);
 }
 
 .node .company {
@@ -214,30 +221,137 @@
   margin-top: 2px;
 }
 
+.exp-chevron {
+  grid-area: chev;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-red-ink);
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  box-shadow: 1.5px 1.5px 0 var(--color-ink);
+  transform: rotate(0deg);
+  transition:
+    transform 0.4s var(--ease-soft),
+    box-shadow 0.18s ease;
+  position: relative;
+  z-index: 3;
+  margin-right: 4px;
+}
+
+.node:not(.is-open) .exp-toggle:hover .exp-chevron {
+  box-shadow: 2.5px 2.5px 0 var(--color-red-ink);
+}
+
+.exp-chevron svg {
+  width: 22px;
+  height: 22px;
+}
+
+.node.is-open .exp-chevron {
+  transform: rotate(180deg);
+}
+
+.exp-hint {
+  grid-area: hint;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--color-red-ink);
+  opacity: 0;
+  transform: translateY(-4px) rotate(-1deg);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s var(--ease-soft);
+  pointer-events: none;
+  margin-top: 2px;
+  align-self: start;
+}
+
+.node:not(.is-open) .exp-toggle:hover .exp-hint,
+.node:not(.is-open) .exp-toggle:focus-visible .exp-hint {
+  opacity: 1;
+  transform: translateY(0) rotate(-1deg);
+}
+
+/* ============= Panel grid-trick collapse ============= */
+.exp-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease-soft);
+}
+
+.exp-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.node.is-open .exp-panel {
+  grid-template-rows: 1fr;
+}
+
+.exp-panel .loc,
+.exp-panel .stats-row,
+.exp-panel .desc,
+.exp-panel ul {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s var(--ease-soft);
+}
+
+.node.is-open .exp-panel .loc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.18s;
+}
+
+.node.is-open .exp-panel .stats-row {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.26s;
+}
+
+.node.is-open .exp-panel .desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.34s;
+}
+
+.node.is-open .exp-panel ul {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
+}
+
+.exp-panel-inner > * + * {
+  margin-top: 12px;
+}
+
 .node .loc {
   font-family: var(--font-utility);
   font-size: 14px;
   color: var(--color-ink-soft);
-  margin-top: 4px;
 }
 
 .node .stats-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 8px;
-  margin-top: 12px;
 }
 
 .node .desc {
   font-family: var(--font-body);
   font-size: 17px;
   color: var(--color-ink-muted);
-  margin-top: 12px;
   line-height: 1.55;
 }
 
 .node ul {
-  margin-top: 8px;
   padding-left: 20px;
 }
 
@@ -247,6 +361,18 @@
   color: var(--color-ink-muted);
   margin-bottom: 4px;
   line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-panel,
+  .exp-chevron,
+  .role-text::before,
+  .exp-panel .loc,
+  .exp-panel .stats-row,
+  .exp-panel .desc,
+  .exp-panel ul {
+    transition: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -269,5 +395,9 @@
 
   .node .initials {
     font-size: 18px;
+  }
+
+  .node h3 {
+    font-size: 24px;
   }
 }

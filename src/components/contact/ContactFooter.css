@@ -186,7 +186,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .cf {
     margin-top: 36px;
     padding: 28px 18px 24px;

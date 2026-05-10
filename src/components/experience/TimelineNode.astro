@@ -18,7 +18,9 @@ interface Props {
   current?: boolean;
   kind?: 'work' | 'education';
   schoolLabel?: string;
-  compact?: boolean;
+  defaultOpen?: boolean;
+  index: number;
+  toggleHint: string;
 }
 const {
   company,
@@ -34,7 +36,9 @@ const {
   current = false,
   kind,
   schoolLabel,
-  compact = false,
+  defaultOpen = false,
+  index,
+  toggleHint,
 } = Astro.props;
 const initials = company
   .split(/\s+/)
@@ -43,17 +47,20 @@ const initials = company
   .join('')
   .toUpperCase();
 const logoSrc = companyLogo ? assetUrl(companyLogo, import.meta.env.BASE_URL) : undefined;
+const panelId = `exp-panel-${index}`;
+const headerId = `exp-header-${index}`;
 ---
 
 <article
-  class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''} ${compact ? 'is-compact' : ''}`}
+  class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''} ${defaultOpen ? 'is-open' : ''}`}
   data-reveal
+  data-accordion-item
 >
   {kind === 'education' && schoolLabel && <span class="school-stamp">{schoolLabel}</span>}
   <div class="logo" aria-hidden="true">
     {
       logoSrc ? (
-        <img src={logoSrc} alt="" loading="lazy" />
+        <img src={logoSrc} alt="" width="48" height="48" loading="lazy" decoding="async" />
       ) : (
         <span class="initials">{initials}</span>
       )
@@ -66,32 +73,65 @@ const logoSrc = companyLogo ? assetUrl(companyLogo, import.meta.env.BASE_URL) : 
       </span>
     )
   }
-  <header class="hd">
-    <h3>{role}</h3>
-    <span class="company">{company}</span>
-    {employmentType && <span class="emp">· {employmentType}</span>}
-    <time>
-      {startDate} → {endDate}
-    </time>
-  </header>
-  {location && <p class="loc">{location}</p>}
-  {
-    stats && stats.length > 0 && (
-      <div class="stats-row">
-        {stats.map((s) => (
-          <StatBadge label={s.label} icon={s.icon} />
-        ))}
-      </div>
-    )
-  }
-  <p class="desc">{description}</p>
-  {
-    highlights.length > 0 && (
-      <ul>
-        {highlights.map((h) => (
-          <li>{h}</li>
-        ))}
-      </ul>
-    )
-  }
+  <button
+    type="button"
+    class="exp-toggle"
+    id={headerId}
+    aria-expanded={defaultOpen ? 'true' : 'false'}
+    aria-controls={panelId}
+    data-accordion-toggle
+  >
+    <header class="hd">
+      <h3>
+        <span class="role-text">{role}</span>
+      </h3>
+      <span class="company">{company}</span>
+      {employmentType && <span class="emp">· {employmentType}</span>}
+      <time>
+        {startDate} → {endDate}
+      </time>
+    </header>
+    <span class="exp-chevron" aria-hidden="true">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M 5 9 Q 12 16, 19 9"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </span>
+    <span class="exp-hint" aria-hidden="true">{toggleHint}</span>
+  </button>
+  <div
+    class="exp-panel"
+    id={panelId}
+    role="region"
+    aria-labelledby={headerId}
+  >
+    <div class="exp-panel-inner">
+      {location && <p class="loc">{location}</p>}
+      {
+        stats && stats.length > 0 && (
+          <div class="stats-row">
+            {stats.map((s) => (
+              <StatBadge label={s.label} icon={s.icon} />
+            ))}
+          </div>
+        )
+      }
+      <p class="desc">{description}</p>
+      {
+        highlights.length > 0 && (
+          <ul>
+            {highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
 </article>

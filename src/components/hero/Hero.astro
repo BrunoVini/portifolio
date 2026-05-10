@@ -48,9 +48,10 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
   <h1 class="title">
     <span class="line-1">{p.hero.titleLine1}</span>
     <span class="line-2">
-      <span class="highlight">{p.hero.titleLine2}</span>
+      <span class="highlight"
+        >{p.hero.titleLine2}<span class="cursor" aria-hidden="true"></span></span
+      >
       <span class="arrow">{p.hero.titleAccent}</span>
-      <span class="cursor" aria-hidden="true"></span>
     </span>
   </h1>
   <p class="sub">{p.hero.subtitle}</p>

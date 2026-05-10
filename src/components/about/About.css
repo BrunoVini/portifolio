@@ -169,6 +169,10 @@
 }
 
 @media (max-width: 980px) {
+  .about-wrap {
+    padding: 60px 56px;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
     gap: 28px;

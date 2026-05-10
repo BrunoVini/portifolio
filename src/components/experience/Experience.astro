@@ -16,6 +16,7 @@ const { locale } = Astro.props;
 const p = getProfile(locale);
 const table = { en, pt };
 const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far';
+const toggleHint = locale === 'pt' ? 'clique pra abrir →' : 'click to open →';
 ---
 
 <div class="exp" id="experience">
@@ -36,7 +37,7 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
   <div class="timeline" data-reveal aria-hidden="true"></div>
   <div class="nodes">
     {
-      p.experience.map((e) => (
+      p.experience.map((e, i) => (
         <TimelineNode
           company={e.company}
           companyLogo={e.companyLogo}
@@ -50,8 +51,10 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
           stats={e.stats}
           current={e.endDate === 'present'}
           kind={e.kind}
-          compact={e.kind === 'education'}
           schoolLabel={locale === 'pt' ? 'BOLETIM' : 'SCHOOL RECORDS'}
+          defaultOpen={e.endDate === 'present'}
+          index={i}
+          toggleHint={toggleHint}
         />
       ))
     }
@@ -84,13 +87,21 @@ const aside = locale === 'pt' ? '* a história até aqui' : '* the story so far'
     position: relative;
     z-index: 2;
   }
+  @media (max-width: 1100px) {
+    .exp {
+      padding: 48px 56px 12px;
+    }
+  }
   @media (max-width: 600px) {
     .exp {
       padding: 32px 18px 32px 32px;
     }
     .timeline {
       left: 54px;
-      top: 110px;
+      top: 140px;
+    }
+    .nodes {
+      padding-top: 24px;
     }
   }
 </style>

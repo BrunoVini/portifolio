@@ -7,6 +7,101 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-05-10
+
+Polish + a11y/SEO/perf pass. Fixes the long tail of issues that surface
+once the v3 mini-game stabilizes: rocket cursor reliability, tablet
+breakpoints, focus management, and meta tags for shareability.
+
+### Added
+
+- **Experience accordion.** Each timeline node is now a collapsible
+  card with a chevron pill, highlighter sweep on the role text, and a
+  cascaded reveal of location → stats → description → highlights.
+  Single-open behaviour: opening one closes the others. Current role
+  defaults to open. ARIA `aria-expanded` + `aria-controls` wired up.
+- **Process-card flourishes.** Every "How I work" card now has its
+  own characteristic hover animation (sketch pencil wiggle + shimmer
+  lines, TDD tube shake + bubbles + ✗→✓ + arrow shoot, build code
+  flash cascade + spark spin + faster cursor, ship rocket bob + flame
+  flicker + stamp wiggle). Touch devices get the same animations via
+  a `.is-flourishing` class — JS controller plays a cascaded reveal
+  when the section enters the viewport, and tap re-plays a card.
+- **Design & UX skill category.** UI fundamentals (featured), UX
+  heuristics, responsive layout, accessibility (WCAG), design
+  systems. Rendered as a full-width row between paired skills and
+  AI tooling.
+- **"This Portfolio" project.** Replaces the placeholder card. Lists
+  the trade-offs (Astro over Next.js, hand-rolled CSS over Tailwind,
+  inline SVG over icon font) with a custom blinking-cursor SVG
+  thumbnail.
+- **Unit-tests highlight.** Both project polaroids now mark the
+  unit-tests chip with a rotated red-bordered cheese-yellow stamp +
+  a leading ✓.
+- **Global focus-visible styles.** Dashed red-ink outline on inputs,
+  solid on links/buttons, with a `.skip-link` ribbon that slides in
+  on tab and jumps to `#main`.
+- **SEO/meta.** `<link rel="canonical">`, hreflang en/pt/x-default,
+  and JSON-LD Person schema with name, jobTitle, sameAs (GitHub /
+  LinkedIn) emitted per page.
+
+### Changed
+
+- **Hero subtitle softened** to "I work on the development and
+  rollout of systems across a cybersecurity ecosystem" (away from
+  product/employer-specific copy).
+- **DarkSense stack** rebalanced to JavaScript / Go / Shell Script /
+  Unit tests / React / Node.js / Opensearch / CI/CD (TypeScript chip
+  removed; trade-off stories on the back keep their original
+  framing).
+- **Tablet visualization.** Section paddings drop from `80px 130px`
+  to `60px 56px` between 600 and 1100 px on Contact / Skills /
+  Process / About / Projects; Hero content uses `left: 56px` in the
+  same range. Projects grid forces `repeat(2, 1fr)` at tablet so
+  both polaroids stay side-by-side. ContactFooter stack breakpoint
+  raised from 760 → 900 px.
+- **Polaroid flip layout.** `.proj-shell.has-flip` is now a CSS
+  Grid 1×1 with front and back occupying the same cell, so the
+  shell sizes to whichever face is taller. Fixes the bug where the
+  "see trade-offs" button floated below the front while the back
+  exceeded the front's height.
+- **Profile post image** swapped for a `<picture>` element serving
+  WebP (98 KB) with PNG fallback (602 KB), down from a 1.9 MB PNG;
+  explicit width/height and `decoding="async"` added.
+- **Tab/laptop nav breakpoint** raised from 600 → 820 px so tablets
+  use the INDEX ribbon menu rather than the cramped desktop bar.
+- **BugMargin in Projects** message updated to a meta nod since the
+  placeholder is gone.
+
+### Fixed
+
+- **Rocket cursor wobble** over interactive/animated elements. Lerp
+  removed (now snaps to the pointer position each frame), scale
+  folded into the single transform string, last angle preserved
+  when velocity is below threshold so the rocket doesn't snap back
+  to 0° while idle. `.exp-toggle` added to the targeted-cursor
+  selector list.
+- **Skills section overflow.** Reduced wrap padding (56 top, 40
+  bottom) and grid `gap` (28 px row) so the section title, pairs,
+  Design & UX strip, and AI tooling row all fit inside the fixed
+  notebook page height instead of the AI row being clipped.
+- **Education timeline node clipping.** No longer hides description
+  / highlights / stats on desktop in the compact variant; layout
+  fully reachable through the accordion.
+- **Mobile aside cropped by NOW! sticker.** `.timeline { top: 140px }`
+  and `.nodes { padding-top: 24px }` keep the "story so far" aside
+  visible on small screens.
+- **Contact "manda pra mim" / "send it my way" margin bug** moved
+  from `bottom` → `middle` so it stays on screen on PC even when the
+  ContactFooter pushes the postcard up.
+- **Hero blinking cursor** repositioned inside the highlighted word
+  so it visually anchors to the typed text instead of floating in
+  the page.
+- **Image dimensions** added to `TimelineNode` company logos and
+  ProfilePost slides to prevent cumulative layout shift.
+- **Skills dead code.** Removed the commented-out `ReachFor` import,
+  JSX, and `.reach-slot` styles.
+
 ## [3.0.0] - 2026-05-09
 
 Easter-egg + interaction layer. Turns the portfolio into a small mini-game

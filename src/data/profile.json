@@ -17,14 +17,14 @@
     "titleLine2": { "en": "craft.", "pt": "ofício." },
     "titleAccent": { "en": "↗ shipped", "pt": "↗ entregue" },
     "subtitle": {
-      "en": "I build user-facing pieces of DarkSense — Arancia's cybersecurity product. TypeScript, React, Node. TDD and CI/CD by reflex.",
-      "pt": "Construo as partes do DarkSense que o usuário vê — produto de cibersegurança da Arancia. TypeScript, React, Node. TDD e CI/CD por reflexo."
+      "en": "I work on the development and rollout of systems across a cybersecurity ecosystem. TypeScript, React, Node. TDD and CI/CD by reflex.",
+      "pt": "Trabalho no desenvolvimento e implementação de sistemas num ecossistema de cibersegurança. TypeScript, React, Node. TDD e CI/CD por reflexo."
     },
     "primaryCTA": { "en": "view my work", "pt": "ver meu trabalho" },
     "secondaryCTA": { "en": "say hello", "pt": "diga olá" },
     "currentlyNote": {
-      "en": "currently: building DarkSense @ Arancia. JS / TS / React / Node / CI-CD.",
-      "pt": "agora: construindo DarkSense @ Arancia. JS / TS / React / Node / CI-CD."
+      "en": "currently: shipping inside a cybersecurity ecosystem. JS / TS / React / Node / CI-CD.",
+      "pt": "agora: entregando num ecossistema de cibersegurança. JS / TS / React / Node / CI-CD."
     },
     "currentlyCycle": [
       {
@@ -188,6 +188,16 @@
       ]
     },
     {
+      "category": { "en": "Design & UX", "pt": "Design & UX" },
+      "items": [
+        { "name": "UI fundamentals", "featured": true },
+        { "name": "UX heuristics" },
+        { "name": "Responsive layout" },
+        { "name": "Accessibility (WCAG)" },
+        { "name": "Design systems" }
+      ]
+    },
+    {
       "category": { "en": "AI tooling", "pt": "Ferramentas de IA" },
       "items": [
         { "name": "Claude" },
@@ -208,7 +218,7 @@
         "en": "Public product page: https://arancia.ca/darksense/. My contributions are JavaScript/TypeScript user-facing features, automated tests, and CI/CD.",
         "pt": "Página pública do produto: https://arancia.ca/darksense/. Minhas contribuições são em features JavaScript/TypeScript, testes automatizados e CI/CD."
       },
-      "stack": ["JavaScript", "TypeScript", "React", "Node.js", "CI/CD"],
+      "stack": ["JavaScript", "Go", "Shell Script", "Unit tests", "React", "Node.js", "Opensearch", "CI/CD"],
       "links": { "demo": "https://arancia.ca/darksense/" },
       "thumbnail": "/projects/darksense.svg",
       "featured": true,
@@ -228,20 +238,37 @@
       ]
     },
     {
-      "id": "placeholder-1",
-      "title": { "en": "Project Placeholder", "pt": "Projeto Placeholder" },
+      "id": "this-portfolio",
+      "title": { "en": "This Portfolio", "pt": "Este Portfólio" },
       "tagline": {
-        "en": "Bruno will replace this with a real project entry.",
-        "pt": "Bruno irá substituir por um projeto real."
+        "en": "Hand-built diary-style portfolio. Yes, the one you're reading.",
+        "pt": "Portfólio diário feito à mão. Sim, este mesmo que você está lendo."
       },
       "description": {
-        "en": "Replace this entry in src/data/profile.json. The schema in src/lib/types.ts is the contract.",
-        "pt": "Substitua esta entrada em src/data/profile.json. O schema em src/lib/types.ts é o contrato."
+        "en": "Astro 5 + TypeScript, custom design system from scratch — paper textures, marginalia, hand-drawn SVG decorations, hidden easter eggs. Bilingual (EN/PT), responsive, a11y-conscious, deployed to GitHub Pages.",
+        "pt": "Astro 5 + TypeScript, design system feito do zero — texturas de papel, marginalia, decorações em SVG desenhadas à mão, easter eggs escondidos. Bilíngue (EN/PT), responsivo, com acessibilidade em mente, deploy no GitHub Pages."
       },
-      "stack": ["JavaScript"],
-      "links": {},
-      "thumbnail": "/projects/placeholder.svg",
-      "featured": false
+      "stack": ["Astro", "TypeScript", "Unit tests", "CSS", "SVG", "GitHub Pages"],
+      "links": {
+        "repo": "https://github.com/BrunoVini/portifolio",
+        "demo": "https://brunovini.github.io/portifolio/"
+      },
+      "thumbnail": "/projects/this-portfolio.svg",
+      "featured": true,
+      "tradeOffs": [
+        {
+          "en": "Astro over Next.js — content-first site with near-zero JS shipped to the client; only the interactive bits hydrate.",
+          "pt": "Astro no lugar de Next.js — site orientado a conteúdo com quase zero JS no cliente; só os pedaços interativos hidratam."
+        },
+        {
+          "en": "Hand-rolled CSS over Tailwind — the diary aesthetic needs custom textures and marginalia that utility classes would only obscure.",
+          "pt": "CSS feito à mão no lugar de Tailwind — a estética de diário precisa de texturas e marginalia que utility classes só esconderiam."
+        },
+        {
+          "en": "Inline SVG over icon font/PNG — every doodle is themable via currentColor and animatable with CSS.",
+          "pt": "SVG inline no lugar de icon font/PNG — cada rabisco é tematizável via currentColor e animável com CSS."
+        }
+      ]
     }
   ],
   "contact": {
