@@ -1,0 +1,59 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g
+    stroke="var(--color-ink)"
+    fill="none"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line x1="34" y1="14" x2="34" y2="50"></line>
+    <line x1="58" y1="14" x2="58" y2="50"></line>
+    <clipPath id="tdd-tube-clip">
+      <path d="M 34 50 Q 34 84, 46 86 Q 58 84, 58 50 Z"></path>
+    </clipPath>
+    <g clip-path="url(#tdd-tube-clip)">
+      <rect
+        class="tdd-liquid"
+        x="32"
+        y="60"
+        width="28"
+        height="30"
+        fill="var(--color-red-ink)"
+        fill-opacity="0.55"
+        stroke="none"></rect>
+    </g>
+    <path d="M 34 50 Q 34 84, 46 86 Q 58 84, 58 50 Z"></path>
+    <line x1="30" y1="14" x2="62" y2="14" stroke-width="3"></line>
+    <circle class="tdd-bubble tdd-b1" cx="42" cy="74" r="2.2" fill="var(--color-ink)"></circle>
+    <circle class="tdd-bubble tdd-b2" cx="50" cy="68" r="1.6" fill="var(--color-ink)"></circle>
+    <g class="tdd-fail">
+      <text
+        x="78"
+        y="40"
+        font-family="JetBrains Mono"
+        font-weight="700"
+        font-size="11"
+        fill="var(--color-red-ink)"
+        stroke="none">✗</text
+      >
+    </g>
+    <g class="tdd-pass">
+      <text
+        x="78"
+        y="60"
+        font-family="JetBrains Mono"
+        font-weight="700"
+        font-size="11"
+        fill="#3f7d56"
+        stroke="none">✓</text
+      >
+    </g>
+    <path class="tdd-arrow" d="M 80 50 L 90 50" stroke="var(--color-red-ink)" stroke-width="1.6"
+    ></path>
+    <path
+      class="tdd-arrow"
+      d="M 86 46 L 90 50 L 86 54"
+      stroke="var(--color-red-ink)"
+      stroke-width="1.6"></path>
+  </g>
+</svg>

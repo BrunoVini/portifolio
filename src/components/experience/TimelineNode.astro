@@ -99,18 +99,12 @@ const headerId = `exp-header-${index}`;
           stroke="currentColor"
           stroke-width="2.2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
+          stroke-linejoin="round"></path>
       </svg>
     </span>
     <span class="exp-hint" aria-hidden="true">{toggleHint}</span>
   </button>
-  <div
-    class="exp-panel"
-    id={panelId}
-    role="region"
-    aria-labelledby={headerId}
-  >
+  <div class="exp-panel" id={panelId} role="region" aria-labelledby={headerId}>
     <div class="exp-panel-inner">
       {location && <p class="loc">{location}</p>}
       {
