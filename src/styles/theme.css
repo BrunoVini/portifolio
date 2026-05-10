@@ -25,6 +25,8 @@
   --color-cheese: #f4c430;
   --color-comic-shadow: rgba(0, 0, 0, 0.55);
   --color-paper-warm: #faf1e8;
+  --color-code-green: #7ab68b;
+  --color-code-green-light: #b5e6c2;
 
   /* ====== Typography ====== */
   --font-display: 'Caveat', cursive;

@@ -126,9 +126,11 @@
   0%, 100% {
     transform: translate(0, 0) rotate(0deg);
   }
+
   35% {
     transform: translate(-2px, 1px) rotate(-6deg);
   }
+
   65% {
     transform: translate(2px, -1px) rotate(4deg);
   }
@@ -139,6 +141,7 @@
     stroke-width: 2.4;
     opacity: 1;
   }
+
   50% {
     stroke-width: 3.2;
     opacity: 0.85;
@@ -150,6 +153,7 @@
     opacity: 1;
     transform: translateX(0);
   }
+
   50% {
     opacity: 0.45;
     transform: translateX(1px);
@@ -191,9 +195,11 @@
   0%, 100% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(-3deg);
   }
+
   75% {
     transform: rotate(3deg);
   }
@@ -204,9 +210,11 @@
     transform: translateY(0);
     opacity: 0.9;
   }
+
   80% {
     opacity: 0.6;
   }
+
   100% {
     transform: translateY(-22px);
     opacity: 0;
@@ -218,9 +226,11 @@
     transform: translate(0, 0);
     opacity: 1;
   }
+
   25%, 75% {
     transform: translate(-1.2px, 0.6px);
   }
+
   50% {
     transform: translate(1px, -0.4px);
     opacity: 0.55;
@@ -231,6 +241,7 @@
   0%, 100% {
     transform: scale(1);
   }
+
   40% {
     transform: scale(1.5);
   }
@@ -241,6 +252,7 @@
     transform: translateX(0);
     opacity: 0.55;
   }
+
   50% {
     transform: translateX(2px);
     opacity: 1;
@@ -294,11 +306,12 @@
 /* BUILD — code lines flash green sequentially, sparkle spins */
 @keyframes bd-code-flash {
   0%, 100% {
-    stroke: #7ab68b;
+    stroke: var(--color-code-green);
     stroke-width: 2;
   }
+
   50% {
-    stroke: #b5e6c2;
+    stroke: var(--color-code-green-light);
     stroke-width: 2.6;
   }
 }
@@ -307,9 +320,11 @@
   0% {
     transform: rotate(0deg) scale(1);
   }
+
   50% {
     transform: rotate(180deg) scale(1.25);
   }
+
   100% {
     transform: rotate(360deg) scale(1);
   }
@@ -350,6 +365,7 @@
   0%, 100% {
     transform: translateY(-10px);
   }
+
   50% {
     transform: translateY(-13px) rotate(0.8deg);
   }
@@ -360,6 +376,7 @@
     transform: translateY(0) scaleY(1);
     opacity: 1;
   }
+
   50% {
     transform: translateY(3px) scaleY(1.35);
     opacity: 0.85;
@@ -370,9 +387,11 @@
   0%, 100% {
     transform: rotate(0deg) scale(1);
   }
+
   30% {
     transform: rotate(-4deg) scale(1.08);
   }
+
   60% {
     transform: rotate(3deg) scale(1.05);
   }
