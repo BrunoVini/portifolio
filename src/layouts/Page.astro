@@ -31,10 +31,7 @@ const personLd = {
   url: canonicalUrl,
   email: 'mailto:brunovinissouza@gmail.com',
   jobTitle: 'Full-stack JavaScript Developer',
-  sameAs: [
-    'https://github.com/BrunoVini',
-    'https://www.linkedin.com/in/brunovini04',
-  ],
+  sameAs: ['https://github.com/BrunoVini', 'https://www.linkedin.com/in/brunovini04'],
 };
 const skipLabel = locale === 'pt' ? 'pular para o conteúdo' : 'skip to content';
 ---
@@ -58,7 +55,7 @@ const skipLabel = locale === 'pt' ? 'pular para o conteúdo' : 'skip to content'
     <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
   <body>
     <a class="skip-link" href="#main">{skipLabel}</a>

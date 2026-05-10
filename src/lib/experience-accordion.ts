@@ -6,9 +6,7 @@
  */
 export const initExperienceAccordion = (): void => {
   if (typeof document === 'undefined') return;
-  const items = Array.from(
-    document.querySelectorAll<HTMLElement>('[data-accordion-item]'),
-  );
+  const items = Array.from(document.querySelectorAll<HTMLElement>('[data-accordion-item]'));
   if (items.length === 0) return;
 
   const setOpen = (item: HTMLElement, open: boolean) => {

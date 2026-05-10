@@ -218,7 +218,16 @@
         "en": "Public product page: https://arancia.ca/darksense/. My contributions are JavaScript/TypeScript user-facing features, automated tests, and CI/CD.",
         "pt": "Página pública do produto: https://arancia.ca/darksense/. Minhas contribuições são em features JavaScript/TypeScript, testes automatizados e CI/CD."
       },
-      "stack": ["JavaScript", "Go", "Shell Script", "Unit tests", "React", "Node.js", "Opensearch", "CI/CD"],
+      "stack": [
+        "JavaScript",
+        "Go",
+        "Shell Script",
+        "Unit tests",
+        "React",
+        "Node.js",
+        "Opensearch",
+        "CI/CD"
+      ],
       "links": { "demo": "https://arancia.ca/darksense/" },
       "thumbnail": "/projects/darksense.svg",
       "featured": true,
