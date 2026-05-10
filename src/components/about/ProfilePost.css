@@ -114,13 +114,25 @@
   transform: translateX(-50%);
 }
 
-.post-slides img {
+.post-slides > img,
+.post-slides > picture {
   width: 50%;
   height: 100%;
-  object-fit: cover;
   display: block;
   flex-shrink: 0;
   transition: transform 0.6s var(--ease-soft);
+}
+
+.post-slides > picture > img,
+.post-slides > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-slides > img {
+  width: 50%;
 }
 
 .post-slides img.is-miranha {
@@ -128,7 +140,7 @@
   background: var(--color-paper-warm);
 }
 
-.post:hover .post-slides img:not(.is-miranha) {
+.post:hover .post-slides > picture {
   transform: scale(1.04);
 }
 

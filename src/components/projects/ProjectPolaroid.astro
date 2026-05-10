@@ -74,7 +74,7 @@ const hasFlip = (tradeOffs?.length ?? 0) > 0;
         stack.length > 0 && (
           <ul class="stack" aria-label="Stack">
             {stack.map((s) => (
-              <li>{s}</li>
+              <li class={/test/i.test(s) ? 'is-tests' : ''}>{s}</li>
             ))}
           </ul>
         )

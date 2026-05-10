@@ -20,16 +20,12 @@ const ROCKET_SVG = `
 `;
 
 const TRAIL_COLOR = '#d63333';
-const LERP_DEFAULT = 0.45;
-const LERP_LOCK = 0.65;
 const ROCKET_SIZE = 28;
 const TARGET_SELECTOR =
-  'a, button, [role="button"], .badge, .proj, .panel, .post-action, .sk-close';
+  'a, button, [role="button"], .badge, .proj, .panel, .post-action, .sk-close, .exp-toggle';
 
-const lerp = (a: number, b: number, t: number): number => a + (b - a) * t;
-
-const angleFor = (vx: number, vy: number): number => {
-  if (Math.abs(vx) + Math.abs(vy) < 0.05) return 0;
+const angleFor = (vx: number, vy: number, prev: number): number => {
+  if (Math.hypot(vx, vy) < 0.6) return prev;
   return (Math.atan2(vy, vx) * 180) / Math.PI + 90;
 };
 
@@ -56,9 +52,12 @@ export const initRocketCursor = (): void => {
   rocket.innerHTML = ROCKET_SVG;
   Object.assign(rocket.style, {
     position: 'absolute',
+    left: '0',
+    top: '0',
     width: `${ROCKET_SIZE}px`,
     height: `${ROCKET_SIZE}px`,
     transform: 'translate(-9999px, -9999px)',
+    transformOrigin: '50% 50%',
     transition: 'opacity 0.15s ease',
     opacity: '0',
     willChange: 'transform',
@@ -67,32 +66,24 @@ export const initRocketCursor = (): void => {
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
-  let rocketX = mouseX;
-  let rocketY = mouseY;
   let lastX = mouseX;
   let lastY = mouseY;
+  let prevAngle = 0;
   let visible = false;
-  let firstMove = true;
   let lastTrailAt = 0;
   let locked = false;
 
   const setLocked = (on: boolean) => {
+    if (on === locked) return;
     locked = on;
-    rocket.style.scale = on ? '1.18' : '1';
-    rocket.style.transition = 'opacity 0.15s ease, scale 0.18s ease';
   };
 
   const onMove = (e: MouseEvent) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (firstMove) {
-      rocketX = mouseX;
-      rocketY = mouseY;
+    if (!visible) {
       lastX = mouseX;
       lastY = mouseY;
-      firstMove = false;
-    }
-    if (!visible) {
       visible = true;
       rocket.style.opacity = '1';
     }
@@ -156,20 +147,18 @@ export const initRocketCursor = (): void => {
   };
 
   const tick = () => {
-    const k = locked ? LERP_LOCK : LERP_DEFAULT;
-    rocketX = lerp(rocketX, mouseX, k);
-    rocketY = lerp(rocketY, mouseY, k);
-    const vx = rocketX - lastX;
-    const vy = rocketY - lastY;
-    const angle = angleFor(vx, vy);
-    rocket.style.transform = `translate(${rocketX - ROCKET_SIZE / 2}px, ${rocketY - ROCKET_SIZE / 2}px) rotate(${angle}deg)`;
-    lastX = rocketX;
-    lastY = rocketY;
+    const vx = mouseX - lastX;
+    const vy = mouseY - lastY;
+    prevAngle = angleFor(vx, vy, prevAngle);
+    const scale = locked ? 1.15 : 1;
+    rocket.style.transform = `translate(${mouseX - ROCKET_SIZE / 2}px, ${mouseY - ROCKET_SIZE / 2}px) rotate(${prevAngle}deg) scale(${scale})`;
+    lastX = mouseX;
+    lastY = mouseY;
 
     const speed = Math.hypot(vx, vy);
     const now = performance.now();
-    if (visible && speed > 1.2 && now - lastTrailAt > 50) {
-      spawnTrail(rocketX, rocketY + 10);
+    if (visible && speed > 1.2 && now - lastTrailAt > 55) {
+      spawnTrail(mouseX, mouseY + 10);
       lastTrailAt = now;
     }
     requestAnimationFrame(tick);

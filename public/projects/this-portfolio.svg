@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 130">
+  <rect width="200" height="130" fill="#1a1a1a"/>
+  <text x="14" y="26" font-family="JetBrains Mono, monospace" font-size="11" fill="#7ab68b">$ this.portfolio</text>
+  <line x1="14" y1="42" x2="120" y2="42" stroke="#7ab68b" stroke-width="1.4" opacity="0.8"/>
+  <line x1="22" y1="56" x2="100" y2="56" stroke="#7ab68b" stroke-width="1.4" opacity="0.6"/>
+  <line x1="22" y1="70" x2="140" y2="70" stroke="#7ab68b" stroke-width="1.4" opacity="0.6"/>
+  <line x1="14" y1="84" x2="80" y2="84" stroke="#7ab68b" stroke-width="1.4" opacity="0.8"/>
+  <text x="14" y="108" font-family="Architects Daughter" font-size="14" fill="#fff" opacity="0.6">— made with care.</text>
+  <rect x="146" y="100" width="6" height="10" fill="#7ab68b">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+</svg>
+</content>
+</invoke>

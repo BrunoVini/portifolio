@@ -13,6 +13,30 @@ const { locale, title, description } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const ogImage = assetUrl('/og-image.svg', base);
 const favicon = assetUrl('/favicon.svg', base);
+
+const SITE = 'https://brunovini.github.io';
+const trimmedBase = base.replace(/\/$/, '');
+const enPath = `${trimmedBase}/`;
+const ptPath = `${trimmedBase}/pt/`;
+const canonicalPath = locale === 'pt' ? ptPath : enPath;
+const canonicalUrl = `${SITE}${canonicalPath}`;
+const enUrl = `${SITE}${enPath}`;
+const ptUrl = `${SITE}${ptPath}`;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Bruno Vinicius',
+  alternateName: 'BrunoVini',
+  url: canonicalUrl,
+  email: 'mailto:brunovinissouza@gmail.com',
+  jobTitle: 'Full-stack JavaScript Developer',
+  sameAs: [
+    'https://github.com/BrunoVini',
+    'https://www.linkedin.com/in/brunovini04',
+  ],
+};
+const skipLabel = locale === 'pt' ? 'pular para o conteúdo' : 'skip to content';
 ---
 
 <!doctype html>
@@ -28,11 +52,17 @@ const favicon = assetUrl('/favicon.svg', base);
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="pt" href={ptUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
   <body>
-    <main>
+    <a class="skip-link" href="#main">{skipLabel}</a>
+    <main id="main">
       <slot />
     </main>
     <script>
@@ -44,6 +74,8 @@ const favicon = assetUrl('/favicon.svg', base);
       import { initProfilePost } from '../lib/profile-post';
       import { initEasterEggs } from '../lib/easter-eggs';
       import { initProjectFlip } from '../lib/project-flip';
+      import { initExperienceAccordion } from '../lib/experience-accordion';
+      import { initProcessFlourish } from '../lib/process-flourish';
       const locale = document.documentElement.lang === 'pt' ? 'pt' : 'en';
       initReveal();
       attachPageFlip();
@@ -53,6 +85,8 @@ const favicon = assetUrl('/favicon.svg', base);
       initProfilePost();
       initEasterEggs(locale);
       initProjectFlip();
+      initExperienceAccordion();
+      initProcessFlourish();
     </script>
   </body>
 </html>
