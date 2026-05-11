@@ -1,0 +1,50 @@
+---
+import './ProcessTools.css';
+import type { Locale } from '../../lib/types';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const tools =
+  locale === 'pt'
+    ? [
+        {
+          name: 'TypeScript',
+          caption: 'o compilador que lembra o que você esqueceu',
+          rot: '-1.2deg',
+        },
+        { name: 'React', caption: 'a parte bonitinha que você interage', rot: '0.8deg' },
+        { name: 'OpenSearch', caption: 'logs que respondem de volta', rot: '-0.5deg' },
+        { name: 'Golang', caption: 'rápido, chato e orgulhoso disso', rot: '1deg' },
+        { name: 'Kubernetes', caption: 'porque containers precisam de babá', rot: '-0.7deg' },
+      ]
+    : [
+        {
+          name: 'TypeScript',
+          caption: 'the compiler that remembers what you forgot',
+          rot: '-1.2deg',
+        },
+        { name: 'React', caption: 'the pretty part you actually touch', rot: '0.8deg' },
+        { name: 'OpenSearch', caption: 'logs that talk back', rot: '-0.5deg' },
+        { name: 'Golang', caption: 'fast, boring, and proud of it', rot: '1deg' },
+        { name: 'Kubernetes', caption: 'because containers need a babysitter', rot: '-0.7deg' },
+      ];
+
+const header = '« stack »';
+---
+
+<div class="tools">
+  <p class="tools-header">{header}</p>
+  <div class="tools-grid">
+    {
+      tools.map((t) => (
+        <div class="tool-card" data-reveal style={`--rot:${t.rot}`}>
+          <strong class="tool-name">{t.name}</strong>
+          <span class="tool-caption">{t.caption}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
