@@ -29,19 +29,36 @@
   opacity: 0;
   transition:
     opacity 0.4s var(--ease-soft),
-    transform 0.25s var(--ease-soft),
+    transform 0.3s var(--ease-soft),
     box-shadow 0.25s var(--ease-soft);
   position: relative;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1.5px dashed var(--color-red-ink);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-soft);
 }
 
 .tool-card.is-revealed {
   opacity: 1;
 }
 
-.tool-card:hover {
-  transform: rotate(0deg) scale(1.05) translateY(-2px);
-  box-shadow: 4px 4px 0 var(--color-red-ink);
+.tool-card:hover,
+.tool-card.is-flourishing {
+  transform: rotate(-1.5deg) scale(1.07) translateY(-5px);
+  box-shadow: 6px 6px 0 var(--color-red-ink);
   z-index: 3;
+}
+
+.tool-card:hover::before,
+.tool-card.is-flourishing::before {
+  opacity: 0.65;
 }
 
 .tool-name {
@@ -88,7 +105,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tool-card {
+  .tool-card,
+  .tool-card::before {
     transition: none !important;
   }
 }
