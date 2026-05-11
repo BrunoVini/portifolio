@@ -72,17 +72,17 @@
       "startDate": "2024-01",
       "endDate": "present",
       "description": {
-        "en": "Working on DarkSense (https://arancia.ca/darksense/) — the analyst console. I own front-end pieces and the tests/CI plumbing that lets us deploy them without flinching.",
-        "pt": "Trabalhando no DarkSense (https://arancia.ca/darksense/) — o console do analista. Eu cuido das peças de front-end e do encanamento de testes/CI que deixa a gente entregar sem suar."
+        "en": "Working on DarkSense — the console analysts stare at while an incident unfolds. I touch the front-end, Go APIs, CI/CD, and the Kubernetes infra that ties it all together. The goal is Friday deploys without holding a breath.",
+        "pt": "Trabalho no DarkSense — o console que analistas encaram enquanto um incidente está rolando. Mexo no front, em APIs Go, no CI/CD e na infra Kubernetes que junta tudo. O objetivo é deploy de sexta sem segurar o fôlego."
       },
       "highlights": [
         {
-          "en": "Raised automated test coverage on the services I touched",
-          "pt": "Aumentei a cobertura de testes automatizados nos serviços que toquei"
+          "en": "Raised test coverage on the services I touched — fewer breath-holding deploys",
+          "pt": "Subi a cobertura de testes nos serviços que toquei — menos deploy segurando o fôlego"
         },
         {
-          "en": "Shipped UX changes that lifted weekly active analyst retention",
-          "pt": "Entreguei mudanças de UX que aumentaram a retenção semanal de analistas ativos"
+          "en": "Shipped UX changes that got analysts coming back on Monday — weekly retention up",
+          "pt": "Entreguei UX que fez analista voltar na segunda — retenção semanal subiu"
         }
       ],
       "stats": [
@@ -109,17 +109,17 @@
       "startDate": "2023-08",
       "endDate": "2024-01",
       "description": {
-        "en": "Shipped TypeScript features in a fast-moving product team.",
-        "pt": "Entreguei features TypeScript em um time de produto rápido."
+        "en": "Small, fast-moving product team. TypeScript end to end. Learned what short deadlines and a user on the other side do to your code.",
+        "pt": "Time pequeno e rápido. TypeScript de ponta a ponta. Aprendi o que prazo curto e usuário do outro lado fazem com seu código."
       },
       "highlights": [
         {
-          "en": "Built critical TypeScript features end-to-end",
-          "pt": "Construí features críticas em TypeScript de ponta a ponta"
+          "en": "Critical TS features, from DB schema to the component users click",
+          "pt": "Features críticas em TS, do schema do banco ao componente que o usuário clica"
         },
         {
-          "en": "Delivered new user-facing features that lifted retention metrics",
-          "pt": "Entreguei novas features de interface que aumentaram métricas de retenção"
+          "en": "New UI moving the retention needle",
+          "pt": "UI nova mexendo nos números de retenção"
         }
       ],
       "stats": [
@@ -145,8 +145,8 @@
       "startDate": "2021-07",
       "endDate": "2023-12",
       "description": {
-        "en": "Where the fundamentals got named: data structures, OOP, databases, software engineering — the vocabulary I now use on the job.",
-        "pt": "Onde os fundamentos ganharam nome: estruturas de dados, POO, bancos, engenharia de software — o vocabulário que uso no trabalho hoje."
+        "en": "Broad curriculum: data structures, OOP, software engineering, web (HTML/CSS/JS/PHP), Python, computer architecture, networks, cloud, IoT, infosec, UML modeling and Scrum. I don't recite the syllabus around — it's the vocabulary that shows up when I have to design something from scratch.",
+        "pt": "Currículo amplo: estrutura de dados, POO, engenharia de software, web (HTML/CSS/JS/PHP), Python, arquitetura de computadores, redes, cloud, IoT, segurança da informação, modelagem em UML e Scrum. Não fico citando ementa — mas é o vocabulário que aparece quando preciso desenhar algo do zero."
       },
       "highlights": [],
       "stats": [
