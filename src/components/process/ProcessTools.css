@@ -1,0 +1,112 @@
+.tools {
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.tools-header {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  color: var(--color-ink-soft);
+  text-align: center;
+  letter-spacing: 0.12em;
+  margin: 0 0 16px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.tool-card {
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 4px;
+  padding: 10px 12px;
+  box-shadow: 3px 3px 0 var(--color-ink);
+  transform: rotate(var(--rot, 0deg));
+  opacity: 0;
+  transition:
+    opacity 0.4s var(--ease-soft),
+    transform 0.3s var(--ease-soft),
+    box-shadow 0.25s var(--ease-soft);
+  position: relative;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1.5px dashed var(--color-red-ink);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-soft);
+}
+
+.tool-card.is-revealed {
+  opacity: 1;
+}
+
+.tool-card:hover,
+.tool-card.is-flourishing {
+  transform: rotate(-1.5deg) scale(1.07) translateY(-5px);
+  box-shadow: 6px 6px 0 var(--color-red-ink);
+  z-index: 3;
+}
+
+.tool-card:hover::before,
+.tool-card.is-flourishing::before {
+  opacity: 0.65;
+}
+
+.tool-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--color-ink);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tool-caption {
+  display: block;
+  font-family: var(--font-utility);
+  font-size: 11px;
+  color: var(--color-ink-soft);
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+@media (max-width: 980px) {
+  .tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .tools {
+    margin-top: 28px;
+  }
+
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .tool-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .tool-name {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card,
+  .tool-card::before {
+    transition: none !important;
+  }
+}
