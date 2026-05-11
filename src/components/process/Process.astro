@@ -2,6 +2,7 @@
 import SectionTitle from '../ui/SectionTitle.astro';
 import ProcessDecorations from './ProcessDecorations.astro';
 import ProcessArt from './ProcessArt.astro';
+import ProcessTools from './ProcessTools.astro';
 import BugMargin from '../ui/BugMargin.astro';
 import './Process.css';
 import type { Locale } from '../../lib/types';
@@ -49,4 +50,5 @@ const title = locale === 'pt' ? 'Como eu trabalho' : 'How I work';
       ))
     }
   </div>
+  <ProcessTools locale={locale} />
 </div>
