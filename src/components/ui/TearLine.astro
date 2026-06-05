@@ -55,7 +55,9 @@ const dots = 80;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 18px;
-    color: var(--color-red-ink);
+    /* Sits on the darker paper-edge, where even the global red-ink only reaches
+       ~3.9:1. red-stamp (darker) clears 4.5:1 here. */
+    color: var(--color-red-stamp);
     background: var(--color-paper-edge);
     padding: 2px 12px;
     letter-spacing: 1px;
