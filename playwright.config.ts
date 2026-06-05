@@ -2,10 +2,22 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests/smoke',
+  testDir: './tests',
+  // Unit tests live in tests/unit and run under Vitest (*.test.ts). Restrict
+  // Playwright to *.spec.ts so the two runners never pick up each other's files.
+  testMatch: '**/*.spec.ts',
   fullyParallel: true,
   reporter: [['list']],
   use: { baseURL: 'http://localhost:4321' },
+  expect: {
+    // Hand-drawn rotations + web fonts mean a handful of antialiased pixels
+    // shift between renders. Allow a small ratio so snapshots aren't brittle.
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.01,
+      animations: 'disabled',
+      caret: 'hide',
+    },
+  },
   webServer: {
     command: 'npm run build && npm run preview -- --port 4321',
     url: 'http://localhost:4321/portifolio/',

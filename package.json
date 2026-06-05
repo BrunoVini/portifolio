@@ -11,7 +11,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:unit": "vitest run",
-    "test:smoke": "playwright test",
+    "test:smoke": "playwright test tests/smoke",
+    "test:a11y": "playwright test tests/a11y",
+    "test:visual": "playwright test tests/visual",
+    "test:visual:update": "playwright test tests/visual --update-snapshots",
     "check": "astro check && npm run lint && npm run format:check && npm run test:unit"
   },
   "dependencies": {
@@ -26,6 +29,7 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@eslint/js": "^9.18.0",
     "@playwright/test": "^1.49.1",
     "@types/node": "^25.6.2",
