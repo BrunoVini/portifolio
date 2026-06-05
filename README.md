@@ -51,4 +51,13 @@ ESLint enforces a 200-line ceiling per source file. If a component approaches it
 
 ## Deploying
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages on push to `main`. Pages must be configured to source from "GitHub Actions" in repo settings.
+GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages. It runs on a **version tag push** (`v*.*.*`) or a manual `workflow_dispatch` — merging to `main` no longer publishes on its own. Pages must be configured to source from "GitHub Actions" in repo settings.
+
+Cut a release:
+
+```bash
+npm version 5.0.0 --no-git-tag-version   # bump package.json
+git commit -am "chore: release v5.0.0"
+git tag v5.0.0
+git push origin main --tags               # the tag push triggers the deploy
+```
