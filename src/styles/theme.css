@@ -6,7 +6,10 @@
   --color-ink: #1a1a1a;
   --color-ink-muted: #3a2f24;
   --color-ink-soft: #5a4a3a;
-  --color-red-ink: #d63333;
+
+  /* Darkened from #d63333 (4.47:1 on paper — 0.03 below WCAG AA) to clear 4.5:1
+     as both text-on-paper and white-on-red. Visually near-identical. */
+  --color-red-ink: #d12f2f;
   --color-red-stamp: #a8332a;
   --color-highlight: #ffe066;
   --color-highlight-strong: #ffd633;

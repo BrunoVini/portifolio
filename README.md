@@ -16,7 +16,24 @@ npm run dev        # http://localhost:4321
 npm run check      # astro check + eslint + stylelint + prettier + vitest
 npm run build
 npm run test:smoke # Playwright smoke tests across viewports
+npm run test:a11y  # axe-core WCAG 2 A/AA scan (EN + PT, 3 viewports)
+npm run test:visual # full-page visual regression against committed baselines
 ```
+
+### Visual regression baselines
+
+`test:visual` compares full-page screenshots against baselines in
+`tests/visual/**-snapshots/`. Baselines are **platform-specific** (font hinting
+and antialiasing differ across OSes) and are generated on Linux. Regenerate
+after intentional visual changes with:
+
+```bash
+npm run test:visual:update
+```
+
+Because baselines are renderer-specific, visual regression is intended for local
+runs, not CI on a different platform. The axe a11y scan, by contrast, reads
+computed CSS and is deterministic anywhere.
 
 ## Updating personal content
 
@@ -34,4 +51,13 @@ ESLint enforces a 200-line ceiling per source file. If a component approaches it
 
 ## Deploying
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages on push to `main`. Pages must be configured to source from "GitHub Actions" in repo settings.
+GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages. It runs on a **version tag push** (`v*.*.*`) or a manual `workflow_dispatch` — merging to `main` no longer publishes on its own. Pages must be configured to source from "GitHub Actions" in repo settings.
+
+Cut a release:
+
+```bash
+npm version 5.0.0 --no-git-tag-version   # bump package.json
+git commit -am "chore: release v5.0.0"
+git tag v5.0.0
+git push origin main --tags               # the tag push triggers the deploy
+```

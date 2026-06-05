@@ -16,10 +16,12 @@ const { category, items } = Astro.props;
   <ul>
     {
       items.map((it, i) => (
-        <li class={`badge i-${i % 5} ${it.featured ? 'featured' : ''}`}>
-          <SkillIcon name={it.name} />
-          <span class="badge-text">{it.name}</span>
-          {it.note && <span class="note"> — {it.note}</span>}
+        <li>
+          <span class={`badge i-${i % 5} ${it.featured ? 'featured' : ''}`}>
+            <SkillIcon name={it.name} />
+            <span class="badge-text">{it.name}</span>
+            {it.note && <span class="note"> — {it.note}</span>}
+          </span>
         </li>
       ))
     }
@@ -54,9 +56,13 @@ const { category, items } = Astro.props;
   ul {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px 12px;
+  }
+  ul > li {
+    display: inline-flex;
   }
   .badge {
     font-family: var(--font-utility);
