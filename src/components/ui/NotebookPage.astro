@@ -37,16 +37,7 @@ const { pageNumber, static: isStatic = false, flipTarget = true } = Astro.props;
     margin: 28px auto;
     perspective: 1800px;
     perspective-origin: top center;
-    /* Flip-in entrance — placed when scrolled into view. */
-    opacity: 0;
-    transform: translateY(28px) rotateX(-12deg);
-    transition:
-      opacity 0.7s var(--ease-soft),
-      transform 0.7s var(--ease-soft);
-  }
-  .notebook-wrap.is-revealed {
-    opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    /* Flip-in entrance (opacity/visibility/transform) lives in animations.css. */
   }
   .notebook-peek-1 {
     position: absolute;

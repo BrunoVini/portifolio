@@ -303,10 +303,23 @@
 .exp-panel-inner {
   overflow: hidden;
   min-height: 0;
+
+  /* Collapsed panel content is fully inert: the 0fr grid row clips its paint,
+     but descendants still report their natural box to getBoundingClientRect
+     (and stay focusable / in the a11y tree) unless visibility is hidden. The
+     delayed transition keeps the content measurable while the row animates open
+     and hides it only after the collapse finishes. */
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s;
 }
 
 .node.is-open .exp-panel {
   grid-template-rows: 1fr;
+}
+
+.node.is-open .exp-panel-inner {
+  visibility: visible;
+  transition: visibility 0s linear 0s;
 }
 
 .exp-panel .loc,
@@ -388,6 +401,12 @@
   .exp-panel .desc,
   .exp-panel ul {
     transition: none;
+  }
+
+  /* No collapse animation to wait for — flip inertness instantly. */
+  .exp-panel-inner,
+  .node.is-open .exp-panel-inner {
+    transition-delay: 0s;
   }
 }
 

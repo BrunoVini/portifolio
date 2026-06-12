@@ -8,12 +8,25 @@
   justify-content: center;
   padding: 24px;
   pointer-events: none;
-  transition: background 0.25s ease;
+
+  /* Closed, the full-viewport overlay is fully inert: visibility:hidden keeps
+     its modal contents out of the a11y tree, tab order, and the layout-overlap
+     checker (the fixed inset:0 box would otherwise sit over the logo / ribbon
+     and its opacity:0 modal text would still be measured over the page). The
+     delayed visibility transition lets the close animation play out first. */
+  visibility: hidden;
+  transition:
+    background 0.25s ease,
+    visibility 0s linear 0.25s;
 }
 
 .sk-overlay.is-open {
   background: rgba(40, 30, 18, 0.5);
   pointer-events: auto;
+  visibility: visible;
+  transition:
+    background 0.25s ease,
+    visibility 0s linear 0s;
 }
 
 .sk-modal {
@@ -143,6 +156,14 @@
   transform: rotate(8deg);
   pointer-events: none;
   opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No close animation to wait for — drop the overlay's hide delay so a closed
+     modal is inert immediately. */
+  .sk-overlay {
+    transition-delay: 0s;
+  }
 }
 
 @media (max-width: 600px) {

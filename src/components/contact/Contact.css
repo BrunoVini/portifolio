@@ -148,6 +148,12 @@
   font-size: clamp(36px, 4.5vw, 56px);
   color: var(--color-ink);
   margin-bottom: 22px;
+
+  /* Hug the heading text so its block box does not stretch full-width under the
+     decorative postage stamp in the top-right corner. The glyphs never reached
+     the stamp; only the empty right end of the box did. */
+  width: fit-content;
+  max-width: 100%;
 }
 
 .postcard .line {

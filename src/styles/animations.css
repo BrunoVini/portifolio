@@ -66,9 +66,18 @@
   [data-reveal='settle'] {
     opacity: 0;
     transform: translateY(var(--settle-shift)) rotate(var(--settle-tilt));
+
+    /* The not-yet-settled card is invisible (opacity:0) but its 14px lift would
+       still let its text leaves be measured/focused at a shifted position that
+       can clip the next section. visibility:hidden makes the whole pre-reveal
+       card inert until it lands; the delayed transition keeps it measurable for
+       the settle animation and only hides it while it is genuinely off-screen.
+       Reduced motion / no-JS never enter this block, so they render fully. */
+    visibility: hidden;
     transition:
       opacity var(--duration-settle) var(--ease-ink),
-      transform var(--duration-settle) var(--ease-ink);
+      transform var(--duration-settle) var(--ease-ink),
+      visibility 0s linear var(--duration-settle);
   }
 
   [data-reveal='settle']:nth-child(even) {
@@ -78,7 +87,34 @@
   [data-reveal='settle'].is-revealed {
     opacity: 1;
     transform: none;
+    visibility: visible;
+    transition:
+      opacity var(--duration-settle) var(--ease-ink),
+      transform var(--duration-settle) var(--ease-ink),
+      visibility 0s linear 0s;
   }
+}
+
+/* NotebookPage flip-in entrance. Lives here (not in the scoped component style)
+   so the component stays within its line budget. visibility:hidden (synced with
+   opacity:0) makes the fixed-height page fully inert pre-reveal — otherwise its
+   overflowing content is measured/focusable at coordinates that clip the next
+   page. On reveal visibility flips to visible while opacity/transform animate
+   the entrance in. reveal.ts adds .is-revealed immediately under reduced motion,
+   so the hidden state is never the resting state for those users. */
+.notebook-wrap {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(28px) rotateX(-12deg);
+  transition:
+    opacity 0.7s var(--ease-soft),
+    transform 0.7s var(--ease-soft);
+}
+
+.notebook-wrap.is-revealed {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) rotateX(0deg);
 }
 
 @keyframes fadeIn {

@@ -97,10 +97,15 @@
 .conf-eyebrow {
   font-family: var(--font-mono);
   font-size: 12px;
+  line-height: 1.2;
   letter-spacing: 4px;
   color: var(--color-red-ink);
   text-transform: uppercase;
-  margin: 0 0 6px;
+
+  /* The big display title's first line carries tall ascender leading that
+     reached up into the eyebrow's line box. A tight eyebrow line box plus a
+     real gap keeps the two text rows from sharing leading. */
+  margin: 0 0 18px;
 }
 
 .conf-title {

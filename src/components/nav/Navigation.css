@@ -193,16 +193,29 @@
     z-index: 29;
     pointer-events: none;
     opacity: 0;
+
+    /* Closed drawer is fully inert. It is scaleY(0.05)-collapsed and opacity:0,
+       but its link leaves stay op:1 — measurable and focusable, stacked on top
+       of each other and the hero eyebrow. visibility:hidden removes the whole
+       closed drawer from the a11y tree, tab order, and the overlap checker. The
+       delayed visibility transition lets the open/close animation play first. */
+    visibility: hidden;
     transform: rotate(-1.4deg) scaleY(0.05);
     transition:
       opacity 0.32s var(--ease-soft),
-      transform 0.32s var(--ease-soft);
+      transform 0.32s var(--ease-soft),
+      visibility 0s linear 0.32s;
   }
 
   .chapter-index.is-open {
     pointer-events: auto;
     opacity: 1;
+    visibility: visible;
     transform: rotate(-1.4deg) scaleY(1);
+    transition:
+      opacity 0.32s var(--ease-soft),
+      transform 0.32s var(--ease-soft),
+      visibility 0s linear 0s;
   }
 
   .chapter-index ol {
@@ -273,6 +286,12 @@
     .ribbon,
     .chapter-index {
       transition: none;
+    }
+
+    /* no open/close animation to wait for — toggle inertness immediately */
+    .chapter-index,
+    .chapter-index.is-open {
+      transition-delay: 0s;
     }
   }
 }
