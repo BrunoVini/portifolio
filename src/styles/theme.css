@@ -31,6 +31,10 @@
   --color-code-green: #7ab68b;
   --color-code-green-light: #b5e6c2;
 
+  /* terminal scene tints (project thumbnails) — on the ink-black screen */
+  --color-term-alert: #ff6b5e;
+  --color-term-note: #fff;
+
   /* ====== Typography ====== */
   --font-display: 'Caveat', cursive;
   --font-body: 'Kalam', cursive;

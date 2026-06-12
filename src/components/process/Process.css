@@ -171,7 +171,7 @@
 }
 
 .p-sketch .sk-pencil {
-  transform-origin: 75px 41px;
+  transform-origin: center;
   transform-box: fill-box;
   animation: sk-pencil-idle 4.5s ease-in-out infinite;
 }
@@ -208,32 +208,44 @@
 
 /* ============= Per-step hover flourishes (rest state stays complete) ============= */
 
-/* SKETCH — pencil keeps drawing on hover */
-@keyframes sk-pencil-draw {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
+/* SKETCH — the pencil tip rides the red stroke as it is drawn. Points are
+   sampled along the path M22,74 Q34,66 46,73 Q56,79 64,71 (minus the rest tip
+   at 64,71), so the graphite stays on the line; linear timing keeps it fluid. */
+@keyframes sk-pencil-trace {
+  0% {
+    transform: translate(-42px, 3px);
   }
 
-  35% {
-    transform: translate(-2px, 1px) rotate(-6deg);
+  12.5% {
+    transform: translate(-36px, 0);
   }
 
-  65% {
-    transform: translate(2px, -1px) rotate(4deg);
+  25% {
+    transform: translate(-30px, -1px);
   }
-}
 
-@keyframes sk-stroke-pulse {
-  0%,
-  100% {
-    stroke-width: 2.4;
-    opacity: 1;
+  37.5% {
+    transform: translate(-24px, -1px);
   }
 
   50% {
-    stroke-width: 3.2;
-    opacity: 0.85;
+    transform: translate(-18px, 2px);
+  }
+
+  62.5% {
+    transform: translate(-13px, 4px);
+  }
+
+  75% {
+    transform: translate(-8px, 4px);
+  }
+
+  87.5% {
+    transform: translate(-4px, 3px);
+  }
+
+  100% {
+    transform: translate(0, 0);
   }
 }
 
@@ -252,12 +264,12 @@
 
 .p-sketch.is-flourishing .sk-pencil,
 .p-sketch:hover .sk-pencil {
-  animation: sk-pencil-draw 0.9s ease-in-out infinite;
+  animation: sk-pencil-trace 1.6s linear forwards;
 }
 
 .p-sketch.is-flourishing .sk-stroke,
 .p-sketch:hover .sk-stroke {
-  animation: sk-stroke-pulse 0.9s ease-in-out infinite;
+  animation: sk-draw 1.6s linear forwards;
 }
 
 .p-sketch.is-flourishing .sk-line-1,
@@ -307,48 +319,6 @@
   }
 }
 
-@keyframes tdd-fail-shake {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-
-  25%,
-  75% {
-    transform: translate(-1.2px, 0.6px);
-  }
-
-  50% {
-    transform: translate(1px, -0.4px);
-    opacity: 0.55;
-  }
-}
-
-@keyframes tdd-pass-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  40% {
-    transform: scale(1.5);
-  }
-}
-
-@keyframes tdd-arrow-shoot {
-  0%,
-  100% {
-    transform: translateX(0);
-    opacity: 0.55;
-  }
-
-  50% {
-    transform: translateX(2px);
-    opacity: 1;
-  }
-}
-
 .p-tdd .tdd-liquid,
 .p-tdd .tdd-bubble,
 .p-tdd .tdd-fail,
@@ -359,7 +329,9 @@
 
 .p-tdd.is-flourishing .tdd-liquid,
 .p-tdd:hover .tdd-liquid {
-  animation: tdd-shake 0.7s ease-in-out infinite;
+  animation:
+    tdd-shake 0.7s ease-in-out infinite,
+    tdd-pass-fill 2.6s ease-in-out infinite;
   transform-origin: center;
 }
 
@@ -378,19 +350,19 @@
 .p-tdd.is-flourishing .tdd-fail,
 .p-tdd:hover .tdd-fail {
   transform-origin: center;
-  animation: tdd-fail-shake 0.6s ease-in-out infinite;
+  animation: tdd-fail-out 2.6s ease-in-out infinite;
 }
 
 .p-tdd.is-flourishing .tdd-pass,
 .p-tdd:hover .tdd-pass {
   transform-origin: center;
-  animation: tdd-pass-pulse 0.9s ease-in-out 0.3s infinite;
+  animation: tdd-pass-in 2.6s ease-in-out infinite;
 }
 
 .p-tdd.is-flourishing .tdd-arrow,
 .p-tdd:hover .tdd-arrow {
-  transform-origin: left center;
-  animation: tdd-arrow-shoot 0.9s ease-in-out 0.15s infinite;
+  transform-origin: center;
+  animation: tdd-arrow-down 1.2s ease-in-out infinite;
 }
 
 /* BUILD — code lines flash green sequentially, sparkle spins */
@@ -422,7 +394,7 @@
 }
 
 .p-build .bd-spark {
-  transform-origin: 70px 28px;
+  transform-origin: center;
   transform-box: fill-box;
 }
 
@@ -663,5 +635,126 @@
     mask-image: none !important;
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* ============= Refined art: draws itself in, red→green, launch ============= */
+
+/* SKETCH — at rest the red stroke is fully drawn; on hover / scroll-in the
+   pencil traces it back on (sk-draw + sk-pencil-trace run together, synced). */
+.p-sketch .sk-stroke {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+
+@keyframes sk-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.p-sketch .sk-idea {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.p-sketch.is-flourishing .sk-idea,
+.p-sketch:hover .sk-idea {
+  animation: sk-idea-pop 0.9s ease-in-out infinite;
+}
+
+@keyframes sk-idea-pop {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* TDD — the liquid goes red → green; the ✗ fades as the ✓ pops */
+@keyframes tdd-pass-fill {
+  0%,
+  35% {
+    fill: var(--color-red-ink);
+  }
+
+  65%,
+  100% {
+    fill: var(--color-code-green);
+  }
+}
+
+@keyframes tdd-fail-out {
+  0%,
+  30% {
+    opacity: 1;
+  }
+
+  60%,
+  100% {
+    opacity: 0.12;
+  }
+}
+
+@keyframes tdd-pass-in {
+  0%,
+  35% {
+    opacity: 0.15;
+    transform: scale(0.6);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+
+  80%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tdd-arrow-down {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translateY(2px);
+  }
+}
+
+/* SHIP — speed lines streak in on launch */
+.p-ship .sh-speed {
+  opacity: 0;
+}
+
+.p-ship.is-flourishing .sh-speed,
+.p-ship:hover .sh-speed {
+  animation: sh-speed-in 0.5s ease-out forwards;
+}
+
+@keyframes sh-speed-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 0.5;
+    transform: translateY(0);
   }
 }

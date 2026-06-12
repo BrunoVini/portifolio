@@ -6,39 +6,72 @@
     stroke-linecap="round"
     stroke-linejoin="round"
   >
-    <rect x="14" y="32" width="72" height="44" rx="3" fill="var(--color-ink)"></rect>
-    <rect x="20" y="38" width="60" height="32" rx="2" fill="var(--color-ink)"></rect>
+    {/* editor window */}
+    <rect x="12" y="24" width="76" height="56" rx="5" fill="var(--color-ink)"></rect>
+    {/* title bar + traffic lights */}
+    <line x1="12" y1="36" x2="88" y2="36" stroke="var(--color-paper)" stroke-width="1" opacity="0.3"
+    ></line>
+    <circle class="bd-dot" cx="20" cy="30" r="2.2" fill="var(--color-red-ink)" stroke="none"
+    ></circle>
+    <circle class="bd-dot" cx="28" cy="30" r="2.2" fill="var(--color-highlight)" stroke="none"
+    ></circle>
+    <circle class="bd-dot" cx="36" cy="30" r="2.2" fill="var(--color-code-green)" stroke="none"
+    ></circle>
+
+    {/* syntax-coloured code lines */}
     <line
       class="bd-code bd-code-1"
-      x1="26"
+      x1="20"
       y1="46"
-      x2="44"
+      x2="34"
       y2="46"
-      stroke="#7ab68b"
-      stroke-width="2"></line>
+      stroke="var(--color-red-ink)"
+      stroke-width="2.4"></line>
+    <line
+      class="bd-code bd-code-1"
+      x1="38"
+      y1="46"
+      x2="60"
+      y2="46"
+      stroke="var(--color-code-green)"
+      stroke-width="2.4"></line>
     <line
       class="bd-code bd-code-2"
-      x1="30"
-      y1="54"
-      x2="58"
-      y2="54"
-      stroke="#7ab68b"
-      stroke-width="2"></line>
+      x1="26"
+      y1="55"
+      x2="44"
+      y2="55"
+      stroke="var(--color-highlight)"
+      stroke-width="2.4"></line>
+    <line
+      class="bd-code bd-code-2"
+      x1="48"
+      y1="55"
+      x2="68"
+      y2="55"
+      stroke="var(--color-code-green-light)"
+      stroke-width="2.4"></line>
     <line
       class="bd-code bd-code-3"
-      x1="34"
-      y1="62"
-      x2="50"
-      y2="62"
-      stroke="#7ab68b"
-      stroke-width="2"></line>
-    <rect x="56" y="58" width="6" height="8" fill="#7ab68b" stroke="none" class="build-cursor"
-    ></rect>
-    <line x1="14" y1="76" x2="86" y2="76" stroke-width="3"></line>
-    <ellipse cx="50" cy="82" rx="12" ry="3"></ellipse>
+      x1="26"
+      y1="64"
+      x2="40"
+      y2="64"
+      stroke="var(--color-code-green)"
+      stroke-width="2.4"></line>
+    <rect
+      x="44"
+      y="60"
+      width="6"
+      height="8"
+      fill="var(--color-code-green-light)"
+      stroke="none"
+      class="build-cursor"></rect>
+
+    {/* spark of flow */}
     <path
       class="bd-spark"
-      d="M 70 18 L 72 26 L 80 28 L 72 30 L 70 38 L 68 30 L 60 28 L 68 26 Z"
+      d="M 78 12 L 80 20 L 88 22 L 80 24 L 78 32 L 76 24 L 68 22 L 76 20 Z"
       fill="var(--color-highlight)"></path>
   </g>
 </svg>

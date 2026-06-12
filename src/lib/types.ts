@@ -35,7 +35,6 @@ export type Project = {
   description: I18nString;
   stack: string[];
   links: { repo?: string; demo?: string };
-  thumbnail: string;
   featured: boolean;
   tradeOffs?: I18nString[];
 };

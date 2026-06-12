@@ -23,14 +23,20 @@ const captions =
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M 20 12 Q 22 6, 26 12 M 28 8 Q 30 4, 34 10 M 36 12 Q 38 6, 42 12"></path>
-          <ellipse cx="30" cy="30" rx="18" ry="16" fill="var(--color-paper)"></ellipse>
-          <rect x="20" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
-          <rect x="31" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
-          <line x1="29" y1="29" x2="31" y2="29"></line>
-          <circle cx="24.5" cy="29" r="1" fill="var(--color-ink)"></circle>
-          <circle cx="35.5" cy="29" r="1" fill="var(--color-ink)"></circle>
-          <path d="M 25 38 Q 30 42, 35 38"></path>
+          <path d="M 18 13 Q 20 7, 24 13 M 26 9 Q 28 4, 32 10 M 34 13 Q 36 7, 40 13"></path>
+          <circle cx="29" cy="30" r="16" fill="var(--color-paper)"></circle>
+          <rect x="19" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <rect x="30" y="26" width="9" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <line x1="28" y1="29" x2="30" y2="29"></line>
+          <circle class="hcs-eye" cx="23.5" cy="29" r="1.2" fill="var(--color-ink)"></circle>
+          <path d="M 32.5 29.5 Q 34.5 27.5, 36.5 29.5"></path>
+          <path d="M 24 38 Q 29 42, 34 38"></path>
+          <g class="hcs-wave">
+            <line x1="45" y1="44" x2="50" y2="33"></line>
+            <path
+              d="M 47 35 Q 45 31, 47 28 M 50 35 Q 49 30, 51 27 M 53 36 Q 53 32, 55 30"
+              stroke-width="1.6"></path>
+          </g>
         </g>
       </svg>
       <span class="hcs-bubble">!</span>
@@ -48,13 +54,19 @@ const captions =
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <ellipse cx="30" cy="22" rx="14" ry="12" fill="var(--color-paper)"></ellipse>
-          <rect x="22" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
-          <rect x="31" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
-          <circle cx="25.5" cy="21" r="1" fill="var(--color-ink)"></circle>
-          <circle cx="34.5" cy="21" r="1" fill="var(--color-ink)"></circle>
-          <path d="M 26 28 Q 30 31, 34 28"></path>
-          <path d="M 14 50 L 22 36 Q 28 32, 38 36 L 46 50"></path>
+          <ellipse cx="26" cy="22" rx="14" ry="12" fill="var(--color-paper)"></ellipse>
+          <rect x="18" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <rect x="27" y="18" width="7" height="6" rx="1" fill="var(--color-paper)"></rect>
+          <line x1="25" y1="21" x2="27" y2="21"></line>
+          <circle cx="21.5" cy="21" r="1" fill="var(--color-ink)"></circle>
+          <circle cx="30.5" cy="21" r="1" fill="var(--color-ink)"></circle>
+          <path d="M 22 28 Q 26 31, 30 28"></path>
+          <path d="M 10 52 L 17 38 Q 22 34, 30 36"></path>
+          <path d="M 40 38 L 52 38 L 50 50 L 42 50 Z" fill="var(--color-paper)"></path>
+          <path d="M 52 40 Q 57 41, 55 46 Q 54 48, 51 47"></path>
+          <g class="hcs-steam" stroke="var(--color-ink)" stroke-width="1.6" opacity="0.5">
+            <path d="M 44 36 Q 41 32, 44 28 M 49 36 Q 46 32, 49 28"></path>
+          </g>
         </g>
       </svg>
     </div>
@@ -71,14 +83,25 @@ const captions =
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <rect x="8" y="20" width="44" height="28" rx="2" fill="var(--color-ink)"></rect>
-          <line x1="14" y1="28" x2="34" y2="28" stroke="#7ab68b" stroke-width="2"></line>
-          <line x1="16" y1="34" x2="42" y2="34" stroke="#7ab68b" stroke-width="2"></line>
-          <line x1="14" y1="40" x2="30" y2="40" stroke="#7ab68b" stroke-width="2"></line>
-          <line x1="6" y1="50" x2="54" y2="50" stroke-width="3"></line>
-          <path
-            d="M 38 12 L 40 18 L 46 20 L 40 22 L 38 28 L 36 22 L 30 20 L 36 18 Z"
-            fill="var(--color-highlight)"></path>
+          <rect x="6" y="18" width="40" height="26" rx="2" fill="var(--color-ink)"></rect>
+          <line x1="11" y1="25" x2="27" y2="25" stroke="var(--color-red-ink)" stroke-width="2"
+          ></line>
+          <line x1="14" y1="31" x2="34" y2="31" stroke="var(--color-code-green)" stroke-width="2"
+          ></line>
+          <line
+            x1="14"
+            y1="37"
+            x2="26"
+            y2="37"
+            stroke="var(--color-code-green-light)"
+            stroke-width="2"></line>
+          <line x1="4" y1="46" x2="48" y2="46" stroke-width="3"></line>
+          <g class="hcs-gear" stroke="var(--color-highlight-strong)">
+            <circle cx="48" cy="16" r="6" fill="var(--color-paper)" stroke-width="2"></circle>
+            <path
+              d="M 48 7 V 4 M 48 28 V 25 M 39 16 H 36 M 57 16 H 60 M 41.6 9.6 L 39.5 7.5 M 56.4 22.4 L 54.3 24.5 M 41.6 22.4 L 39.5 24.5 M 56.4 9.6 L 54.3 7.5"
+              stroke-width="1.8"></path>
+          </g>
         </g>
       </svg>
     </div>
@@ -95,10 +118,16 @@ const captions =
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <rect x="14" y="16" width="32" height="22" rx="2" fill="var(--color-paper)"></rect>
-          <path d="M 14 18 L 30 32 L 46 18"></path>
-          <path d="M 18 46 Q 30 50, 42 46" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
-          <path d="M 38 46 L 44 46 L 44 52" stroke="var(--color-red-ink)" stroke-width="2.4"></path>
+          <rect x="12" y="12" width="36" height="14" rx="2" fill="var(--color-paper)"></rect>
+          <rect x="12" y="30" width="36" height="14" rx="2" fill="var(--color-paper)"></rect>
+          <circle cx="18" cy="19" r="1.6" fill="var(--color-code-green)" stroke="none"></circle>
+          <circle cx="18" cy="37" r="1.6" fill="var(--color-code-green)" stroke="none"></circle>
+          <path
+            class="hcs-pulse"
+            d="M 26 19 L 30 19 L 32 14 L 35 24 L 37 19 L 42 19"
+            stroke="var(--color-red-ink)"
+            stroke-width="2"></path>
+          <path d="M 26 37 L 42 37" stroke-width="1.6" opacity="0.4"></path>
         </g>
       </svg>
     </div>

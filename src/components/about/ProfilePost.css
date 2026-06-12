@@ -396,6 +396,31 @@
   animation: heart-pop 0.5s var(--ease-soft);
 }
 
+/* the heart gives the post a "like" as it scrolls into view */
+.post.is-revealed .post-action.like .ic-filled {
+  transform-origin: center;
+  animation: heart-like 0.7s var(--ease-soft) 0.7s backwards;
+}
+
+@keyframes heart-like {
+  0%,
+  25% {
+    transform: scale(1);
+  }
+
+  55% {
+    transform: scale(1.55) rotate(-10deg);
+  }
+
+  78% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 @keyframes heart-pop {
   0% {
     transform: scale(1);

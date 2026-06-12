@@ -229,7 +229,6 @@
         "CI/CD"
       ],
       "links": { "demo": "https://arancia.ca/darksense/" },
-      "thumbnail": "/projects/darksense.svg",
       "featured": true,
       "tradeOffs": [
         {
@@ -262,7 +261,6 @@
         "repo": "https://github.com/BrunoVini/portifolio",
         "demo": "https://brunovini.github.io/portifolio/"
       },
-      "thumbnail": "/projects/this-portfolio.svg",
       "featured": true,
       "tradeOffs": [
         {
@@ -276,6 +274,35 @@
         {
           "en": "Inline SVG over icon font/PNG — every doodle is themable via currentColor and animatable with CSS.",
           "pt": "SVG inline no lugar de icon font/PNG — cada rabisco é tematizável via currentColor e animável com CSS."
+        }
+      ]
+    },
+    {
+      "id": "atelier",
+      "title": { "en": "atelier", "pt": "atelier" },
+      "tagline": {
+        "en": "A repo-aware design studio — a Claude Code skill I built.",
+        "pt": "Um ateliê de design ciente do repositório — uma skill do Claude Code que criei."
+      },
+      "description": {
+        "en": "Measures a repo's real design language, writes it as an enforceable DESIGN.md + tokens, then generates every visual artifact to match — never generic AI slop. Open source. (Yes: the skill that shaped this very page.)",
+        "pt": "Mede a linguagem de design real do repositório, escreve como um DESIGN.md + tokens aplicáveis e gera todo artefato visual seguindo isso — nunca a cara genérica de IA. Open source. (Sim: a skill que deu forma a esta página.)"
+      },
+      "stack": ["Claude Code", "Python", "Shell Script", "SVG", "Markdown"],
+      "links": { "repo": "https://github.com/BrunoVini/atelie" },
+      "featured": true,
+      "tradeOffs": [
+        {
+          "en": "Measure before generate — the design already living in the repo beats anything invented from a blank page.",
+          "pt": "Medir antes de gerar — o design que já vive no repositório vence qualquer coisa inventada do zero."
+        },
+        {
+          "en": "One enforceable DESIGN.md over loose vibes — tokens live in code, so the contract can be linted, not just admired.",
+          "pt": "Um DESIGN.md aplicável no lugar de 'vibes' soltas — os tokens vivem no código, então o contrato é verificável, não só admirado."
+        },
+        {
+          "en": "Stdlib-only Python tooling over a heavy framework — a skill should run anywhere, with no install dance.",
+          "pt": "Ferramentas em Python só com stdlib no lugar de framework pesado — uma skill precisa rodar em qualquer lugar, sem ritual de instalação."
         }
       ]
     }

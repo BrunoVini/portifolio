@@ -91,3 +91,94 @@
     display: none;
   }
 }
+
+/* per-panel life: the hand waves, coffee steams, the gear turns, prod beats */
+.hcs-wave {
+  transform-origin: left bottom;
+  transform-box: fill-box;
+  animation: hcs-wave-kf 2.4s ease-in-out infinite;
+}
+
+@keyframes hcs-wave-kf {
+  0%,
+  55%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-20deg);
+  }
+
+  38% {
+    transform: rotate(10deg);
+  }
+}
+
+.hcs-eye {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hcs-blink 4s ease-in-out infinite;
+}
+
+@keyframes hcs-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+.hcs-steam {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hcs-steam-kf 3s ease-in-out infinite;
+}
+
+@keyframes hcs-steam-kf {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.12;
+    transform: translateY(-3px);
+  }
+}
+
+.hcs-gear {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: rotateLoop 8s linear infinite;
+}
+
+.hcs-pulse {
+  animation: hcs-pulse-kf 1.6s ease-in-out infinite;
+}
+
+@keyframes hcs-pulse-kf {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hcs-wave,
+  .hcs-eye,
+  .hcs-steam,
+  .hcs-gear,
+  .hcs-pulse {
+    animation: none;
+  }
+}
