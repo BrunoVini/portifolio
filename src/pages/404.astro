@@ -1,50 +1,147 @@
 ---
 import Page from '../layouts/Page.astro';
 import NotebookPage from '../components/ui/NotebookPage.astro';
+import TearLine from '../components/ui/TearLine.astro';
 import Button from '../components/ui/Button.astro';
 import { assetUrl } from '../lib/asset';
 const homeHref = assetUrl('/', import.meta.env.BASE_URL);
 ---
 
-<Page locale="en" title="404 — page torn out" description="Page not found.">
+<Page locale="en" title="404 — page torn out" description="This page was torn out of the notebook.">
   <NotebookPage pageNumber={404} static={true} flipTarget={false}>
     <div class="not-found">
-      <h1>404</h1>
-      <p>Looks like that page was torn out of the notebook.</p>
-      <div class="cta">
-        <Button href={homeHref} variant="primary">go home</Button>
+      <div class="stamp-wrap" aria-hidden="true">
+        <span class="stamp">MISSING</span>
       </div>
+
+      <h1 class="nf-number">404</h1>
+      <p class="nf-head">Page torn out.</p>
+      <p class="nf-body">
+        Looks like someone ripped this one right out of the notebook. The red margin&rsquo;s still
+        there — the page isn&rsquo;t.
+      </p>
+
+      <TearLine label="page missing" align="left" />
+
+      <!-- Self-inking doodle: a little spiral question mark, aria-hidden -->
+      <svg
+        class="nf-doodle"
+        data-ink="enter"
+        data-ink-delay="400"
+        data-ink-stagger="200"
+        viewBox="0 0 80 80"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <g
+          fill="none"
+          stroke="var(--color-red-ink)"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <!-- spiral body of the ? -->
+          <path d="M 40 18 C 52 18, 58 26, 54 36 C 51 44, 42 46, 40 54"></path>
+          <!-- dot of the ? -->
+          <circle
+            cx="40"
+            cy="63"
+            r="2.5"
+            stroke="var(--color-red-ink)"
+            fill="var(--color-red-ink)"
+            stroke-width="1"></circle>
+        </g>
+      </svg>
+
+      <div class="cta">
+        <Button href={homeHref} variant="primary">back to the notebook</Button>
+      </div>
+
+      <p class="nf-aside" aria-hidden="true">← go back, nothing to see here</p>
     </div>
   </NotebookPage>
 </Page>
 
 <style>
   .not-found {
-    padding: 130px;
-    max-width: 640px;
+    padding: 80px 64px 64px 130px;
+    max-width: 600px;
+    position: relative;
   }
-  .not-found h1 {
+
+  .stamp-wrap {
+    margin-bottom: 20px;
+  }
+
+  .stamp {
+    display: inline-block;
+    font-family: var(--font-utility);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--color-red-ink);
+    border: 2.5px solid var(--color-red-ink);
+    padding: 4px 16px;
+    transform: rotate(-3deg);
+    opacity: 0.75;
+    border-radius: 2px;
+  }
+
+  .nf-number {
     font-family: var(--font-display);
-    font-size: clamp(80px, 12vw, 140px);
+    font-size: clamp(72px, 12vw, 136px);
     color: var(--color-red-ink);
     line-height: 1;
+    margin: 0;
   }
-  .not-found p {
+
+  .nf-head {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 8px 0 0;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  .nf-body {
     font-family: var(--font-body);
-    font-size: 20px;
+    font-size: 18px;
     color: var(--color-ink-muted);
     margin-top: 16px;
-    line-height: 1.5;
+    line-height: 1.55;
+    max-width: 420px;
   }
+
+  .nf-doodle {
+    width: 64px;
+    height: 64px;
+    margin: 4px 0 20px;
+    display: block;
+    transform: rotate(-8deg);
+  }
+
   .cta {
-    margin-top: 32px;
+    margin-top: 4px;
   }
+
+  .nf-aside {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--color-pencil-margin);
+    margin-top: 20px;
+    transform: rotate(-1.5deg);
+    display: inline-block;
+  }
+
   @media (max-width: 600px) {
     .not-found {
-      padding: 32px 18px 32px 32px;
+      padding: 48px 20px 48px 32px;
     }
-    .not-found p {
-      font-size: 18px;
+
+    .nf-body {
+      font-size: 16px;
     }
   }
 </style>

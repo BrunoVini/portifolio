@@ -56,6 +56,26 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
     <Button variant="primary" href="#work">{p.hero.primaryCTA} →</Button>
     <Button href="#contact">{p.hero.secondaryCTA}</Button>
   </div>
+
+  <!-- Small quiet marginalia between the CTAs and the bottom scroll hint.
+       Aria-hidden decoration; never over interactive targets. -->
+  <div class="hero-margin-aside" aria-hidden="true">
+    <svg
+      class="aside-squiggle"
+      data-ink="enter"
+      data-ink-delay="1800"
+      viewBox="0 0 48 16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M 2 8 C 8 4, 14 12, 20 8 C 26 4, 32 12, 38 8 C 42 5, 46 8, 46 8"
+        fill="none"
+        stroke="var(--color-pencil-margin)"
+        stroke-width="1.5"
+        stroke-linecap="round"></path>
+    </svg>
+    <span class="aside-text">{t('hero.marginAside', locale, table)}</span>
+  </div>
 </div>
 
 <div class="diary-sticker" data-depth="3" aria-hidden="true">

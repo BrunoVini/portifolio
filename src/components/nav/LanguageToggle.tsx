@@ -11,7 +11,9 @@ export default function LanguageToggle({ locale, enHref, ptHref }: Props) {
   useEffect(() => {
     const stored = getStoredLocale();
     if (stored && stored !== locale) {
-      window.location.replace(route[stored]);
+      // Explicit URL wins: the user navigated to a specific locale URL.
+      // Update stored preference to match, never redirect away.
+      persistLocale(locale);
       return;
     }
     if (!stored) {

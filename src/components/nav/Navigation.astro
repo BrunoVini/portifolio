@@ -31,7 +31,8 @@ const items: Array<{ id: string; key: string }> = [
   <nav class="nav" aria-label="primary">
     {
       items.map((it) => (
-        <a href={`#${it.id}`}>
+        <a href={`#${it.id}`} data-nav-id={it.id}>
+          <span class="nav-hl" aria-hidden="true" />
           {t(it.key, locale, table)}
           <span class="flip-hint" aria-hidden="true">
             ↗
@@ -111,6 +112,39 @@ const items: Array<{ id: string; key: string }> = [
         { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
       );
       targets.forEach((t) => io.observe(t));
+    }
+  }
+
+  // Desktop nav: highlighter swipe on the active section link
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav > a[data-nav-id]');
+  const navTargets = Array.from(navLinks)
+    .map((a) => ({ link: a, section: document.getElementById(a.dataset.navId!) }))
+    .filter((x): x is { link: HTMLAnchorElement; section: HTMLElement } => !!x.section);
+
+  const setNavActive = (id: string | null) => {
+    navLinks.forEach((a) => {
+      const isActive = a.dataset.navId === id;
+      a.setAttribute('aria-current', isActive ? 'true' : 'false');
+      a.classList.toggle('is-active', isActive);
+    });
+  };
+
+  if ('IntersectionObserver' in window && navTargets.length) {
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const navIo = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            setNavActive(en.target.id);
+          }
+        });
+      },
+      { rootMargin: '-35% 0px -45% 0px', threshold: 0 },
+    );
+    navTargets.forEach(({ section }) => navIo.observe(section));
+    if (reduce) {
+      // under reduced motion: highlight appears immediately, no transition
+      document.documentElement.classList.add('reduced-motion');
     }
   }
 </script>

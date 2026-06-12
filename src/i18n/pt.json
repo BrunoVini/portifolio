@@ -6,7 +6,11 @@
     "contact": "contato",
     "menu": "menu"
   },
-  "hero": { "scrollHint": "↓ deslize para mais páginas", "threadStart": "siga o fio vermelho" },
+  "hero": {
+    "scrollHint": "↓ deslize para mais páginas",
+    "threadStart": "siga o fio vermelho",
+    "marginAside": "* aberto a novas oportunidades"
+  },
   "about": {
     "pullLead": "Eu rodo os agents.",
     "pullPunch": "O diff continua meu."

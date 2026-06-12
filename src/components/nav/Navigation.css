@@ -32,7 +32,7 @@
 
 .nav {
   display: flex;
-  gap: 26px;
+  gap: 24px;
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 500;
@@ -42,6 +42,43 @@
 
 .nav > a {
   position: relative;
+}
+
+/* Active-section highlighter: organic yellow swipe behind the link text.
+   A pseudo-background that sits at z -1, slightly askew, with an irregular
+   shape so it reads as a real highlighter stroke — not a flat rounded rect. */
+.nav-hl {
+  position: absolute;
+  inset: -3px -6px -2px -4px;
+  background: var(--color-highlight);
+  border-radius: 1px 4px 3px 2px / 3px 2px 4px 1px;
+  transform: rotate(-1.2deg) scaleX(0);
+  transform-origin: left center;
+  z-index: -1;
+  pointer-events: none;
+  transition: transform 0.28s var(--ease-soft);
+}
+
+.nav > a.is-active .nav-hl {
+  transform: rotate(-1.2deg) scaleX(1);
+}
+
+.nav > a.is-active {
+  color: var(--color-ink);
+}
+
+/* Keyboard focus: keep the dashed outline, just layer it above the swipe */
+.nav > a:focus-visible {
+  outline: 2px dashed var(--color-red-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reduced motion: no swipe animation — highlight appears/disappears instantly */
+@media (prefers-reduced-motion: reduce) {
+  .nav-hl {
+    transition: none;
+  }
 }
 
 .nav > a::after {
@@ -171,7 +208,7 @@
   .chapter-index ol {
     list-style: none;
     margin: 0;
-    padding: 10px 0;
+    padding: 12px 0;
   }
 
   .chapter-index li {
@@ -182,7 +219,7 @@
     display: flex;
     align-items: baseline;
     gap: 12px;
-    padding: 9px 18px;
+    padding: 8px 16px;
     font-family: var(--font-display);
     font-size: 22px;
     font-weight: 600;

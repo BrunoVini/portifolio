@@ -44,7 +44,7 @@
 .headline {
   position: relative;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .shipped-note {
@@ -105,6 +105,47 @@
 
 .hero-spread .ctas .btn.primary:active {
   box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+/* Airy band between CTAs and scroll hint — a hand-pencilled aside note.
+   Ink-soft, small, aria-hidden; never over interactive targets.
+   Delayed to appear after the CTAs settle (1.3s + gap). */
+.hero-margin-aside {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  opacity: 0;
+  animation: fadeIn var(--duration-fade) var(--ease-soft) 1.9s forwards;
+  pointer-events: none;
+  user-select: none;
+}
+
+.aside-squiggle {
+  width: 40px;
+  height: 14px;
+  flex: none;
+}
+
+.aside-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--color-pencil-margin);
+  transform: rotate(-1deg);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-margin-aside {
+    animation-delay: 0s;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-margin-aside {
+    display: none;
+  }
 }
 
 /* ====== marginalia & collage ====== */
@@ -241,7 +282,7 @@
   z-index: 7;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .thread-start {
@@ -374,7 +415,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
-    margin-top: 22px;
+    margin-top: 24px;
   }
 
   .date,
@@ -392,6 +433,6 @@
   .scroll-hint {
     position: static;
     justify-content: center;
-    margin: 26px 0 6px;
+    margin: 24px 0 8px;
   }
 }

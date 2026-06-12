@@ -6,7 +6,11 @@
     "contact": "contact",
     "menu": "menu"
   },
-  "hero": { "scrollHint": "↓ scroll for more pages", "threadStart": "follow the red thread" },
+  "hero": {
+    "scrollHint": "↓ scroll for more pages",
+    "threadStart": "follow the red thread",
+    "marginAside": "* currently open to new roles"
+  },
   "about": {
     "pullLead": "I run the agents.",
     "pullPunch": "I still own the diff."
