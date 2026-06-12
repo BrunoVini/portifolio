@@ -18,7 +18,12 @@ const { text = '~ bruno' } = Astro.props;
     transform: rotate(-3deg);
     z-index: 7;
     opacity: 0;
-    animation: fadeIn 0.6s ease-out 3.8s forwards;
+    animation: fadeIn 0.6s var(--ease-soft) 2.2s forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .signature {
+      animation-delay: 0s;
+    }
   }
   .signature::after {
     content: '';

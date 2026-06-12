@@ -6,15 +6,55 @@
     "contact": "contact",
     "menu": "menu"
   },
-  "hero": { "scrollHint": "↓ scroll for more pages" },
-  "experience": { "headline": "Experience" },
-  "projects": { "headline": "Selected work" },
+  "hero": { "scrollHint": "↓ scroll for more pages", "threadStart": "follow the red thread" },
+  "about": {
+    "pullLead": "I run the agents.",
+    "pullPunch": "I still own the diff."
+  },
+  "experience": { "headline": "Experience", "timelineLabel": "career timeline" },
+  "projects": {
+    "headline": "Selected work",
+    "sketchCaption": "fig. — how it works",
+    "flipLabel": "see trade-offs",
+    "backTitle": "why these trade-offs",
+    "backFoot": "flip back ↺"
+  },
   "skills": { "headline": "Skills" },
+  "process": {
+    "title": "How I work",
+    "chapter": "PG. 49",
+    "aside": "* the daily loop",
+    "steps": {
+      "sketch": { "label": "Sketch", "caption": "pencil it out" },
+      "tdd": { "label": "TDD", "caption": "red → green" },
+      "build": { "label": "Build", "caption": "flow state" },
+      "ship": { "label": "Ship", "caption": "shipped 🚀" }
+    },
+    "toolsHeader": "« stack »",
+    "tools": [
+      { "name": "TypeScript", "caption": "the compiler that remembers what you forgot" },
+      { "name": "React", "caption": "the pretty part you actually touch" },
+      { "name": "OpenSearch", "caption": "logs that talk back" },
+      { "name": "Golang", "caption": "fast, boring, and proud of it" },
+      { "name": "Kubernetes", "caption": "because containers need a babysitter" }
+    ]
+  },
   "contact": {
     "headline": "Get in touch",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
-    "linkedinLabel": "LinkedIn"
+    "linkedinLabel": "LinkedIn",
+    "footer": {
+      "ps": "P.S.",
+      "body": "You reached the last page of the diary. Thanks for reading.",
+      "made": "made with",
+      "coffee": "coffee",
+      "love": "love",
+      "and": "and",
+      "in": "in",
+      "end": "THE END",
+      "bye": "bye!"
+    }
   },
   "common": { "page": "page", "present": "present" }
 }

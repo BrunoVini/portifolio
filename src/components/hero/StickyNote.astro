@@ -8,7 +8,11 @@ const { text, label = 'currently:', cycle = [] } = Astro.props;
 const all = [text, ...cycle];
 ---
 
-<div class="sticky" data-sticky-cycle={all.length > 1 ? JSON.stringify(all) : undefined}>
+<div
+  class="sticky"
+  data-depth="1.2"
+  data-sticky-cycle={all.length > 1 ? JSON.stringify(all) : undefined}
+>
   <strong>{label}</strong>
   <span class="sticky-text">{text}</span>
 </div>
@@ -16,9 +20,9 @@ const all = [text, ...cycle];
 <style>
   .sticky {
     position: absolute;
-    right: 7%;
-    bottom: 12%;
-    width: 175px;
+    right: 6%;
+    bottom: 10%;
+    width: 185px;
     background: var(--color-sticky-bg);
     padding: 20px 18px;
     transform: rotate(4deg);
@@ -32,8 +36,8 @@ const all = [text, ...cycle];
     z-index: 8;
     opacity: 0;
     animation:
-      stickyIn 0.5s ease-out 3.2s forwards,
-      stickyJiggle 6s ease-in-out 4s infinite;
+      stickyIn 0.5s var(--ease-ink) 1.7s forwards,
+      stickyJiggle 6s ease-in-out 3s infinite;
   }
   @keyframes stickyJiggle {
     0%,
@@ -78,8 +82,8 @@ const all = [text, ...cycle];
   @media (max-width: 979px) and (min-width: 601px) {
     .sticky {
       width: 165px;
-      right: 6%;
-      bottom: 14%;
+      right: 4%;
+      bottom: 12%;
       font-size: 14px;
     }
   }

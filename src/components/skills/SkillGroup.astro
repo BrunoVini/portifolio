@@ -8,7 +8,27 @@ interface Props {
 const { category, items } = Astro.props;
 ---
 
-<section class="grp" data-reveal>
+<section class="grp" data-reveal="settle">
+  {
+    /* Hand-drawn lasso enclosing the cluster — badges read as a grouped set,
+      not loose soup. Inks itself in via the shared data-ink primitive. */
+  }
+  <svg
+    class="grp-lasso"
+    viewBox="0 0 300 160"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    data-ink="enter"
+  >
+    <path
+      d="M 14 22 Q 8 8, 30 8 L 250 6 Q 294 4, 292 30 L 294 132 Q 296 154, 264 152 L 36 154 Q 6 156, 8 130 L 6 30 Q 6 24, 14 22 Z"
+      fill="none"
+      stroke="var(--color-pencil-margin)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
   <header class="grp-head">
     <CategoryIcon name={category} />
     <h3>{category}</h3>
@@ -30,30 +50,45 @@ const { category, items } = Astro.props;
 
 <style>
   .grp {
+    position: relative;
     margin-bottom: 36px;
-    opacity: 0;
-    transform: translateY(12px);
-    transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
+    padding: 18px 18px 16px;
   }
-  .grp.is-revealed {
-    opacity: 1;
-    transform: translateY(0);
+  /* the drawn enclosure fills the cluster box behind its contents */
+  .grp-lasso {
+    position: absolute;
+    inset: -2px -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 4px);
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
   }
   .grp-head {
-    display: flex;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin: -30px 0 14px;
+    padding: 2px 12px 2px 8px;
+    /* category sits on a little "label tab" clipped onto the lasso */
+    background: var(--color-paper);
+    border: 2px solid var(--color-ink);
+    border-radius: 6px 12px 8px 14px / 12px 8px 14px 6px;
+    box-shadow: 2px 2px 0 var(--color-red-ink);
+    transform: rotate(-1.2deg);
   }
   h3 {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 26px;
     color: var(--color-ink);
     margin: 0;
+    line-height: 1;
   }
   ul {
+    position: relative;
+    z-index: 1;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -113,7 +148,7 @@ const { category, items } = Astro.props;
     font-family: var(--font-utility);
     font-size: 16px;
     padding: 8px 14px 8px 10px;
-    background: transparent;
+    background: var(--color-paper);
     color: var(--color-ink);
     border: 1.5px solid var(--color-ink);
     border-radius: 14px 18px 16px 20px / 22px 16px 24px 18px;

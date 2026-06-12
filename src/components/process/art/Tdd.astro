@@ -1,4 +1,17 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+---
+interface Props {
+  inkDelay?: number;
+}
+const { inkDelay = 0 } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  data-ink="enter"
+  data-ink-stagger="70"
+  data-ink-delay={inkDelay}
+>
   <g
     stroke="var(--color-ink)"
     fill="none"

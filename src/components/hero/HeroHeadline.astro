@@ -1,0 +1,149 @@
+---
+/**
+ * Hand-lettered headline — the hero's focal moment.
+ *
+ * Real Caveat <text> glyphs (so PT/EN both work from profile copy) are
+ * revealed by hand-drawn scribble strokes inside an SVG <mask>: as each mask
+ * stroke inks itself left-to-right, the word appears as if a pen were writing
+ * it. The mask strokes use pathLength="1", so the write-on is pure CSS — it
+ * plays on load, needs no runtime measuring, finishes in ≤ 2.5s and lands on
+ * the fully-drawn state even without JS (animation-fill-mode: both). Reduced
+ * motion renders the final state immediately (hidden state only exists behind
+ * prefers-reduced-motion: no-preference; the global kill-switch is the second
+ * line of defense). Screen readers get the real copy from the visually-hidden
+ * <h1> in Hero.astro — this whole SVG is aria-hidden.
+ *
+ * textLength pins every word to the same advance the mask was generated for,
+ * so scribble coverage is exact by construction (no clipped glyphs if the
+ * webfont's metrics drift or while the fallback face is showing).
+ */
+import { layoutLine, scribble, r1 } from '../../lib/hero-lettering';
+import './HeroHeadline.css';
+
+interface Props {
+  /** quiet lead-in line, e.g. "Code as" */
+  lead: string;
+  /** the giant focus word, e.g. "craft." */
+  focus: string;
+  /** unique suffix for SVG ids (one per locale/page) */
+  id: string;
+}
+
+const { lead, focus, id } = Astro.props;
+
+/* ---- line layout (svg user units) ------------------------------------- */
+const F1 = 46; /* lead font size */
+const F2 = 132; /* focus font size — the loud beat */
+const B1 = 50; /* lead baseline */
+const B2 = 196; /* focus baseline */
+
+const leadLine = layoutLine(lead, F1);
+const focusLine = layoutLine(focus, F2);
+
+/* ---- scribble mask strokes (the "pen" that writes each word) ---------- */
+interface MaskStroke {
+  d: string;
+  width: number;
+  step: number; /* delay = --ink-stagger × step */
+}
+const strokes: MaskStroke[] = [
+  ...leadLine.placed.map((p, i) => ({
+    d: scribble(p.x, B1, p.w, F1),
+    width: 0.62 * F1,
+    step: 1 + i * 3,
+  })),
+  ...focusLine.placed.map((p, i) => ({
+    d: scribble(p.x, B2, p.w, F2),
+    width: 0.62 * F2,
+    step: 1 + (leadLine.placed.length + i) * 3,
+  })),
+];
+
+/* ---- flourishes -------------------------------------------------------- */
+const fx0 = focusLine.placed[0].x;
+const fw = focusLine.width;
+
+/* highlighter swipe behind the focus word (slight marker slope) */
+const swipeY = B2 - 0.26 * F2;
+const swipeD = `M ${r1(fx0 - 6)} ${r1(swipeY + 4)} L ${r1(fx0 + fw + 10)} ${r1(swipeY - 4)}`;
+const swipeW = 0.6 * F2;
+
+/* red-pen squiggle under the focus word */
+const uy = B2 + 0.17 * F2;
+const underlineD =
+  `M ${r1(fx0 - 6)} ${r1(uy)} ` +
+  `Q ${r1(fx0 + fw * 0.18)} ${r1(uy - 7)}, ${r1(fx0 + fw * 0.38)} ${r1(uy + 1)} ` +
+  `Q ${r1(fx0 + fw * 0.58)} ${r1(uy + 8)}, ${r1(fx0 + fw * 0.78)} ${r1(uy)} ` +
+  `Q ${r1(fx0 + fw * 0.92)} ${r1(uy - 5)}, ${r1(fx0 + fw + 14)} ${r1(uy - 1)}`;
+
+/* ---- viewbox ----------------------------------------------------------- */
+const vbW = Math.ceil(Math.max(leadLine.width + 12, fx0 + fw + 26));
+const vbH = Math.ceil(uy + 14);
+/* CSS sizes the svg as (focus glyph size × ratio) so the giant word renders
+   at the clamp()ed display size regardless of locale word lengths. */
+const ratio = (vbW / F2).toFixed(3);
+const maskId = `hl-mask-${id}`;
+---
+
+<svg
+  class="hl-svg"
+  viewBox={`0 0 ${vbW} ${vbH}`}
+  style={`--hl-ratio: ${ratio}`}
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <defs>
+    <mask id={maskId} maskUnits="userSpaceOnUse">
+      {
+        strokes.map((s) => (
+          <path
+            class="hl-write"
+            d={s.d}
+            pathLength="1"
+            fill="none"
+            stroke="white"
+            stroke-width={r1(s.width)}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style={`--write-step: ${s.step}`}
+          />
+        ))
+      }
+    </mask>
+  </defs>
+
+  <path class="hl-swipe" d={swipeD} pathLength="1" stroke-width={r1(swipeW)}></path>
+
+  <g class="hl-words" mask={`url(#${maskId})`}>
+    {
+      leadLine.placed.map((p) => (
+        <text
+          class="hl-lead"
+          x={r1(p.x)}
+          y={B1}
+          font-size={F1}
+          textLength={r1(p.w)}
+          lengthAdjust="spacingAndGlyphs"
+        >
+          {p.word}
+        </text>
+      ))
+    }
+    {
+      focusLine.placed.map((p) => (
+        <text
+          class="hl-focus"
+          x={r1(p.x)}
+          y={B2}
+          font-size={F2}
+          textLength={r1(p.w)}
+          lengthAdjust="spacingAndGlyphs"
+        >
+          {p.word}
+        </text>
+      ))
+    }
+  </g>
+
+  <path class="hl-underline" d={underlineD} pathLength="1"></path>
+</svg>

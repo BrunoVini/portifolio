@@ -6,11 +6,17 @@ import Ship from './art/Ship.astro';
 
 interface Props {
   step: string;
+  inkOrder?: number;
 }
-const { step } = Astro.props;
+const { step, inkOrder = 0 } = Astro.props;
+
+// Comic-page pacing: each panel's art starts inking after the previous one,
+// so the strip reads left-to-right like reading a comic strip. The strokes
+// inside a panel auto-stagger; the per-panel base delay sequences the panels.
+const inkDelay = 240 + inkOrder * 420;
 ---
 
-{step === 'sketch' && <Sketch />}
-{step === 'tdd' && <Tdd />}
-{step === 'build' && <Build />}
-{step === 'ship' && <Ship />}
+{step === 'sketch' && <Sketch inkDelay={inkDelay} />}
+{step === 'tdd' && <Tdd inkDelay={inkDelay} />}
+{step === 'build' && <Build inkDelay={inkDelay} />}
+{step === 'ship' && <Ship inkDelay={inkDelay} />}

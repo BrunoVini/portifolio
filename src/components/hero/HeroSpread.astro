@@ -1,0 +1,29 @@
+---
+/**
+ * The notebook's opening page — a full-viewport (≈100svh) spread that hosts
+ * the hero. Same paper language as NotebookPage (ruled lines, binder holes,
+ * red margin, page deck peeking behind) but sized as a single dramatic
+ * opening moment instead of a card, with a subtle SVG-noise paper grain and
+ * a pointer micro-parallax stage (data-hero-parallax, ≤ 8px, see
+ * src/lib/hero-parallax.ts — disabled for reduced motion / coarse pointers).
+ */
+import './HeroSpread.css';
+---
+
+<section class="hero-spread-wrap" id="hero">
+  <div class="hs-peek hs-peek-2" aria-hidden="true"></div>
+  <div class="hs-peek hs-peek-1" aria-hidden="true"></div>
+  <article class="hero-spread" data-hero-parallax>
+    <div class="hs-holes" aria-hidden="true">
+      <div class="hs-hole"></div>
+      <div class="hs-hole"></div>
+      <div class="hs-hole"></div>
+      <div class="hs-hole"></div>
+      <div class="hs-hole"></div>
+      <div class="hs-hole"></div>
+    </div>
+    <div class="hs-red-margin" aria-hidden="true"></div>
+    <div class="hs-grain" aria-hidden="true"></div>
+    <slot />
+  </article>
+</section>

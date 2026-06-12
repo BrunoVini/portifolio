@@ -4,6 +4,7 @@ import NotebookPage from '../components/ui/NotebookPage.astro';
 import TearLine from '../components/ui/TearLine.astro';
 import Navigation from '../components/nav/Navigation.astro';
 import Hero from '../components/hero/Hero.astro';
+import HeroSpread from '../components/hero/HeroSpread.astro';
 import About from '../components/about/About.astro';
 import Process from '../components/process/Process.astro';
 import Experience from '../components/experience/Experience.astro';
@@ -20,10 +21,10 @@ const locale = 'en' as const;
   title="Bruno Vinicius — Software Engineer"
   description="Full-stack JavaScript developer focused on scalable, high-performance apps. TDD, end-to-end testing, CI/CD by default."
 >
-  <NotebookPage>
+  <HeroSpread>
     <Navigation locale={locale} />
     <Hero locale={locale} />
-  </NotebookPage>
+  </HeroSpread>
   <TearLine />
   <NotebookPage pageNumber={48} static>
     <About locale={locale} />

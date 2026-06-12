@@ -16,8 +16,59 @@
 }
 
 .dec.is-revealed .d {
-  opacity: 0.85;
+  /* quieter supporting marks so the toolbox beat reads as the single loud
+     element — no more evenly-sprinkled soup */
+  opacity: 0.4;
   transform: scale(1) rotate(var(--rot, 0deg));
+}
+
+/* THE LOUD BEAT — the giant toolbox dominates the right column. It draws in
+   (data-ink) so its own container should reach full opacity, not the muted
+   doodle alpha. */
+.d-toolbox {
+  top: 34%;
+  right: -2%;
+  width: clamp(160px, 14vw, 210px);
+  height: auto;
+  --rot: 4deg;
+
+  transition-delay: 0.15s;
+}
+
+/* On very wide pages the wrap stops at 1180px but the viewport keeps going —
+   let the beat drift into that outer margin so it never overlaps a cluster. */
+@media (min-width: 1320px) {
+  .d-toolbox {
+    right: -10%;
+    top: 28%;
+  }
+}
+
+.dec.is-revealed .d-toolbox {
+  opacity: 1;
+}
+
+.d-toolbox text {
+  font-family: var(--font-display);
+}
+
+@media (max-width: 1100px) {
+  /* below the wide layout the right column collapses — tuck the beat into the
+     corner, smaller, so it never collides with the badge clusters */
+  .d-toolbox {
+    top: auto;
+    bottom: 3%;
+    right: 4%;
+    width: 150px;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 760px) {
+  .d-toolbox {
+    width: 110px;
+    opacity: 0.32;
+  }
 }
 
 .d-braces {
@@ -48,16 +99,6 @@
   --rot: 6deg;
 
   transition-delay: 0.4s;
-}
-
-.d-term {
-  top: 36%;
-  right: 4%;
-  width: 110px;
-  height: 70px;
-  --rot: 5deg;
-
-  transition-delay: 0.5s;
 }
 
 .d-beaker {
@@ -100,26 +141,6 @@
   transition-delay: 0.9s;
 }
 
-.d-coffee {
-  top: 16%;
-  right: 4%;
-  width: 50px;
-  height: 42px;
-  --rot: -6deg;
-
-  transition-delay: 1s;
-}
-
-.d-arrow {
-  bottom: 50%;
-  right: 8%;
-  width: 96px;
-  height: 36px;
-  --rot: 6deg;
-
-  transition-delay: 1.1s;
-}
-
 .d-star {
   top: 30%;
   left: 48%;
@@ -140,10 +161,26 @@
   transition-delay: 1.3s;
 }
 
+/* On wide screens the toolbox owns the right column — retire the doodles that
+   used to crowd it so the beat stands alone with only a couple of quiet marks. */
+.d-bolt,
+.d-react,
+.d-node {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  /* the toolbox shrinks into the corner here, so a few supporting marks can
+     come back to fill the freed space */
+  .d-react,
+  .d-node {
+    display: block;
+  }
+}
+
 @media (max-width: 980px) {
-  .d-arrow,
-  .d-coffee,
-  .d-bolt,
+  .d-react,
+  .d-node,
   .d-sparkles,
   .d-star,
   .d-heart {
@@ -154,9 +191,7 @@
 @media (max-width: 600px) {
   .d-react,
   .d-node,
-  .d-term,
   .d-beaker,
-  .d-coffee,
   .d-heart {
     display: none;
   }
@@ -194,7 +229,6 @@
     height: 22px;
   }
 
-  .d-arrow,
   .d-bolt {
     display: none;
   }

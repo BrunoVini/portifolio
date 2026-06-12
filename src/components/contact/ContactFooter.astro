@@ -1,4 +1,7 @@
 ---
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
 import './ContactFooter.css';
 import type { Locale } from '../../lib/types';
 
@@ -7,29 +10,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 const year = new Date().getFullYear();
+const table = { en, pt };
 
-const lines =
-  locale === 'pt'
-    ? {
-        ps: 'P.S.',
-        body: 'Você chegou na última página do diário. Obrigado por ler.',
-        sig: 'feito com',
-        coffee: 'café',
-        love: 'carinho',
-        and: 'e',
-        end: 'FIM',
-        signoff: '— Bruno, ' + year,
-      }
-    : {
-        ps: 'P.S.',
-        body: 'You reached the last page of the diary. Thanks for reading.',
-        sig: 'made with',
-        coffee: 'coffee',
-        love: 'love',
-        and: 'and',
-        end: 'THE END',
-        signoff: '— Bruno, ' + year,
-      };
+const lines = {
+  ps: t('contact.footer.ps', locale, table),
+  body: t('contact.footer.body', locale, table),
+  sig: t('contact.footer.made', locale, table),
+  coffee: t('contact.footer.coffee', locale, table),
+  love: t('contact.footer.love', locale, table),
+  and: t('contact.footer.and', locale, table),
+  in: t('contact.footer.in', locale, table),
+  end: t('contact.footer.end', locale, table),
+  bye: t('contact.footer.bye', locale, table),
+  signoff: '— Bruno, ' + year,
+};
 ---
 
 <div class="cf" data-reveal>
@@ -101,7 +95,7 @@ const lines =
           </g>
         </g>
       </svg>
-      <span class="cf-bye">{locale === 'pt' ? 'tchau!' : 'bye!'}</span>
+      <span class="cf-bye">{lines.bye}</span>
     </div>
 
     <div class="cf-center">
@@ -114,10 +108,28 @@ const lines =
         <span class="cf-icon" aria-label={lines.coffee}>☕</span>
         {lines.and}
         <span class="cf-icon cf-icon-red" aria-label={lines.love}>♥</span>
-        {locale === 'pt' ? 'em' : 'in'}
+        {lines.in}
         {year}.
       </p>
-      <p class="cf-sign">{lines.signoff}</p>
+      <p class="cf-sign">
+        {lines.signoff}
+        {/* the pen lifts — a signature underline inks itself in last */}
+        <svg
+          class="cf-sign-flourish"
+          viewBox="0 0 140 24"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          data-ink="enter"
+          data-ink-delay="350"
+        >
+          <path
+            d="M 4 14 Q 30 4, 62 12 T 120 11 q 10 -1, 16 -7"
+            fill="none"
+            stroke="var(--color-red-ink)"
+            stroke-width="2.4"
+            stroke-linecap="round"></path>
+        </svg>
+      </p>
     </div>
 
     <div class="cf-end" aria-hidden="true">

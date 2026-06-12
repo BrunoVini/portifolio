@@ -4,6 +4,59 @@ import './SkillsDecorations.css';
 ---
 
 <div class="dec" aria-hidden="true" data-reveal>
+  {
+    /* THE LOUD BEAT: a giant hand-drawn toolbox — "tools of the trade" — that
+      anchors the spread and inks itself in via the shared primitive. Sits in
+      the empty right column on wide screens; hidden on narrow ones. */
+  }
+  <svg
+    class="d d-toolbox"
+    viewBox="0 0 220 200"
+    xmlns="http://www.w3.org/2000/svg"
+    data-ink="enter"
+    data-ink-stagger="140"
+  >
+    <g
+      stroke="var(--color-ink)"
+      fill="none"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* handle */}
+      <path data-ink-order="0" d="M 78 58 Q 78 30, 110 30 Q 142 30, 142 58"></path>
+      {/* lid */}
+      <path
+        data-ink-order="1"
+        d="M 30 78 Q 28 60, 46 60 L 174 60 Q 192 60, 190 78 L 190 92 L 30 92 Z"
+        fill="var(--color-highlight)"
+        fill-opacity="0.35"></path>
+      {/* body */}
+      <path
+        data-ink-order="2"
+        d="M 30 92 L 190 92 L 182 176 Q 181 184, 172 184 L 48 184 Q 39 184, 38 176 Z"></path>
+      {/* clasp */}
+      <rect
+        data-ink-order="3"
+        x="100"
+        y="84"
+        width="20"
+        height="16"
+        rx="2"
+        stroke="var(--color-red-ink)"></rect>
+      {/* a wrench poking out */}
+      <g data-ink-order="4" stroke="var(--color-red-ink)" stroke-width="2.2">
+        <path d="M 132 150 L 156 126"></path>
+        <path d="M 152 118 Q 168 114, 170 128 Q 172 140, 160 142 L 158 132 L 150 130 Z"></path>
+      </g>
+      {/* a screwdriver */}
+      <g data-ink-order="5" stroke="var(--color-ink)" stroke-width="2.2">
+        <path d="M 70 150 L 88 132"></path>
+        <path d="M 64 156 L 70 150 L 76 156 L 70 162 Z" fill="var(--color-ink)"></path>
+      </g>
+    </g>
+  </svg>
+
   <svg class="d d-braces" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
     <g
       stroke="currentColor"
@@ -44,32 +97,6 @@ import './SkillsDecorations.css';
         fill="currentColor"
         stroke="none"
         font-weight="700">JS</text
-      >
-    </g>
-  </svg>
-  <svg class="d d-term" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg">
-    <g stroke="currentColor" fill="none" stroke-width="1.6" stroke-linejoin="round">
-      <rect x="4" y="6" width="82" height="48" rx="4"></rect>
-      <line x1="4" y1="16" x2="86" y2="16"></line>
-      <circle cx="12" cy="11" r="1.6" fill="currentColor"></circle>
-      <circle cx="20" cy="11" r="1.6" fill="currentColor"></circle>
-      <circle cx="28" cy="11" r="1.6" fill="currentColor"></circle>
-      <text
-        x="12"
-        y="32"
-        font-family="JetBrains Mono"
-        font-size="9"
-        fill="var(--color-red-ink)"
-        stroke="none">$ npm test</text
-      >
-      <text
-        x="12"
-        y="44"
-        font-family="JetBrains Mono"
-        font-size="8"
-        fill="currentColor"
-        stroke="none"
-        opacity="0.6">✓ all green</text
       >
     </g>
   </svg>
@@ -122,33 +149,6 @@ import './SkillsDecorations.css';
       fill-opacity="0.7"
     >
       <path d="M 50 38 L 52 46 L 58 48 L 52 50 L 50 58 L 48 50 L 42 48 L 48 46 Z"></path>
-    </g>
-  </svg>
-  <svg class="d d-coffee" viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
-    <g
-      stroke="currentColor"
-      fill="none"
-      stroke-width="1.6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <rect x="10" y="16" width="34" height="26" rx="2"></rect>
-      <path d="M 44 22 Q 54 22, 54 30 Q 54 38, 44 38" stroke-width="1.5"></path>
-      <path d="M 18 10 Q 22 6, 18 2" opacity="0.55"></path>
-      <path d="M 26 10 Q 30 6, 26 2" opacity="0.55"></path>
-      <path d="M 34 10 Q 38 6, 34 2" opacity="0.55"></path>
-    </g>
-  </svg>
-  <svg class="d d-arrow" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-    <g
-      stroke="var(--color-red-ink)"
-      stroke-width="1.7"
-      fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="M 4 28 Q 30 8, 70 18 Q 80 20, 92 24"></path>
-      <path d="M 82 18 L 92 24 L 84 32"></path>
     </g>
   </svg>
   <svg class="d d-star" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">

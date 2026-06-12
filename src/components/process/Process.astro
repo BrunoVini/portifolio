@@ -4,6 +4,9 @@ import ProcessDecorations from './ProcessDecorations.astro';
 import ProcessArt from './ProcessArt.astro';
 import ProcessTools from './ProcessTools.astro';
 import BugMargin from '../ui/BugMargin.astro';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
+import { t } from '../../lib/i18n';
 import './Process.css';
 import type { Locale } from '../../lib/types';
 
@@ -11,36 +14,32 @@ interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
+const table = { en, pt };
 
-const panels =
-  locale === 'pt'
-    ? [
-        { n: '1', step: 'sketch', label: 'Rascunho', caption: 'desenha a ideia' },
-        { n: '2', step: 'tdd', label: 'TDD', caption: 'red → green' },
-        { n: '3', step: 'build', label: 'Build', caption: 'código fluindo' },
-        { n: '4', step: 'ship', label: 'Ship', caption: 'entrega 🚀' },
-      ]
-    : [
-        { n: '1', step: 'sketch', label: 'Sketch', caption: 'pencil it out' },
-        { n: '2', step: 'tdd', label: 'TDD', caption: 'red → green' },
-        { n: '3', step: 'build', label: 'Build', caption: 'flow state' },
-        { n: '4', step: 'ship', label: 'Ship', caption: 'shipped 🚀' },
-      ];
-const aside = locale === 'pt' ? '* o ciclo diário' : '* the daily loop';
-const title = locale === 'pt' ? 'Como eu trabalho' : 'How I work';
+const steps = ['sketch', 'tdd', 'build', 'ship'] as const;
+const panels = steps.map((step, i) => ({
+  n: String(i + 1),
+  step,
+  label: t(`process.steps.${step}.label`, locale, table),
+  caption: t(`process.steps.${step}.caption`, locale, table),
+}));
+
+const title = t('process.title', locale, table);
+const chapter = t('process.chapter', locale, table);
+const aside = t('process.aside', locale, table);
 ---
 
 <div class="proc" id="process">
   <ProcessDecorations />
   <BugMargin locale={locale} en="caught. ☹" pt="pego. ☹" position="middle" side="left" />
-  <SectionTitle title={title} chapter="PG. 49" icon="experience" aside={aside} />
+  <SectionTitle title={title} chapter={chapter} icon="experience" aside={aside} />
   <div class="strip">
     {
       panels.map((p, i) => (
         <article class={`panel p-${p.step}`} data-reveal data-tilt style={`--i:${i}`}>
           <span class="num">{p.n}</span>
           <div class="art" aria-hidden="true">
-            <ProcessArt step={p.step} />
+            <ProcessArt step={p.step} inkOrder={i} />
           </div>
           <div class="caption">
             <strong>{p.label}</strong>

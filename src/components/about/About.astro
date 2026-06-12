@@ -1,6 +1,9 @@
 ---
 import { getProfile } from '../../lib/profile';
 import { splitOnTerms } from '../../lib/highlight';
+import { t } from '../../lib/i18n';
+import en from '../../i18n/en.json';
+import pt from '../../i18n/pt.json';
 import ProfilePost from './ProfilePost.astro';
 import AboutDoodles from './AboutDoodles.astro';
 import AboutFunFacts from './AboutFunFacts.astro';
@@ -14,6 +17,9 @@ interface Props {
 }
 const { locale } = Astro.props;
 const p = getProfile(locale);
+const table = { en, pt };
+const pullLead = t('about.pullLead', locale, table);
+const pullPunch = t('about.pullPunch', locale, table);
 
 const TERMS: Record<Locale, string[]> = {
   en: ['TDD', 'CI/CD', 'AI-augmented', 'high-performance', 'scalable', 'customer retention'],
@@ -67,6 +73,27 @@ const aside = locale === 'pt' ? '* quem é esse cara?' : '* who is this guy?';
           </p>
         ))
       }
+      <blockquote class="pull" data-reveal>
+        <span class="pull-lead">{pullLead}</span>
+        <span class="pull-punch">
+          {pullPunch}
+          <svg
+            class="pull-circle"
+            viewBox="0 0 360 110"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            data-ink="enter"
+            data-ink-delay="320"
+          >
+            <path
+              d="M58 26 C150 6, 300 8, 340 44 C356 60, 338 86, 270 98 C170 114, 40 108, 18 76 C4 56, 20 34, 96 20"
+              fill="none"
+              stroke="var(--color-red-ink)"
+              stroke-width="3.2"
+              stroke-linecap="round"></path>
+          </svg>
+        </span>
+      </blockquote>
       <p class="ps-note">
         <strong class="ps-label">P.S.</strong>
         {

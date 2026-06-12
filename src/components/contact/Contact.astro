@@ -35,7 +35,21 @@ const table = { en, pt };
         <span class="postage-num">26</span>
         <span class="postage-label">BR · 2026</span>
       </div>
-      <div class="cancel-mark"></div>
+      <svg
+        class="postmark"
+        viewBox="0 0 80 80"
+        xmlns="http://www.w3.org/2000/svg"
+        data-ink="enter"
+        data-ink-delay="520"
+        data-ink-stagger="90"
+      >
+        <g stroke="var(--color-red-stamp)" fill="none" stroke-width="2" stroke-linecap="round">
+          <circle cx="40" cy="40" r="30"></circle>
+          <circle cx="40" cy="40" r="23"></circle>
+          <line x1="8" y1="33" x2="72" y2="33"></line>
+          <line x1="8" y1="47" x2="72" y2="47"></line>
+        </g>
+      </svg>
     </div>
     <h2>{p.contact.headline}</h2>
     <p class="line">

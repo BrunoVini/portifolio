@@ -94,29 +94,16 @@
   margin-top: 2px;
 }
 
-.cancel-mark {
+/* the postmark inks itself over the stamp (data-ink), like a cancellation
+   pressed onto the postage — a small "sealed & sent" beat. */
+.postmark {
   position: absolute;
-  top: -10px;
-  right: -28px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-red-ink);
-  opacity: 0.45;
-  box-shadow:
-    0 0 0 4px transparent,
-    inset 0 0 0 4px var(--color-paper),
-    inset 0 0 0 6px var(--color-red-ink);
+  top: -12px;
+  right: -30px;
+  width: 64px;
+  height: 64px;
+  opacity: 0.5;
   transform: rotate(-12deg);
-}
-
-.cancel-mark::after {
-  content: '';
-  position: absolute;
-  inset: 32% -40%;
-  border-top: 1px dashed var(--color-red-ink);
-  border-bottom: 1px dashed var(--color-red-ink);
-  opacity: 0.6;
 }
 
 .addr {
@@ -182,6 +169,30 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+/* The closing CTA is the loudest pixel of the section: red-ink fill at rest,
+   bold comic offset shadow, oversized. Overrides the shared Button primary
+   (which is ink at rest) so the final ask reads as the destination. */
+.cta-row .btn.primary {
+  background: var(--color-red-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+  font-size: 26px;
+  padding: 14px 32px;
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.cta-row .btn.primary:hover,
+.cta-row .btn.primary:focus-visible {
+  background: var(--color-red-stamp);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+
+.cta-row .btn.primary:active {
+  box-shadow: 2px 2px 0 var(--color-ink);
 }
 
 .cta-sfx {

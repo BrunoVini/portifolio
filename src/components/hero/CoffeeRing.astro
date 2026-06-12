@@ -17,8 +17,13 @@
     transform: rotate(-12deg) scale(0.95);
     z-index: 3;
     opacity: 0;
-    animation: coffeeIn 0.8s ease-out 3s forwards;
+    animation: coffeeIn 0.8s var(--ease-ink) 1.6s forwards;
     filter: blur(0.4px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coffee {
+      animation-delay: 0s;
+    }
   }
   @media (max-width: 600px) {
     .coffee {

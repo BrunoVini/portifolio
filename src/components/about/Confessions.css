@@ -12,14 +12,17 @@
     ),
     var(--color-paper);
   color: var(--color-ink);
-  transform: rotate(-1.2deg) translateY(10px);
+
+  /* settles like a torn page dropped onto the desk: lands askew, then rights
+     itself to its resting tilt — a deliberate beat, not a plain fade */
+  transform: rotate(-4.5deg) translateY(26px);
   box-shadow:
     0 12px 22px rgba(0, 0, 0, 0.18),
     inset 0 0 0 1px var(--color-paper-edge);
   opacity: 0;
   transition:
-    opacity 0.7s var(--ease-soft),
-    transform 0.6s var(--ease-soft);
+    opacity var(--duration-settle) var(--ease-ink),
+    transform 0.7s var(--ease-ink);
 }
 
 .confessions.is-revealed {
@@ -167,7 +170,7 @@
 @media (max-width: 600px) {
   .confessions {
     padding: 28px 22px 32px;
-    transform: rotate(-0.8deg) translateY(10px);
+    transform: rotate(-3deg) translateY(22px);
   }
 
   .confessions.is-revealed {

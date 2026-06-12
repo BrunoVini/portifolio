@@ -7,8 +7,9 @@
 <svg
   class="vitruvian"
   data-ink="enter"
-  data-ink-delay="400"
-  data-ink-stagger="200"
+  data-ink-delay="500"
+  data-ink-stagger="140"
+  data-depth="1"
   viewBox="0 0 280 280"
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
@@ -46,21 +47,21 @@
 <style>
   .vitruvian {
     position: absolute;
-    right: 7%;
-    top: 8%;
-    width: 280px;
-    height: 280px;
+    right: 5%;
+    top: 9%;
+    width: clamp(220px, 34vh, 320px);
+    height: clamp(220px, 34vh, 320px);
     z-index: 4;
-    opacity: 0.65;
+    opacity: 0.55;
     color: var(--color-ink);
   }
   @media (max-width: 979px) and (min-width: 601px) {
     .vitruvian {
-      width: 200px;
-      height: 200px;
-      right: 4%;
+      width: 190px;
+      height: 190px;
+      right: 3%;
       top: 10%;
-      opacity: 0.55;
+      opacity: 0.5;
     }
   }
   @media (max-width: 600px) {

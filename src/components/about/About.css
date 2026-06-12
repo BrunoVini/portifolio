@@ -126,6 +126,69 @@
   transition-delay: 1.4s;
 }
 
+/* ===== Loud beat: the bio's punchline, blown up ===== */
+.pull {
+  margin: 44px 0 8px;
+  padding: 0;
+  border: 0;
+  max-width: 60ch;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.pull-lead {
+  display: block;
+  font-size: clamp(26px, 3vw, 38px);
+  color: var(--color-ink-soft);
+  line-height: 1.05;
+}
+
+.pull-punch {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0 10px;
+  font-size: clamp(42px, 6vw, 76px);
+  color: var(--color-ink);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pull-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 116%;
+  height: 188%;
+  transform: translate(-50%, -50%) rotate(-1.5deg);
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 760px) {
+  .pull-punch {
+    white-space: normal;
+  }
+
+  .pull-circle {
+    height: 130%;
+    width: 108%;
+  }
+}
+
+@media (max-width: 600px) {
+  .pull {
+    margin-top: 28px;
+  }
+
+  .pull-punch {
+    font-size: clamp(34px, 11vw, 52px);
+  }
+}
+
 .facts-row {
   margin-top: 16px;
   display: flex;

@@ -1,0 +1,167 @@
+/* The notebook's opening page (HeroSpread.astro) — full-viewport spread. */
+
+.hero-spread-wrap {
+  position: relative;
+  width: min(var(--page-vw), var(--page-max-width));
+  height: max(min(calc(100vh - 24px), 1080px), var(--page-min-height));
+  height: max(min(calc(100svh - 24px), 1080px), var(--page-min-height));
+  margin: 12px auto 28px;
+}
+
+/* The opening page settles onto the desk once, on load. Pure CSS: completes
+   without JS; reduced motion gets the resting state via the gate + the
+   global kill-switch. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-spread-wrap {
+    animation: hs-settle 0.9s var(--ease-ink) both;
+  }
+}
+
+@keyframes hs-settle {
+  from {
+    opacity: 0;
+    transform: translateY(12px) rotate(-0.5deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* page deck peeking behind — the rest of the notebook is already there */
+.hs-peek {
+  position: absolute;
+  background: var(--color-paper-tinted);
+  border-radius: 0 3px 3px 0;
+}
+
+.hs-peek-1 {
+  right: -7px;
+  top: 12px;
+  bottom: 12px;
+  width: 14px;
+  box-shadow: 0 12px 24px -8px var(--color-paper-shadow);
+  z-index: 1;
+  transform: rotate(-0.15deg);
+}
+
+.hs-peek-2 {
+  right: -14px;
+  top: 18px;
+  bottom: 18px;
+  width: 22px;
+  box-shadow: 0 18px 30px -12px var(--color-paper-shadow-strong);
+  z-index: 0;
+  transform: rotate(-0.3deg);
+}
+
+.hero-spread {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--color-paper);
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 31px,
+    var(--color-rule) 32px
+  );
+  border-radius: 4px;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 60%) inset,
+    0 30px 80px -20px var(--color-paper-shadow-strong),
+    0 8px 24px var(--color-paper-shadow);
+  z-index: 2;
+  overflow: hidden;
+  isolation: isolate;
+  transform: rotate(-0.3deg);
+
+  /* hero-local pacing token: the giant word's rendered glyph height */
+  --hero-focus-size: clamp(5.6rem, 11vw, 10.4rem);
+}
+
+/* subtle paper grain — inline SVG noise, ~4% alpha, under all content (z 1:
+   collage sits at z ≥ 4, copy at z 10, so it never dims text or targets). */
+.hs-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.33 0 0 0 0 0.22 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.hs-holes {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 60px 0;
+  pointer-events: none;
+}
+
+.hs-hole {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-paper-edge);
+  box-shadow:
+    0 0 0 1.5px rgb(0 0 0 / 15%) inset,
+    1px 1px 2px rgb(0 0 0 / 15%);
+  margin-left: 4px;
+}
+
+.hs-red-margin {
+  position: absolute;
+  left: var(--margin-left);
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--color-margin-red);
+  z-index: 2;
+}
+
+@media (max-width: 979px) and (min-width: 601px) {
+  .hero-spread-wrap {
+    width: 96vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-spread-wrap {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0 0 8px;
+  }
+
+  .hs-peek {
+    display: none;
+  }
+
+  .hero-spread {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    transform: none;
+    padding: 18px 18px 56px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hs-holes {
+    display: none;
+  }
+
+  .hs-red-margin {
+    left: 18px;
+    opacity: 0.35;
+  }
+}

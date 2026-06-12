@@ -1,7 +1,10 @@
+/* Project card = an annotated engineer's sketch on paper. The card itself is
+   always visible (its entrance is handled by the shell's data-reveal="settle");
+   the static hand-drawn tilt lives here. */
 .proj {
   display: block;
   background: var(--color-paper);
-  padding: 14px 14px 22px;
+  padding: 14px 16px 22px;
   box-shadow: 5px 5px 0 var(--color-ink);
   transform: rotate(-1.2deg);
   border: 3px solid var(--color-ink);
@@ -11,22 +14,12 @@
     transform 0.25s var(--ease-soft),
     box-shadow 0.25s ease;
   position: relative;
-  opacity: 0;
   transform-origin: center;
 }
 
-.proj.is-revealed {
-  opacity: 1;
-  transform: rotate(-1.2deg);
-}
-
-.proj:nth-child(2n) {
+.proj-shell:nth-child(2n) .proj {
   transform: rotate(1.6deg);
   box-shadow: -5px 5px 0 var(--color-ink);
-}
-
-.proj:nth-child(2n).is-revealed {
-  transform: rotate(1.6deg);
 }
 
 .proj:hover,
@@ -37,8 +30,8 @@
   z-index: 3;
 }
 
-.proj:nth-child(2n):hover,
-.proj:nth-child(2n):focus-visible {
+.proj-shell:nth-child(2n) .proj:hover,
+.proj-shell:nth-child(2n) .proj:focus-visible {
   box-shadow: -7px 7px 0 var(--color-red-ink);
 }
 
@@ -54,17 +47,18 @@
   z-index: 1;
 }
 
+/* "FIG 0N" label — a drawn margin tag, not a terminal panel chip. */
 .panel-label {
   position: absolute;
-  top: -18px;
-  left: -14px;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  padding: 3px 10px 2px;
-  font-family: var(--font-mono);
-  font-size: 10px;
+  top: -16px;
+  left: -12px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  padding: 2px 9px;
+  font-family: var(--font-utility);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   transform: rotate(-6deg);
   border: 2px solid var(--color-ink);
   box-shadow: 2px 2px 0 var(--color-red-ink);
@@ -91,18 +85,18 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2.5px;
-  box-shadow: 1.5px 1.5px 0 rgba(214, 51, 51, 0.4);
+  box-shadow: 1.5px 1.5px 0 var(--color-highlight-soft);
 }
 
 @keyframes stamp-slam {
   0% {
     transform: scale(2.4);
-    filter: blur(2px);
+    opacity: 0;
   }
 
   55% {
     transform: scale(0.9);
-    filter: blur(0);
+    opacity: 1;
   }
 
   100% {
@@ -115,22 +109,46 @@
   animation: stamp-slam 0.45s cubic-bezier(0.34, 1.6, 0.64, 1);
 }
 
-/* The stamp slams down once as the card reveals — it reads as the project being
-   "marked shipped" right in front of you, not just sitting there. */
-.proj.is-revealed .featured-stamp span {
+/* The stamp slams down once as the card settles in — it reads as the project
+   being "marked shipped" right in front of you. */
+.proj-shell.is-revealed .featured-stamp span {
   animation: stamp-slam 0.5s 0.35s cubic-bezier(0.34, 1.6, 0.64, 1) backwards;
 }
 
-.thumb {
+/* The sketch frame: a light blueprint panel holding the hand-drawn diagram —
+   replaces the old dark terminal thumbnail. */
+.sketch {
+  position: relative;
   aspect-ratio: 200 / 130;
-  background: var(--color-ink);
+  background: var(--color-paper-tinted);
+  border: 1.5px solid var(--color-pencil-margin);
+  border-radius: 3px;
   overflow: hidden;
+
+  /* faint blueprint grid drawn from existing rule token */
+  background-image:
+    linear-gradient(var(--color-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-rule) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
-.thumb svg {
+.sketch svg {
+  position: relative;
   width: 100%;
   height: 100%;
   display: block;
+  z-index: 1;
+}
+
+.sketch-cap {
+  position: absolute;
+  left: 8px;
+  bottom: 4px;
+  z-index: 2;
+  font-family: var(--font-utility);
+  font-size: 11px;
+  color: var(--color-ink-soft);
+  letter-spacing: 0.3px;
 }
 
 .meta {
@@ -139,16 +157,39 @@
 
 h3 {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 28px;
   color: var(--color-ink);
   margin: 0;
+  line-height: 1.05;
+}
+
+/* Highlighter swipe behind the project name — a hand-drawn marker stroke. */
+.title-hl {
+  position: relative;
+  display: inline;
+  background: linear-gradient(
+    100deg,
+    transparent 1%,
+    var(--color-highlight) 1%,
+    var(--color-highlight-strong) 96%,
+    transparent 99%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 62%;
+  background-position: 0 78%;
+  padding: 0 2px;
 }
 
 .tag {
   font-family: var(--font-utility);
   font-size: 14px;
   color: var(--color-red-ink);
-  margin-top: 4px;
+  margin-top: 6px;
+
+  /* red-pen underline annotation */
+  display: inline-block;
+  border-bottom: 1.5px solid var(--color-red-ink);
+  padding-bottom: 1px;
 }
 
 .desc {
@@ -159,22 +200,41 @@ h3 {
   line-height: 1.5;
 }
 
+/* The surviving code motif: a tiny mono snippet on a torn paper strip. The
+   ONLY place JetBrains Mono appears on the card. */
+.code-strip {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-muted);
+  background: var(--color-paper-edge);
+  padding: 3px 9px;
+  transform: rotate(-0.8deg);
+  border-left: 2px solid var(--color-code-green);
+
+  /* torn edges */
+  clip-path: polygon(0 8%, 100% 0, 98% 50%, 100% 100%, 2% 92%, 0 55%);
+}
+
 .stack {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 10px;
+  gap: 6px 5px;
+  margin-top: 12px;
   padding: 0;
 }
 
+/* stack entries = small ink stamp chips */
 .stack li {
-  font-family: var(--font-mono);
+  font-family: var(--font-utility);
   font-size: 11px;
-  background: var(--color-paper-edge);
+  background: transparent;
   color: var(--color-ink-muted);
   padding: 2px 8px;
-  border-radius: 999px;
+  border: 1.5px solid var(--color-pencil-margin);
+  border-radius: 8px 12px 9px 14px / 14px 9px 13px 8px;
 }
 
 .stack li.is-tests {
@@ -196,17 +256,15 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  /* Mobile: flat polaroids (no rotation) so they appear wider and never
-       overlap the section title or each other. Keep the tape decoration. */
+  /* Mobile: flat cards (no rotation) so they appear wider and never overlap the
+     section title or each other. Keep the tape decoration. */
   .proj,
-  .proj.is-revealed,
-  .proj:nth-child(2n),
-  .proj:nth-child(2n).is-revealed {
+  .proj-shell:nth-child(2n) .proj {
     transform: none;
   }
 
   .proj {
-    padding: 10px 10px 18px;
+    padding: 10px 12px 18px;
   }
 
   .proj:hover,

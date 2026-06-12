@@ -34,7 +34,22 @@ const toggleHint = locale === 'pt' ? 'clique pra abrir →' : 'click to open →
     icon="experience"
     aside={aside}
   />
-  <div class="timeline" data-reveal aria-hidden="true"></div>
+  <svg
+    class="timeline-ink"
+    viewBox="0 0 12 1000"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    data-ink="scroll"
+  >
+    <path
+      d="M6 2 C9 70, 3 130, 6 200 C9 270, 3 330, 6 400 C9 470, 3 530, 6 600 C9 670, 3 730, 6 800 C9 870, 4 930, 6 998"
+      fill="none"
+      stroke="var(--color-ink)"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      vector-effect="non-scaling-stroke"></path>
+  </svg>
   <div class="nodes">
     {
       p.experience.map((e, i) => (
@@ -67,21 +82,20 @@ const toggleHint = locale === 'pt' ? 'clique pra abrir →' : 'click to open →
     position: relative;
   }
   /* SectionTitle component handles section heading styling */
-  .timeline {
+  /* The career line: one continuous hand-drawn stroke that inks itself in as
+     you scroll the section (data-ink="scroll"). It runs down the left margin,
+     threading the node logos; entries settle onto it like pinned notes. */
+  .timeline-ink {
     position: absolute;
-    left: 158px;
-    top: 180px;
+    left: 157px;
+    top: 188px;
     bottom: 40px;
-    width: 2px;
-    background: var(--color-ink);
-    opacity: 0.25;
+    width: 14px;
     z-index: 1;
-    transform-origin: top center;
-    transform: scaleY(0);
-    transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  .timeline.is-revealed {
-    transform: scaleY(1);
+    color: var(--color-ink);
+    opacity: 0.32;
+    pointer-events: none;
+    overflow: visible;
   }
   .nodes {
     position: relative;
@@ -96,9 +110,9 @@ const toggleHint = locale === 'pt' ? 'clique pra abrir →' : 'click to open →
     .exp {
       padding: 32px 18px 32px 32px;
     }
-    .timeline {
-      left: 54px;
-      top: 140px;
+    .timeline-ink {
+      left: 53px;
+      top: 148px;
     }
     .nodes {
       padding-top: 24px;

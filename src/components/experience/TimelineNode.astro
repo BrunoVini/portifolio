@@ -53,7 +53,7 @@ const headerId = `exp-header-${index}`;
 
 <article
   class={`node ${current ? 'is-current' : ''} ${kind === 'education' ? 'is-school' : ''} ${defaultOpen ? 'is-open' : ''}`}
-  data-reveal
+  data-reveal="settle"
   data-accordion-item
 >
   {kind === 'education' && schoolLabel && <span class="school-stamp">{schoolLabel}</span>}

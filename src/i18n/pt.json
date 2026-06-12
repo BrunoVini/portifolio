@@ -6,15 +6,55 @@
     "contact": "contato",
     "menu": "menu"
   },
-  "hero": { "scrollHint": "↓ deslize para mais páginas" },
-  "experience": { "headline": "Experiência" },
-  "projects": { "headline": "Trabalhos selecionados" },
+  "hero": { "scrollHint": "↓ deslize para mais páginas", "threadStart": "siga o fio vermelho" },
+  "about": {
+    "pullLead": "Eu rodo os agents.",
+    "pullPunch": "O diff continua meu."
+  },
+  "experience": { "headline": "Experiência", "timelineLabel": "linha do tempo da carreira" },
+  "projects": {
+    "headline": "Trabalhos selecionados",
+    "sketchCaption": "fig. — como funciona",
+    "flipLabel": "ver trade-offs",
+    "backTitle": "por que esses trade-offs",
+    "backFoot": "voltar ↺"
+  },
   "skills": { "headline": "Habilidades" },
+  "process": {
+    "title": "Como eu trabalho",
+    "chapter": "PG. 49",
+    "aside": "* o ciclo diário",
+    "steps": {
+      "sketch": { "label": "Rascunho", "caption": "desenha a ideia" },
+      "tdd": { "label": "TDD", "caption": "red → green" },
+      "build": { "label": "Build", "caption": "código fluindo" },
+      "ship": { "label": "Ship", "caption": "entrega 🚀" }
+    },
+    "toolsHeader": "« stack »",
+    "tools": [
+      { "name": "TypeScript", "caption": "o compilador que lembra o que você esqueceu" },
+      { "name": "React", "caption": "a parte bonitinha que você interage" },
+      { "name": "OpenSearch", "caption": "logs que respondem de volta" },
+      { "name": "Golang", "caption": "rápido, chato e orgulhoso disso" },
+      { "name": "Kubernetes", "caption": "porque containers precisam de babá" }
+    ]
+  },
   "contact": {
     "headline": "Vamos conversar",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
-    "linkedinLabel": "LinkedIn"
+    "linkedinLabel": "LinkedIn",
+    "footer": {
+      "ps": "P.S.",
+      "body": "Você chegou na última página do diário. Obrigado por ler.",
+      "made": "feito com",
+      "coffee": "café",
+      "love": "carinho",
+      "and": "e",
+      "in": "em",
+      "end": "FIM",
+      "bye": "tchau!"
+    }
   },
   "common": { "page": "página", "present": "atual" }
 }

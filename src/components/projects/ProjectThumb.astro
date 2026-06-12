@@ -5,12 +5,14 @@ interface Props {
   id?: string;
   title: string;
 }
-const { id, title } = Astro.props;
+const { id } = Astro.props;
 
-/* Pick a terminal "scene" by project. Each scene tells the project's own
-   story in a developer-native idiom (a real-looking terminal session) so two
-   cards never read as the same placeholder chart. Unknown ids fall back to a
-   generic prompt that still uses the project's title. */
+/* Per-project hand-drawn engineer's sketch — an annotated diagram of how the
+   thing actually works, inked onto the paper card (no dark terminal panel).
+   Each project gets its own doodle so two cards never read as the same
+   placeholder. Strokes ink themselves in via `data-ink="enter"` (staggered);
+   reduced motion / no-JS renders them fully drawn. Unknown ids fall back to a
+   generic boxes-and-arrows architecture sketch. */
 type Scene = 'darksense' | 'portfolio' | 'atelier' | 'generic';
 const scene: Scene =
   id === 'darksense'
@@ -20,79 +22,98 @@ const scene: Scene =
       : id === 'atelier'
         ? 'atelier'
         : 'generic';
-
-// sparkline bars (alert volume) for the SOC scene
-const spark = [5, 9, 6, 13, 18, 11, 16, 9, 14];
 ---
 
 <svg
-  class="pt-svg"
+  class={`pt-svg pt-${scene}`}
   viewBox="0 0 200 130"
-  preserveAspectRatio="xMidYMid slice"
+  preserveAspectRatio="xMidYMid meet"
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
+  data-ink="enter"
+  data-ink-stagger="90"
 >
-  <rect width="200" height="130" fill="var(--color-ink)"></rect>
-
   {
     scene === 'darksense' && (
-      <g font-size="8">
-        <text x="12" y="18" class="pt-line pt-prompt">
-          $ darksense --watch
-        </text>
-        <text x="12" y="34" class="pt-line pt-alert">
-          ▲ alert · lateral move
-        </text>
-        <text x="20" y="45" class="pt-line pt-ok">
-          ✓ contained · 14ms
-        </text>
-        <text x="12" y="61" class="pt-line pt-alert">
-          ▲ alert · c2 beacon
-        </text>
-        <text x="20" y="72" class="pt-line pt-ok">
-          ✓ contained · 9ms
-        </text>
-        <g class="pt-line pt-spark">
-          {spark.map((h, i) => (
-            <rect x={12 + i * 7} y={104 - h} width="4.4" height={h} rx="0.8" />
-          ))}
+      <g
+        class="pt-stroke"
+        stroke="var(--color-ink)"
+        fill="none"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        {/* SOC pipeline: logs → detector → contained, with a live heartbeat */}
+        <g data-ink-order="0">
+          <path d="M 14 34 Q 12 24, 22 24 L 44 24 Q 52 24, 50 34 L 50 46 Q 50 54, 42 54 L 20 54 Q 12 54, 14 44 Z" />
+          <line x1="20" y1="32" x2="44" y2="32" opacity="0.45" />
+          <line x1="20" y1="40" x2="40" y2="40" opacity="0.45" />
+          <line x1="20" y1="48" x2="44" y2="48" opacity="0.45" />
         </g>
-        <circle cx="14" cy="120" r="3" class="pt-live" fill="var(--color-code-green)" />
-        <text x="22" y="123" class="pt-dim">
-          live · uptime 99.98%
-        </text>
+        <path data-ink-order="1" d="M 52 39 L 78 39" />
+        <path data-ink-order="1" d="M 72 34 L 80 39 L 72 44" stroke="var(--color-red-ink)" />
+        <g data-ink-order="2" stroke="var(--color-red-ink)">
+          <circle cx="102" cy="39" r="22" />
+          <path d="M 92 39 L 100 47 L 114 31" stroke-width="2.4" />
+        </g>
+        <path data-ink-order="3" d="M 126 39 L 152 39" />
+        <path data-ink-order="3" d="M 146 34 L 154 39 L 146 44" stroke="var(--color-red-ink)" />
+        <g data-ink-order="4">
+          <rect x="156" y="26" width="32" height="26" rx="4" />
+          <path d="M 162 39 L 168 45 L 182 31" stroke="var(--color-red-ink)" stroke-width="2" />
+        </g>
+        {/* live heartbeat line at the foot */}
+        <path
+          data-ink-order="5"
+          d="M 14 96 L 40 96 L 48 80 L 58 110 L 66 96 L 96 96 L 104 86 L 112 104 L 120 96 L 188 96"
+          stroke="var(--color-code-green)"
+          stroke-width="1.6"
+        />
       </g>
     )
   }
 
   {
     scene === 'portfolio' && (
-      <g font-size="8">
-        <text x="12" y="18" class="pt-line pt-prompt">
-          $ astro build
-        </text>
-        <text x="12" y="34" class="pt-line pt-dim">
-          ▶ building…
-        </text>
-        <text x="12" y="50" class="pt-line pt-ok">
-          ✓ 14 pages · 1.2s
-        </text>
-        <text x="12" y="66" class="pt-line pt-ok">
-          ✓ a11y · 0 violations
-        </text>
-        <text x="12" y="82" class="pt-line pt-ok">
-          ↑ deploy → gh-pages
-        </text>
-        <text x="12" y="104" class="pt-line pt-note">
-          — handmade, shipped.
-        </text>
-        <rect
-          x="118"
-          y="97"
-          width="6"
-          height="10"
-          class="pt-cursor"
-          fill="var(--color-code-green)"
+      <g
+        class="pt-stroke"
+        stroke="var(--color-ink)"
+        fill="none"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        {/* notebook page → build → deploy globe (this very site) */}
+        <g data-ink-order="0">
+          <path d="M 22 22 L 64 22 L 64 78 L 22 78 Q 18 78, 18 74 L 18 26 Q 18 22, 22 22 Z" />
+          <line x1="30" y1="22" x2="30" y2="78" stroke="var(--color-red-ink)" opacity="0.7" />
+          <line x1="36" y1="34" x2="58" y2="34" opacity="0.4" />
+          <line x1="36" y1="44" x2="56" y2="44" opacity="0.4" />
+          <line x1="36" y1="54" x2="58" y2="54" opacity="0.4" />
+          <line x1="36" y1="64" x2="50" y2="64" opacity="0.4" />
+        </g>
+        <path data-ink-order="1" d="M 66 50 L 92 50" />
+        <path data-ink-order="1" d="M 86 45 L 94 50 L 86 55" stroke="var(--color-red-ink)" />
+        {/* gear = build step */}
+        <g data-ink-order="2" stroke="var(--color-red-ink)">
+          <circle cx="114" cy="50" r="13" />
+          <circle cx="114" cy="50" r="5" />
+          <path d="M 114 33 L 114 28 M 114 72 L 114 67 M 97 50 L 92 50 M 136 50 L 131 50 M 102 38 L 99 35 M 126 38 L 129 35 M 102 62 L 99 65 M 126 62 L 129 65" />
+        </g>
+        <path data-ink-order="3" d="M 136 50 L 158 50" />
+        <path data-ink-order="3" d="M 152 45 L 160 50 L 152 55" stroke="var(--color-red-ink)" />
+        {/* deployed globe */}
+        <g data-ink-order="4">
+          <circle cx="178" cy="50" r="14" stroke="var(--color-code-green)" />
+          <ellipse cx="178" cy="50" rx="6" ry="14" stroke="var(--color-code-green)" />
+          <line x1="164" y1="50" x2="192" y2="50" stroke="var(--color-code-green)" />
+        </g>
+        <path
+          data-ink-order="5"
+          d="M 30 100 Q 70 92, 120 100 T 188 100"
+          stroke="var(--color-highlight-strong)"
+          stroke-width="6"
+          opacity="0.7"
         />
       </g>
     )
@@ -100,32 +121,48 @@ const spark = [5, 9, 6, 13, 18, 11, 16, 9, 14];
 
   {
     scene === 'atelier' && (
-      <g font-size="8">
-        <text x="12" y="18" class="pt-line pt-prompt">
-          $ atelier scan ./repo
-        </text>
-        <text x="12" y="34" class="pt-line pt-dim">
-          ◆ measuring design…
-        </text>
-        <text x="12" y="50" class="pt-line pt-ok">
-          ✓ palette · 5 roles
-        </text>
-        <text x="12" y="66" class="pt-line pt-ok">
-          ✓ type · Caveat + Kalam
-        </text>
-        <text x="12" y="82" class="pt-line pt-prompt">
-          ↪ wrote DESIGN.md
-        </text>
-        <text x="12" y="104" class="pt-line pt-note">
-          no slop detected.
-        </text>
-        <rect
-          x="103"
-          y="97"
-          width="6"
-          height="10"
-          class="pt-cursor"
-          fill="var(--color-code-green)"
+      <g
+        class="pt-stroke"
+        stroke="var(--color-ink)"
+        fill="none"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        {/* repo → atelier eye scans → DESIGN.md contract */}
+        <g data-ink-order="0">
+          <path d="M 16 30 L 32 30 L 38 38 L 56 38 Q 60 38, 60 42 L 60 70 Q 60 74, 56 74 L 20 74 Q 16 74, 16 70 Z" />
+        </g>
+        <path data-ink-order="1" d="M 62 56 L 84 56" />
+        <path data-ink-order="1" d="M 78 51 L 86 56 L 78 61" stroke="var(--color-red-ink)" />
+        {/* the measuring eye */}
+        <g data-ink-order="2" stroke="var(--color-red-ink)">
+          <path d="M 88 56 Q 106 40, 124 56 Q 106 72, 88 56 Z" />
+          <circle cx="106" cy="56" r="6" />
+          <circle cx="106" cy="56" r="2" fill="var(--color-red-ink)" stroke="none" />
+        </g>
+        <path data-ink-order="3" d="M 126 56 L 148 56" />
+        <path data-ink-order="3" d="M 142 51 L 150 56 L 142 61" stroke="var(--color-red-ink)" />
+        {/* the contract doc */}
+        <g data-ink-order="4">
+          <path d="M 152 38 L 178 38 L 188 48 L 188 74 L 152 74 Z" />
+          <path d="M 178 38 L 178 48 L 188 48" />
+          <line x1="158" y1="56" x2="182" y2="56" stroke="var(--color-code-green)" />
+          <line x1="158" y1="63" x2="178" y2="63" stroke="var(--color-code-green)" />
+        </g>
+        <path
+          data-ink-order="5"
+          d="M 152 32 L 184 28"
+          stroke="var(--color-highlight-strong)"
+          stroke-width="6"
+          opacity="0.7"
+        />
+        {/* "no slop" check mark by the eye */}
+        <path
+          data-ink-order="5"
+          d="M 96 96 L 104 104 L 122 86"
+          stroke="var(--color-code-green)"
+          stroke-width="2.4"
         />
       </g>
     )
@@ -133,20 +170,34 @@ const spark = [5, 9, 6, 13, 18, 11, 16, 9, 14];
 
   {
     scene === 'generic' && (
-      <g font-size="8">
-        <text x="12" y="20" class="pt-prompt">
-          $ {title.toLowerCase()}
-        </text>
-        <text x="12" y="38" class="pt-ok">
-          ✓ ready
-        </text>
+      <g
+        class="pt-stroke"
+        stroke="var(--color-ink)"
+        fill="none"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        {/* generic boxes-and-arrows architecture sketch */}
+        <rect data-ink-order="0" x="18" y="30" width="42" height="30" rx="4" />
         <rect
-          x="12"
-          y="48"
-          width="6"
-          height="10"
-          class="pt-cursor"
-          fill="var(--color-code-green)"
+          data-ink-order="1"
+          x="80"
+          y="30"
+          width="42"
+          height="30"
+          rx="4"
+          stroke="var(--color-red-ink)"
+        />
+        <rect data-ink-order="2" x="142" y="30" width="42" height="30" rx="4" />
+        <path data-ink-order="1" d="M 60 45 L 80 45" stroke="var(--color-red-ink)" />
+        <path data-ink-order="2" d="M 122 45 L 142 45" stroke="var(--color-red-ink)" />
+        <path
+          data-ink-order="3"
+          d="M 30 100 L 172 100"
+          stroke="var(--color-highlight-strong)"
+          stroke-width="6"
+          opacity="0.7"
         />
       </g>
     )

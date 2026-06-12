@@ -4,7 +4,7 @@ import en from '../../i18n/en.json';
 import pt from '../../i18n/pt.json';
 import { t } from '../../lib/i18n';
 import Button from '../ui/Button.astro';
-import ScrollHint from '../ui/ScrollHint.astro';
+import HeroHeadline from './HeroHeadline.astro';
 import VitruvianFigure from './VitruvianFigure.astro';
 import Gear from './Gear.astro';
 import StickyNote from './StickyNote.astro';
@@ -44,16 +44,13 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
 <CoffeeRing />
 
 <div class="content">
-  <div class="eyebrow">{p.hero.eyebrow}</div>
-  <h1 class="title">
-    <span class="line-1">{p.hero.titleLine1}</span>
-    <span class="line-2">
-      <span class="highlight"
-        >{p.hero.titleLine2}<span class="cursor" aria-hidden="true"></span></span
-      >
-      <span class="arrow">{p.hero.titleAccent}</span>
-    </span>
-  </h1>
+  <p class="eyebrow">{p.hero.eyebrow}</p>
+  <!-- Real copy for SR/SEO; the SVG hand-letters the same words. -->
+  <h1 class="sr-only">{p.hero.titleLine1} {p.hero.titleLine2}</h1>
+  <div class="headline" aria-hidden="true">
+    <HeroHeadline lead={p.hero.titleLine1} focus={p.hero.titleLine2} id={locale} />
+    <span class="shipped-note">{p.hero.titleAccent}</span>
+  </div>
   <p class="sub">{p.hero.subtitle}</p>
   <div class="ctas">
     <Button variant="primary" href="#work">{p.hero.primaryCTA} →</Button>
@@ -61,7 +58,7 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
   </div>
 </div>
 
-<div class="diary-sticker" aria-hidden="true">
+<div class="diary-sticker" data-depth="3" aria-hidden="true">
   <span class="ds-of"
     >{locale === 'pt' ? 'O ' : 'THE '}<span data-journal
       >{locale === 'pt' ? 'DIÁRIO' : 'DIARY'}</span
@@ -71,11 +68,39 @@ const today = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' });
   <span class="ds-vol">VOL. 1</span>
 </div>
 
-<div class="sfx-1"><SoundEffect text="ZAP!" color="highlight" rotate={-12} size={90} /></div>
-<div class="sfx-2"><SoundEffect text="POW!" color="red" rotate={10} size={76} /></div>
-<div class="sfx-3"><SoundEffect text="SHIP!" color="highlight" rotate={-6} size={84} /></div>
+<div class="sfx-1" data-depth="1">
+  <SoundEffect text="ZAP!" color="highlight" rotate={-12} size={84} />
+</div>
+<div class="sfx-3"><SoundEffect text="SHIP!" color="highlight" rotate={-6} size={80} /></div>
 
 <HeroComicStrip locale={locale} />
 <HeroMobileStickies locale={locale} />
 <Signature />
-<div class="scroll-hint-pos"><ScrollHint label={t('hero.scrollHint', locale, table)} /></div>
+
+<!-- Scroll hint that pays off: a red pen arrow inks itself toward the gutter,
+     where the margin thread takes over and runs down the whole page. -->
+<div class="scroll-hint">
+  <svg
+    class="thread-start"
+    data-ink="enter"
+    data-ink-delay="2300"
+    data-ink-stagger="180"
+    viewBox="0 0 34 58"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <g fill="none" stroke="var(--color-red-ink)" stroke-width="2" stroke-linecap="round">
+      <path d="M 26 4 C 30 14, 24 22, 17 30 C 11 37, 12 45, 14 51"></path>
+      <path d="M 8 45 C 10 48, 12 50, 14 51.5 C 16.5 49.5, 19 46.5, 20 43.5"></path>
+    </g>
+  </svg>
+  <div class="hint-col">
+    <span class="hint-thread">{t('hero.threadStart', locale, table)}</span>
+    <span class="hint-label">{t('hero.scrollHint', locale, table)}</span>
+  </div>
+</div>
+
+<script>
+  import { initHeroParallax } from '../../lib/hero-parallax';
+  initHeroParallax();
+</script>

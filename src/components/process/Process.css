@@ -640,16 +640,13 @@
 
 /* ============= Refined art: draws itself in, red→green, launch ============= */
 
-/* SKETCH — at rest the red stroke is fully drawn; on hover / scroll-in the
-   pencil traces it back on (sk-draw + sk-pencil-trace run together, synced). */
-.p-sketch .sk-stroke {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 0;
-}
-
+/* SKETCH — the red stroke inks itself in on entry via the shared data-ink
+   engine (it owns the dasharray/dashoffset). On hover the pencil rides the
+   curve while the stroke redraws (sk-draw + sk-pencil-trace, synced). The
+   redraw uses --ink-len when the engine measured it, falling back to 100. */
 @keyframes sk-draw {
   from {
-    stroke-dashoffset: 100;
+    stroke-dashoffset: var(--ink-len, 100);
   }
 
   to {

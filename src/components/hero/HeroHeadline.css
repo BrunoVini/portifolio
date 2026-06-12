@@ -1,0 +1,87 @@
+/* Hand-lettered headline (HeroHeadline.astro).
+   The mask scribbles, highlighter swipe and red underline all carry
+   pathLength="1", so the write-on is pure CSS: it starts at first paint,
+   finishes ≤ 2.5s and — because every animation fills `both` — settles on
+   the fully-drawn state even with JS disabled. Hidden states only exist
+   inside prefers-reduced-motion: no-preference. */
+
+.hl-svg {
+  /* --hero-focus-size is the rendered height of the giant word (set in
+     Hero.css); --hl-ratio converts it to the svg's total width per locale. */
+  display: block;
+  width: min(100%, calc(var(--hero-focus-size, 9.5rem) * var(--hl-ratio, 2.2)));
+  height: auto;
+  overflow: visible;
+}
+
+.hl-words text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  fill: var(--color-ink);
+}
+
+.hl-words .hl-lead {
+  fill: var(--color-ink-muted);
+}
+
+.hl-swipe {
+  fill: none;
+  stroke: var(--color-highlight);
+  stroke-linecap: butt;
+  opacity: 0.85;
+}
+
+.hl-underline {
+  fill: none;
+  stroke: var(--color-red-ink);
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+/* The pen hesitates mid-stroke (58% / 72% keyframes) so the writing never
+   reads as a robotic linear sweep — same gesture as the global inkDraw. */
+@keyframes hl-write-on {
+  0% {
+    stroke-dashoffset: 1;
+  }
+
+  58% {
+    stroke-dashoffset: 0.26;
+  }
+
+  72% {
+    stroke-dashoffset: 0.19;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hl-write,
+  .hl-swipe,
+  .hl-underline {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hl-write-on var(--duration-ink) var(--ease-ink) both;
+  }
+
+  /* one word per beat: delay = --ink-stagger × step (120ms grid) */
+  .hl-write {
+    animation-delay: calc(var(--ink-stagger) * var(--write-step, 0));
+  }
+
+  /* the highlighter swipes once the word exists… */
+  .hl-swipe {
+    animation-duration: calc(var(--duration-ink) * 0.45);
+    animation-delay: calc(var(--ink-stagger) * 14);
+  }
+
+  /* …and the red pen underlines it last (ends ≈ 2.4s) */
+  .hl-underline {
+    animation-duration: calc(var(--duration-ink) * 0.4);
+    animation-delay: calc(var(--ink-stagger) * 16);
+  }
+}
