@@ -73,6 +73,32 @@
   animation: now-pulse 2s ease-in-out infinite;
 }
 
+/* each milestone's badge stamps into place as its node scrolls in — the
+   timeline draws down (Experience.astro) and the seals land along it */
+@keyframes node-logo-stamp {
+  0% {
+    transform: scale(0.2) rotate(-3deg);
+  }
+
+  55% {
+    transform: scale(1.12) rotate(-3deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(-3deg);
+  }
+}
+
+.node.is-revealed .logo {
+  animation: node-logo-stamp 0.5s var(--ease-default) 0.12s backwards;
+}
+
+.node.is-current.is-revealed .logo {
+  animation:
+    node-logo-stamp 0.5s var(--ease-default) 0.12s backwards,
+    now-pulse 2s ease-in-out 0.8s infinite;
+}
+
 .node.is-school .logo {
   border-style: dashed;
   border-width: 2px;

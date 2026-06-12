@@ -115,6 +115,12 @@
   animation: stamp-slam 0.45s cubic-bezier(0.34, 1.6, 0.64, 1);
 }
 
+/* The stamp slams down once as the card reveals — it reads as the project being
+   "marked shipped" right in front of you, not just sitting there. */
+.proj.is-revealed .featured-stamp span {
+  animation: stamp-slam 0.5s 0.35s cubic-bezier(0.34, 1.6, 0.64, 1) backwards;
+}
+
 .thumb {
   aspect-ratio: 200 / 130;
   background: var(--color-ink);

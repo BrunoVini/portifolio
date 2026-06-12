@@ -1,0 +1,154 @@
+---
+import './ProjectThumb.css';
+
+interface Props {
+  id?: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+
+/* Pick a terminal "scene" by project. Each scene tells the project's own
+   story in a developer-native idiom (a real-looking terminal session) so two
+   cards never read as the same placeholder chart. Unknown ids fall back to a
+   generic prompt that still uses the project's title. */
+type Scene = 'darksense' | 'portfolio' | 'atelier' | 'generic';
+const scene: Scene =
+  id === 'darksense'
+    ? 'darksense'
+    : id === 'this-portfolio'
+      ? 'portfolio'
+      : id === 'atelier'
+        ? 'atelier'
+        : 'generic';
+
+// sparkline bars (alert volume) for the SOC scene
+const spark = [5, 9, 6, 13, 18, 11, 16, 9, 14];
+---
+
+<svg
+  class="pt-svg"
+  viewBox="0 0 200 130"
+  preserveAspectRatio="xMidYMid slice"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <rect width="200" height="130" fill="var(--color-ink)"></rect>
+
+  {
+    scene === 'darksense' && (
+      <g font-size="8">
+        <text x="12" y="18" class="pt-line pt-prompt">
+          $ darksense --watch
+        </text>
+        <text x="12" y="34" class="pt-line pt-alert">
+          ▲ alert · lateral move
+        </text>
+        <text x="20" y="45" class="pt-line pt-ok">
+          ✓ contained · 14ms
+        </text>
+        <text x="12" y="61" class="pt-line pt-alert">
+          ▲ alert · c2 beacon
+        </text>
+        <text x="20" y="72" class="pt-line pt-ok">
+          ✓ contained · 9ms
+        </text>
+        <g class="pt-line pt-spark">
+          {spark.map((h, i) => (
+            <rect x={12 + i * 7} y={104 - h} width="4.4" height={h} rx="0.8" />
+          ))}
+        </g>
+        <circle cx="14" cy="120" r="3" class="pt-live" fill="var(--color-code-green)" />
+        <text x="22" y="123" class="pt-dim">
+          live · uptime 99.98%
+        </text>
+      </g>
+    )
+  }
+
+  {
+    scene === 'portfolio' && (
+      <g font-size="8">
+        <text x="12" y="18" class="pt-line pt-prompt">
+          $ astro build
+        </text>
+        <text x="12" y="34" class="pt-line pt-dim">
+          ▶ building…
+        </text>
+        <text x="12" y="50" class="pt-line pt-ok">
+          ✓ 14 pages · 1.2s
+        </text>
+        <text x="12" y="66" class="pt-line pt-ok">
+          ✓ a11y · 0 violations
+        </text>
+        <text x="12" y="82" class="pt-line pt-ok">
+          ↑ deploy → gh-pages
+        </text>
+        <text x="12" y="104" class="pt-line pt-note">
+          — handmade, shipped.
+        </text>
+        <rect
+          x="118"
+          y="97"
+          width="6"
+          height="10"
+          class="pt-cursor"
+          fill="var(--color-code-green)"
+        />
+      </g>
+    )
+  }
+
+  {
+    scene === 'atelier' && (
+      <g font-size="8">
+        <text x="12" y="18" class="pt-line pt-prompt">
+          $ atelier scan ./repo
+        </text>
+        <text x="12" y="34" class="pt-line pt-dim">
+          ◆ measuring design…
+        </text>
+        <text x="12" y="50" class="pt-line pt-ok">
+          ✓ palette · 5 roles
+        </text>
+        <text x="12" y="66" class="pt-line pt-ok">
+          ✓ type · Caveat + Kalam
+        </text>
+        <text x="12" y="82" class="pt-line pt-prompt">
+          ↪ wrote DESIGN.md
+        </text>
+        <text x="12" y="104" class="pt-line pt-note">
+          no slop detected.
+        </text>
+        <rect
+          x="103"
+          y="97"
+          width="6"
+          height="10"
+          class="pt-cursor"
+          fill="var(--color-code-green)"
+        />
+      </g>
+    )
+  }
+
+  {
+    scene === 'generic' && (
+      <g font-size="8">
+        <text x="12" y="20" class="pt-prompt">
+          $ {title.toLowerCase()}
+        </text>
+        <text x="12" y="38" class="pt-ok">
+          ✓ ready
+        </text>
+        <rect
+          x="12"
+          y="48"
+          width="6"
+          height="10"
+          class="pt-cursor"
+          fill="var(--color-code-green)"
+        />
+      </g>
+    )
+  }
+</svg>

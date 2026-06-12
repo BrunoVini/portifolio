@@ -6,30 +6,54 @@
     stroke-linecap="round"
     stroke-linejoin="round"
   >
-    <g class="sh-rocket">
-      <path
-        d="M 50 14 Q 70 32, 70 56 L 70 76 L 30 76 L 30 56 Q 30 32, 50 14 Z"
-        fill="var(--color-paper)"></path>
-      <circle cx="50" cy="44" r="6"></circle>
-      <path d="M 30 64 L 18 72 L 24 84 L 30 76 Z"></path>
-      <path d="M 70 64 L 82 72 L 76 84 L 70 76 Z"></path>
+    {/* speed lines — the launch */}
+    <g class="sh-speed" stroke="var(--color-ink)" stroke-width="1.6" opacity="0.4">
+      <line x1="14" y1="40" x2="22" y2="40"></line>
+      <line x1="78" y1="40" x2="86" y2="40"></line>
+      <line x1="16" y1="56" x2="23" y2="56"></line>
+      <line x1="77" y1="56" x2="84" y2="56"></line>
     </g>
+
+    <g class="sh-rocket">
+      {/* body + nose */}
+      <path
+        d="M 50 12 Q 66 30, 66 54 L 66 72 L 34 72 L 34 54 Q 34 30, 50 12 Z"
+        fill="var(--color-paper)"></path>
+      {/* nose tip accent */}
+      <path
+        d="M 50 12 Q 57 21, 58 30 L 42 30 Q 43 21, 50 12 Z"
+        fill="var(--color-red-ink)"
+        stroke="none"></path>
+      {/* porthole */}
+      <circle cx="50" cy="44" r="6" fill="var(--color-highlight-soft)"></circle>
+      {/* fins */}
+      <path d="M 34 60 L 22 70 L 28 80 L 34 72 Z" fill="var(--color-paper)"></path>
+      <path d="M 66 60 L 78 70 L 72 80 L 66 72 Z" fill="var(--color-paper)"></path>
+    </g>
+
+    {/* flames: outer red + inner highlight */}
     <g class="sh-flames">
       <path
-        d="M 38 80 Q 38 90, 42 96 M 50 80 Q 50 92, 50 98 M 62 80 Q 62 90, 58 96"
+        d="M 40 74 Q 40 86, 44 94 M 50 74 Q 50 90, 50 98 M 60 74 Q 60 86, 56 94"
         stroke="var(--color-red-ink)"
-        stroke-width="2.4"></path>
+        stroke-width="2.6"></path>
+      <path
+        class="sh-flame-inner"
+        d="M 50 76 Q 50 86, 50 92"
+        stroke="var(--color-highlight-strong)"
+        stroke-width="2.2"></path>
     </g>
+
     <g class="sh-stamp">
       <text
-        x="20"
-        y="22"
+        x="2"
+        y="20"
         font-family="Caveat"
         font-weight="700"
-        font-size="14"
+        font-size="11"
         fill="var(--color-red-ink)"
         stroke="none"
-        transform="rotate(-10 20 22)">SHIPPED!</text
+        transform="rotate(-13 2 20)">SHIPPED!</text
       >
     </g>
   </g>

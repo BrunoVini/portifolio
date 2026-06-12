@@ -37,6 +37,7 @@ const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀
     {
       p.projects.map((proj, i) => (
         <ProjectPolaroid
+          id={proj.id}
           title={proj.title}
           tagline={proj.tagline}
           description={proj.description}
@@ -61,11 +62,12 @@ const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀
   /* SectionTitle component handles section heading styling */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+    /* Three projects share the row on wide screens so it fills the page instead
+       of leaving a lone card stranded on a second row. */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 32px;
     position: relative;
     z-index: 2;
-    justify-content: start;
   }
   @media (max-width: 1100px) {
     .wrap {
@@ -78,11 +80,17 @@ const aside = locale === 'pt' ? '* já entregues 🚀' : '* shipped & alive 🚀
   }
   @media (max-width: 600px) {
     .wrap {
-      padding: 28px 12px 32px 22px;
+      /* extra bottom room so the meta-bug note can tuck into the corner BELOW
+         the last card's "see trade-offs" flip button (which hangs off the
+         bottom-right on a single column) */
+      padding: 28px 12px 56px 22px;
     }
     .grid {
       grid-template-columns: 1fr;
       gap: 36px;
+    }
+    .wrap :global(.bug-margin.side-right) {
+      bottom: 8px;
     }
   }
 </style>

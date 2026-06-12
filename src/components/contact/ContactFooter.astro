@@ -57,35 +57,48 @@ const lines =
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M 38 14 Q 42 4, 46 14"></path>
-          <path d="M 50 12 Q 56 0, 62 12"></path>
-          <path d="M 66 14 Q 70 4, 74 14"></path>
-          <ellipse cx="55" cy="42" rx="28" ry="24" fill="var(--color-paper)"></ellipse>
-          <rect x="36" y="36" width="16" height="12" rx="2" fill="var(--color-paper)"></rect>
-          <rect x="58" y="36" width="16" height="12" rx="2" fill="var(--color-paper)"></rect>
-          <line x1="52" y1="42" x2="58" y2="42"></line>
-          <circle cx="44" cy="42" r="1.6" fill="var(--color-ink)"></circle>
-          <circle cx="66" cy="42" r="1.6" fill="var(--color-ink)"></circle>
-          <line x1="55" y1="50" x2="55" y2="56"></line>
-          <path d="M 46 60 Q 55 66, 64 60"></path>
+          {/* tail — swishes */}
+          <path class="cat-tail" d="M 74 110 Q 100 108, 98 84 Q 97 70, 86 72" stroke-width="2.6"
+          ></path>
+          {/* sitting body */}
+          <path d="M 36 122 Q 30 74, 55 68 Q 80 74, 74 122 Z" fill="var(--color-paper)"></path>
+          <path d="M 44 122 Q 55 128, 66 122" stroke-width="1.6" opacity="0.5"></path>
+          {/* head */}
+          <circle cx="55" cy="42" r="23" fill="var(--color-paper)"></circle>
+          {/* ears */}
+          <path d="M 38 24 L 33 6 L 53 19 Z" fill="var(--color-paper)"></path>
+          <path d="M 72 24 L 77 6 L 57 19 Z" fill="var(--color-paper)"></path>
           <path
-            d="M 50 64 Q 50 70, 55 72 Q 60 70, 60 64"
-            fill="var(--color-ink)"
-            fill-opacity="0.85"></path>
-          <path d="M 30 84 L 16 100"></path>
-          <line x1="44" y1="74" x2="40" y2="92"></line>
-          <line x1="66" y1="74" x2="70" y2="92"></line>
-          <line x1="55" y1="76" x2="55" y2="118"></line>
-          <path d="M 30 116 Q 30 124, 38 124"></path>
-          <path d="M 80 116 Q 80 124, 72 124"></path>
-          <g class="cf-arm">
-            <path d="M 14 96 Q 8 90, 4 80" stroke="var(--color-red-ink)" stroke-width="2.6"></path>
+            d="M 40 21 L 37 10 L 48 18 Z"
+            fill="var(--color-red-ink)"
+            fill-opacity="0.7"
+            stroke="none"></path>
+          <path
+            d="M 70 21 L 73 10 L 62 18 Z"
+            fill="var(--color-red-ink)"
+            fill-opacity="0.7"
+            stroke="none"></path>
+          {/* eyes — blink */}
+          <g class="cat-eyes">
+            <circle cx="46" cy="41" r="2.6" fill="var(--color-ink)" stroke="none"></circle>
+            <circle cx="64" cy="41" r="2.6" fill="var(--color-ink)" stroke="none"></circle>
           </g>
-          <path
-            d="M 18 78 Q 14 76, 10 80 M 24 76 Q 20 74, 16 78 M 28 84 Q 24 82, 22 86"
-            stroke="var(--color-red-ink)"
-            stroke-width="1.8"
-            opacity="0.7"></path>
+          {/* nose + mouth */}
+          <path d="M 52 48 L 58 48 L 55 52 Z" fill="var(--color-red-ink)" stroke="none"></path>
+          <path d="M 55 52 Q 55 57, 50 57 M 55 52 Q 55 57, 60 57" stroke-width="1.8"></path>
+          {/* whiskers */}
+          <path d="M 27 44 L 43 46 M 27 51 L 43 49" stroke-width="1.4" opacity="0.55"></path>
+          <path d="M 83 44 L 67 46 M 83 51 L 67 49" stroke-width="1.4" opacity="0.55"></path>
+          {/* front paws */}
+          <ellipse cx="47" cy="122" rx="7" ry="5" fill="var(--color-paper)"></ellipse>
+          <ellipse cx="64" cy="122" rx="7" ry="5" fill="var(--color-paper)"></ellipse>
+          {/* raised waving paw */}
+          <g class="cf-arm">
+            <path d="M 42 92 Q 26 86, 22 64" stroke="var(--color-red-ink)" stroke-width="2.6"
+            ></path>
+            <circle cx="22" cy="60" r="5" fill="var(--color-paper)" stroke="var(--color-red-ink)"
+            ></circle>
+          </g>
         </g>
       </svg>
       <span class="cf-bye">{locale === 'pt' ? 'tchau!' : 'bye!'}</span>

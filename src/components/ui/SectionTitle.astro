@@ -65,7 +65,7 @@ const { title, chapter, aside, icon = 'none' } = Astro.props;
     }
   </div>
   <h2>
-    <span class="head-text">{title}</span>
+    <span class="head-text" data-reveal>{title}</span>
     {aside && <span class="ch-aside">{aside}</span>}
   </h2>
 </header>
@@ -128,7 +128,15 @@ const { title, chapter, aside, icon = 'none' } = Astro.props;
     height: 12px;
     background: var(--color-highlight);
     z-index: -1;
-    transform: skewX(-6deg);
+    /* Highlighter swipes in left-to-right when the heading enters view, like a
+       marker drawn by hand. Matches the inline-highlight idiom in About.css.
+       The heading text itself is never hidden — only the marker draws. */
+    transform: skewX(-6deg) scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.55s var(--ease-default) 0.12s;
+  }
+  .head-text.is-revealed::after {
+    transform: skewX(-6deg) scaleX(1);
   }
   .ch-aside {
     font-family: var(--font-utility);

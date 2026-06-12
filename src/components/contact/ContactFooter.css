@@ -103,9 +103,45 @@
 }
 
 .cf-arm {
-  transform-origin: 14px 96px;
+  transform-origin: right bottom;
   transform-box: fill-box;
   animation: wave 2.6s ease-in-out infinite;
+}
+
+/* cat tail swishes, eyes blink */
+.cat-tail {
+  transform-origin: left bottom;
+  transform-box: fill-box;
+  animation: tail-swish 3.4s ease-in-out infinite;
+}
+
+@keyframes tail-swish {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-12deg);
+  }
+}
+
+.cat-eyes {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: cat-blink 4.2s ease-in-out infinite;
+}
+
+@keyframes cat-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  96% {
+    transform: scaleY(0.1);
+  }
 }
 
 .cf-bye {

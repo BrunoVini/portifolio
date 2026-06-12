@@ -1,8 +1,10 @@
 ---
 import './ProjectPolaroid.css';
 import './ProjectPolaroidFlip.css';
+import ProjectThumb from './ProjectThumb.astro';
 import type { Locale } from '../../lib/types';
 interface Props {
+  id?: string;
   title: string;
   tagline: string;
   description: string;
@@ -14,6 +16,7 @@ interface Props {
   locale?: Locale;
 }
 const {
+  id,
   title,
   tagline,
   description,
@@ -55,16 +58,7 @@ const hasFlip = (tradeOffs?.length ?? 0) > 0;
       )
     }
     <div class="thumb">
-      <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="200" height="130" fill="var(--color-ink)"></rect>
-        <g stroke="#7ab68b" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
-          <polyline points="14,100 50,70 80,86 120,40 158,60 192,46"></polyline>
-          <line x1="14" y1="115" x2="186" y2="115" opacity="0.5"></line>
-        </g>
-        <text x="14" y="24" font-family="JetBrains Mono" font-size="9" fill="#7ab68b" opacity="0.95"
-          >$ {title}</text
-        >
-      </svg>
+      <ProjectThumb id={id} title={title} />
     </div>
     <div class="meta">
       <h3>{title}</h3>
