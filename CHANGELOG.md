@@ -7,6 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2026-06-12
+
+"The Living Sketchbook." The notebook stops being decorated and starts
+being alive: the page draws itself as you read. Every section keeps the
+v4 soul (warm paper, red pen, highlighter, handwriting) but gains one
+loud beat, real depth, and scroll-driven motion — all degrading to a
+fully-drawn static page under `prefers-reduced-motion`.
+
+### Added
+
+- **Ink-draw motion system.** Any inline SVG stroke can draw itself:
+  `data-ink="enter"` (plays once on viewport entry) or
+  `data-ink="scroll"` (scrubbed by scroll via CSS Scroll-Driven
+  Animations, IntersectionObserver fallback), with stagger control.
+  New motion tokens in `theme.css` (`--ease-ink`, `--duration-ink`,
+  settle + thread tokens).
+- **Living margin thread.** The notebook's red margin line is now a
+  scroll-progress pen line that inks down the page edge with drawn
+  marks at each section anchor. Hidden ≤600px, static under
+  reduced-motion.
+- **Hero opening spread.** Full-viewport first page: the headline
+  hand-letters itself word by word (SVG mask write-on, i18n-safe),
+  highlighter swipe + red underline follow, layered paper grain and
+  collage with ≤8px micro-parallax, primary CTA as the loudest pixel.
+  No-JS and reduced-motion render the final drawn state immediately.
+- **Experience timeline ink-in.** The timeline is one continuous
+  hand-drawn stroke that draws itself as you scroll; entries settle in
+  like pinned notes.
+- **About pull-quote beat.** Giant circled punchline ("I still own the
+  diff.") with a self-inking red circle; doodle noise cut.
+- **Analog project cards.** Dark terminal panels replaced by annotated
+  blueprint sketches: per-project hand-drawn architecture diagrams that
+  ink in, highlighter titles, torn mono code-strips, stamp chips.
+- **Skills spread.** Lasso-enclosed clusters with drawn label tabs and
+  a giant self-inking toolbox as the section beat.
+- **Process comic pacing.** The four "How I work" panels ink themselves
+  in sequence like a comic page; Ship lands last.
+- **Contact closing moment.** Postmark inks itself over the stamp;
+  footer signature underline draws in as "the pen lifts"; nav gains an
+  organic highlighter swipe on the active section (`aria-current`).
+- **404 rewrite.** "Page torn out." with MISSING stamp, tear line and a
+  self-inking doodle.
+
+### Fixed
+
+- **Hidden states are now truly inert.** Flip-card backs, collapsed
+  accordion panels, the skill modal and the mobile chapter drawer were
+  hidden with `opacity:0` only — still focusable and exposed to
+  assistive tech. All hidden states now sync `visibility` (with
+  delayed transitions so animations still play).
+- **Locale URL intent.** Visiting `/pt/` explicitly now updates the
+  stored language preference instead of redirecting back to EN.
+- Contact heading no longer overlaps the postage stamp; confession
+  title leading fixed; spacing strays snapped to the 4px scale.
+
 ## [4.0.0] - 2026-05-10
 
 Polish + a11y/SEO/perf pass. Fixes the long tail of issues that surface
