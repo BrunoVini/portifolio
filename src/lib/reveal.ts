@@ -3,6 +3,12 @@
  * Siblings sharing a parent get a staggered transition-delay so cascades feel
  * rhythmic rather than snapping all at once. Cap at 6 steps (480ms) so a
  * 12-badge grid never feels sluggish.
+ *
+ * This is the single reveal engine for the site. Components may style a bare
+ * `data-reveal` themselves, or opt into the shared "paper settles in" preset
+ * with `data-reveal="settle"` (styled centrally in src/styles/animations.css:
+ * small lift + tilt that lands in < 600ms). Under prefers-reduced-motion every
+ * element is revealed immediately — no observers, no transitions.
  */
 const STAGGER_MS = 80;
 const STAGGER_CAP = 6;
@@ -21,6 +27,12 @@ export const initReveal = (): void => {
   if (typeof document === 'undefined') return;
   const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
   if (els.length === 0) return;
+
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  if (reduce) {
+    els.forEach((el) => el.classList.add('is-revealed'));
+    return;
+  }
 
   els.forEach((el) => tagSiblingStagger(el));
 

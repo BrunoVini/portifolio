@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/skill-modal.css';
+import MarginThread from '../components/ui/MarginThread.astro';
 import { assetUrl } from '../lib/asset';
 import type { Locale } from '../lib/types';
 
@@ -80,11 +81,14 @@ const skipLabel = locale === 'pt' ? 'pular para o conteúdo' : 'skip to content'
   </head>
   <body>
     <a class="skip-link" href="#main">{skipLabel}</a>
+    <MarginThread />
     <main id="main">
       <slot />
     </main>
     <script>
       import { initReveal } from '../lib/reveal';
+      import { initInkDraw } from '../lib/ink-draw';
+      import { initMarginThread } from '../lib/margin-thread';
       import { attachPageFlip } from '../lib/page-flip';
       import { initTilt } from '../lib/tilt';
       import { initRocketCursor } from '../lib/rocket-cursor';
@@ -96,6 +100,8 @@ const skipLabel = locale === 'pt' ? 'pular para o conteúdo' : 'skip to content'
       import { initProcessFlourish } from '../lib/process-flourish';
       const locale = document.documentElement.lang === 'pt' ? 'pt' : 'en';
       initReveal();
+      initInkDraw();
+      initMarginThread();
       attachPageFlip();
       initTilt();
       initRocketCursor();

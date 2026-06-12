@@ -1,0 +1,38 @@
+---
+/**
+ * Living margin thread — a red pen line that inks itself down the page gutter
+ * as the reader scrolls, with small doodle marks at each section anchor.
+ * Pure decoration (aria-hidden, pointer-events: none); driven by
+ * src/lib/margin-thread.ts. With reduced motion (or no JS) it renders as a
+ * static, fully drawn line. Hidden at ≤600px where the gutter collapses.
+ */
+import './MarginThread.css';
+
+const anchors = ['about', 'process', 'experience', 'work', 'skills', 'contact'];
+// Slightly wavy hand-pulled line; pathLength=1 normalizes the dash scrub.
+const wave = 'M 8 0 C 7.1 12, 8.9 22, 8 34 C 7.2 46, 8.8 58, 8 70 C 7.3 82, 8.6 92, 8 100';
+---
+
+<div class="margin-thread" data-margin-thread aria-hidden="true">
+  <svg class="thread-svg" viewBox="0 0 16 100" preserveAspectRatio="none">
+    <path class="thread-track" d={wave} pathLength="1" vector-effect="non-scaling-stroke"></path>
+    <path class="thread-line" d={wave} pathLength="1" vector-effect="non-scaling-stroke"></path>
+  </svg>
+  {
+    anchors.map((id, i) => (
+      <span class="thread-mark" data-thread-mark={id}>
+        {i % 2 === 0 ? (
+          <svg viewBox="0 0 14 14">
+            {/* pen loop — an open hand-drawn circle */}
+            <path d="M 7 2.4 C 9.8 2.2 11.8 4.4 11.6 7 C 11.4 9.8 9.4 11.8 7 11.6 C 4.4 11.4 2.2 9.6 2.4 7 C 2.6 4.8 4.4 2.8 7.8 3" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 14 14">
+            {/* quick x — two crossing pen ticks */}
+            <path d="M 3.4 3.8 C 5 5.2 8.6 8.8 10.6 10.4 M 10.4 3.4 C 8.6 5.4 5.2 8.8 3.6 10.6" />
+          </svg>
+        )}
+      </span>
+    ))
+  }
+</div>

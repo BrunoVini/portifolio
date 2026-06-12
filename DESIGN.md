@@ -57,9 +57,12 @@ All faces are **handwriting/cursive**, loaded from Google Fonts in `Page.astro` 
 
 ## 5. Motion
 
-- **Durations:** stroke-draw `2s` (`--duration-stroke`), fade `0.6s`, flip `0.7s`.
-- **Easing:** `cubic-bezier(0.2,0.7,0.3,1)` default; `cubic-bezier(0.4,0,0.2,1)` soft.
-- **Philosophy:** motion mimics drawing — strokes that ink themselves in, polaroids that flip, sticky notes that settle. Tasteful and earned, not decorative everywhere. **Always** honor `prefers-reduced-motion` (global.css already kills animations/transitions under it).
+- **Durations:** ink-draw `1.2s` (`--duration-ink`), stroke-draw `2s` (`--duration-stroke`, legacy), settle `0.55s` (`--duration-settle`), fade `0.6s`, flip `0.7s`. Stagger step `120ms` (`--ink-stagger`).
+- **Easing:** `cubic-bezier(0.2,0.7,0.3,1)` default; `cubic-bezier(0.16,0.65,0.25,1)` pen pull (`--ease-ink` — use for ink/settle motion); `cubic-bezier(0.4,0,0.2,1)` soft. Never linear sweeps for drawing — the `inkDraw` keyframes hesitate mid-stroke like a real pen.
+- **Self-drawing ink (`data-ink`):** any inline SVG can draw itself. Put `data-ink` (or `data-ink="enter"`) on the `<svg>`/group/shape to draw once on viewport entry, or `data-ink="scroll"` to scrub the stroke by scroll position (CSS scroll-driven animations, IO fallback). Stagger with `data-ink-delay` (base ms), `data-ink-stagger` (auto-stagger DOM order), `data-ink-order` (explicit index). Engine: `src/lib/ink-draw.ts` + `animations.css`; stroke lengths are measured at runtime (`--ink-len`) — never hand-tune dasharray.
+- **Living margin thread:** the gutter's red pen line (`MarginThread.astro` + `src/lib/margin-thread.ts`) inks down the page with scroll progress, doodle marks inking in at each section anchor. Tokens: `--color-thread`, `--thread-width`, `--thread-mark-size`. Pure decoration — `aria-hidden`, `pointer-events: none`, never over content, hidden ≤600px.
+- **Section reveal:** `src/lib/reveal.ts` is the single reveal engine (`data-reveal` + `.is-revealed`). Prefer the shared preset `data-reveal="settle"` — paper settles in (lift + tilt, < 600ms). Bare `data-reveal` with component-local styling remains for bespoke cases; do not add a second reveal system.
+- **Philosophy:** motion mimics drawing — strokes that ink themselves in, polaroids that flip, sticky notes that settle. Tasteful and earned, not decorative everywhere. **Always** honor `prefers-reduced-motion`: the new system's hidden states only exist behind JS arming + `no-preference` media queries, so reduced motion (and no-JS) renders everything fully drawn and visible (global.css's kill-switch stays as a second line of defense).
 
 ## 6. Anti-slop rules (project-specific)
 

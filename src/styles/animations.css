@@ -4,6 +4,83 @@
   }
 }
 
+/* ====== Self-drawing ink primitive (src/lib/ink-draw.ts) ======
+   JS measures each stroke via getTotalLength(), sets `--ink-len` (unitless,
+   user units) and adds `.ink-stroke`. Strokes then ink themselves either once
+   on viewport entry (`.ink-play`, IntersectionObserver) or scrubbed by scroll
+   (`.ink-scrub`, CSS scroll-driven animations via a named view-timeline on the
+   owning <svg>, `.ink-view-host`).
+
+   Everything lives behind prefers-reduced-motion: no-preference AND behind
+   JS-added classes, so with reduced motion or without JS the base state is a
+   fully drawn stroke. The pen hesitates slightly mid-stroke (the 58%/72%
+   keyframes) so the draw never reads as a robotic linear sweep. */
+@media (prefers-reduced-motion: no-preference) {
+  .ink-stroke {
+    stroke-dasharray: var(--ink-len, 1000);
+    stroke-dashoffset: var(--ink-len, 1000);
+  }
+
+  .ink-stroke.ink-play {
+    animation: inkDraw var(--duration-ink) var(--ease-ink) both;
+    animation-delay: var(--ink-delay, 0ms);
+  }
+
+  .ink-view-host {
+    view-timeline: --ink-view block;
+  }
+
+  .ink-stroke.ink-scrub {
+    animation: inkDraw linear both;
+    animation-timeline: --ink-view;
+    animation-range: entry 20% cover 55%;
+  }
+}
+
+@keyframes inkDraw {
+  0% {
+    stroke-dashoffset: var(--ink-len, 1000);
+  }
+
+  58% {
+    stroke-dashoffset: calc(var(--ink-len, 1000) * 0.26);
+  }
+
+  72% {
+    stroke-dashoffset: calc(var(--ink-len, 1000) * 0.19);
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ====== "Paper settles in" section reveal ======
+   Shared preset for src/lib/reveal.ts — mark an element with
+   `data-reveal="settle"` and it lands like a sheet of paper set on the desk:
+   a small lift + tilt that straightens out in under 600ms. Even siblings tilt
+   the other way so cascades feel hand-placed. Hidden state only exists when
+   motion is allowed; reduced motion (and the global kill-switch) get the
+   final, visible state. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal='settle'] {
+    opacity: 0;
+    transform: translateY(var(--settle-shift)) rotate(var(--settle-tilt));
+    transition:
+      opacity var(--duration-settle) var(--ease-ink),
+      transform var(--duration-settle) var(--ease-ink);
+  }
+
+  [data-reveal='settle']:nth-child(even) {
+    transform: translateY(var(--settle-shift)) rotate(calc(var(--settle-tilt) * -1));
+  }
+
+  [data-reveal='settle'].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;

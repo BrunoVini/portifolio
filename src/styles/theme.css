@@ -56,6 +56,20 @@
   --duration-stroke: 2s;
   --duration-fade: 0.6s;
   --duration-flip: 0.7s;
+
+  /* ====== Motion · v5 living sketchbook ======
+     Shared values for the self-drawing ink system (src/lib/ink-draw.ts +
+     animations.css), the margin thread (MarginThread.astro) and the
+     "paper settles" reveal. Documented in DESIGN.md §5. */
+  --ease-ink: cubic-bezier(0.16, 0.65, 0.25, 1); /* pen pull — fast attack, soft landing */
+  --duration-ink: 1.2s; /* one stroke inking itself in */
+  --ink-stagger: 120ms; /* default gap between staggered strokes */
+  --duration-settle: 0.55s; /* "paper settles in" reveal (< 600ms) */
+  --settle-shift: 14px; /* settle translate distance */
+  --settle-tilt: 0.6deg; /* settle rotation — paper landing slightly askew */
+  --color-thread: var(--color-red-ink); /* the living margin pen line */
+  --thread-width: 2px;
+  --thread-mark-size: 13px; /* doodle nodes on the thread */
 }
 
 @media (width <= 600px) {
